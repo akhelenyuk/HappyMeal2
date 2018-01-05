@@ -23,6 +23,8 @@ public class AddMealCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page = servlet.ConfigurationManager.getProperty("path.page.main");
 
+        System.out.println("test");
+
         Meal meal = new Meal(
                 Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_PRODUCT_ID)),
