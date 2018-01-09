@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <html>
 <head>
     <title>Welcome</title>
@@ -24,8 +26,15 @@
 
 
     <br/>
-    <%--${successAddProductMessage}--%>
-    <%--${errorAddProductMessage}--%>
+    ${successAddProductMessage}
+    ${errorAddProductMessage}
+
+    <form name="calendarForm" method="post" action="controller">
+        <input type="hidden" name="command" value="Select_date">
+        <jsp:useBean id="currentDate" class="java.util.Date"/>
+        <input type="date" name="chosenDate" value="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd"/>"/>
+        <input type="submit" class="button" value="Select Date">
+    </form>
 
 
     <form method="post" action="controller">
