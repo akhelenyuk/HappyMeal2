@@ -1,18 +1,20 @@
 package com.khelenyuk.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Meal implements Serializable{
     private int id;
     private int userId;
-//    private Date date;
+    private LocalDate date;
     private int productId;
     private int weight;
     private MealNumber mealNumber;
 
-    public Meal(int userId, int productId, int weight, int mealNumber) {
+    public Meal(int userId, LocalDate date, int productId, int weight, int mealNumber) {
         this.userId = userId;
+        this.date = date;
         this.productId = productId;
         this.weight = weight;
         this.mealNumber = new MealNumber(mealNumber);
@@ -34,6 +36,10 @@ public class Meal implements Serializable{
         return mealNumber;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,13 +49,14 @@ public class Meal implements Serializable{
                 userId == meal.userId &&
                 productId == meal.productId &&
                 weight == meal.weight &&
+                Objects.equals(date, meal.date) &&
                 Objects.equals(mealNumber, meal.mealNumber);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, userId, productId, weight, mealNumber);
+        return Objects.hash(id, userId, date, productId, weight, mealNumber);
     }
 
     @Override
@@ -57,6 +64,7 @@ public class Meal implements Serializable{
         return "Meal{" +
                 "id=" + id +
                 ", userId=" + userId +
+                ", date=" + date +
                 ", productId=" + productId +
                 ", weight=" + weight +
                 ", mealNumber=" + mealNumber +

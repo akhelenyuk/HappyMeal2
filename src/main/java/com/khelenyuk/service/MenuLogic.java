@@ -6,6 +6,7 @@ import com.khelenyuk.entity.Meal;
 import com.khelenyuk.entity.MealFull;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 public class MenuLogic {
@@ -15,8 +16,8 @@ public class MenuLogic {
         return mealDAO.add(meal);
     }
 
-    public static List<MealFull> getUserMenu(int id) {
-        return mealDAO.getMenu(id);
+    public static List<MealFull> getUserMenu(int id, LocalDate chosenDate) {
+        return mealDAO.getMenu(id, chosenDate);
     }
 
 //    public static void updateMenu(HttpSession session, int userId){

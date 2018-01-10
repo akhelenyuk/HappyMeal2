@@ -11,11 +11,13 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 public class AddMealCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(AddMealCommand.class);
 
     private static final String PARAM_NAME_USER_ID = "user_id";
+    private static final String SESSION_ATTR_NAME_DATE = "chosenDateSession";
     private static final String PARAM_NAME_PRODUCT_ID = "product_id";
     private static final String PARAM_NAME_WEIGHT = "weight";
     private static final String PARAM_NAME_MEAL_NUMBER = "meal_number";
@@ -25,8 +27,12 @@ public class AddMealCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page = ConfigurationManager.getProperty("path.page.main");
 
+        logger.debug("Chosen date param: '" + SESSION_ATTR_NAME_DATE + "'");
+        logger.debug("Get parameter: '" + session.getAttribute(SESSION_ATTR_NAME_DATE) + "'");
+
         Meal meal = new Meal(
                 Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID)),
+                (LocalDate) session.getAttribute(SESSION_ATTR_NAME_DATE),
                 Integer.valueOf(request.getParameter(PARAM_NAME_PRODUCT_ID)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_WEIGHT)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_MEAL_NUMBER))

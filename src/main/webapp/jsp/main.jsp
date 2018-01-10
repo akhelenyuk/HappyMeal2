@@ -11,6 +11,7 @@
 
 <body>
 <div class="container">
+    <%-- Hello, user --%>
     <div align="right">
         Hello,
         <c:choose>
@@ -24,15 +25,15 @@
         <input type="submit" value="Добавить продукт">
     </form>
 
-
     <br/>
     ${successAddProductMessage}
     ${errorAddProductMessage}
 
+    <%-- Choose date for meals --%>
     <form name="calendarForm" method="post" action="controller">
         <input type="hidden" name="command" value="Select_date">
-        <jsp:useBean id="currentDate" class="java.util.Date"/>
-        <input type="date" name="chosenDate" value="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd"/>"/>
+        <input type="date"  name="chosenDate" value="${chosenDateSession}"/>
+
         <input type="submit" class="button" value="Select Date">
     </form>
 
@@ -40,6 +41,8 @@
     <form method="post" action="controller">
         <input type="hidden" name="command" value="add_meal"/>
         <input type="hidden" name="user_id" value="${user.id}"/>
+        <%--<input type="hidden" name="chosenDateHidden" value="${test2}"/>--%>
+
 
 
         <%--Search--%>
