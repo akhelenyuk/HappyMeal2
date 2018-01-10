@@ -13,12 +13,19 @@
 <div class="container">
     <%-- Hello, user --%>
     <div align="right">
-        Hello,
         <c:choose>
-            <c:when test="${empty user}">Guest</c:when>
-            <c:otherwise>${user.firstName}</c:otherwise>
+            <c:when test="${not empty user}">
+                <c:out value="Hello, ${user.firstName}"/>
+                <div><a href="controller?command=logout">Logout</a></div>
+            </c:when>
+            <c:otherwise>
+                <div>
+                    <a href="controller?command=TO_LOGIN_PAGE">Login</a>
+                    <a href="controller?command=TO_REGISTRATION_PAGE">Registration</a>
+                </div>
+            </c:otherwise>
         </c:choose>
-        <div><a href="controller?command=logout">Logout</a></div>
+
     </div>
     <form action="controller" method="post">
         <input type="hidden" name="command" value="to_add_product_page">

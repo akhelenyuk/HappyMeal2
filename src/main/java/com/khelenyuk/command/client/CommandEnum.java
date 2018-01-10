@@ -9,6 +9,11 @@ public enum CommandEnum {
             this.command = new LoginCommand();
         }
     },
+    TO_LOGIN_PAGE{
+        {
+            this.command = new ToLoginPageCommand();
+        }
+    },
     TO_REGISTRATION_PAGE{
         {
             this.command = new ToRegistrationPageCommand();
