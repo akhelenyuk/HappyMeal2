@@ -29,4 +29,17 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         <location>/jsp/error/error.jsp</location>
     </error-page>
 
+    <filter>
+        <filter-name>encodingfilter</filter-name>
+        <filter-class>com.khelenyuk.servlet.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingfilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
