@@ -1,13 +1,13 @@
 package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.entity.Product;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.model.Product;
+import com.khelenyuk.model.User;
 import com.khelenyuk.service.IPageService;
 import com.khelenyuk.service.IProductService;
 import com.khelenyuk.service.factory.ServiceFactory;
-import com.khelenyuk.servlet.ConfigurationManager;
-import com.khelenyuk.servlet.MessageManager;
+import com.khelenyuk.controller.ConfigurationManager;
+import com.khelenyuk.controller.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

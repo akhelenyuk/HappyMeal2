@@ -1,8 +1,9 @@
-package com.khelenyuk.dao.mysql;
+package com.khelenyuk.dao.mysql.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.entity.Sex;
+import com.khelenyuk.dao.SexDAO;
+import com.khelenyuk.model.Sex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SexDAOImpl implements CrudDAO<Sex> {
+public class SexDAOImpl extends CrudDaoImpl<Sex> implements SexDAO {
     private static final Logger logger = LogManager.getLogger(SexDAOImpl.class);
     private final String TABLE = "sex";
     private String selectAll = "SELECT * FROM " + TABLE;
@@ -37,28 +38,5 @@ public class SexDAOImpl implements CrudDAO<Sex> {
         return sex;
     }
 
-    @Override
-    public Sex get(int id) {
-        throw new UnsupportedOperationException();
-    }
 
-    @Override
-    public Sex get(String login) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean add(Sex newObject) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean update(int oldId, Sex newObject) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean delete(int id) {
-        throw new UnsupportedOperationException();
-    }
 }

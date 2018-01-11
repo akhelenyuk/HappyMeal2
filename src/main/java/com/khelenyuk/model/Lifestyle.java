@@ -1,16 +1,16 @@
-package com.khelenyuk.entity;
+package com.khelenyuk.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Role implements Serializable{
+public class Lifestyle implements Serializable{
     private int id;
     private String name;
 
-    public Role() {
+    public Lifestyle() {
     }
 
-    public Role(int id, String name) {
+    public Lifestyle(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -35,9 +35,9 @@ public class Role implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return id == role.id &&
-                Objects.equals(name, role.name);
+        Lifestyle lifestyle = (Lifestyle) o;
+        return id == lifestyle.id &&
+                Objects.equals(name, lifestyle.name);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Role implements Serializable{
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "Lifestyle{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

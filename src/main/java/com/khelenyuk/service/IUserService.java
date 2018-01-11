@@ -1,8 +1,8 @@
 package com.khelenyuk.service;
 
-import com.khelenyuk.entity.Lifestyle;
-import com.khelenyuk.entity.Sex;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.model.Lifestyle;
+import com.khelenyuk.model.Sex;
+import com.khelenyuk.model.User;
 
 import java.util.List;
 

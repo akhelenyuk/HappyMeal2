@@ -1,7 +1,7 @@
 package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.servlet.ConfigurationManager;
+import com.khelenyuk.controller.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

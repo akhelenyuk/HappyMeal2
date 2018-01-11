@@ -1,11 +1,11 @@
 package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.entity.Lifestyle;
-import com.khelenyuk.entity.Sex;
+import com.khelenyuk.model.Lifestyle;
+import com.khelenyuk.model.Sex;
 import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.servlet.ConfigurationManager;
+import com.khelenyuk.controller.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -1,7 +1,7 @@
 package com.khelenyuk.service.impl;
 
 
-import com.khelenyuk.entity.MealFull;
+import com.khelenyuk.model.MealFull;
 import com.khelenyuk.service.*;
 import com.khelenyuk.service.factory.ServiceFactory;
 import org.apache.logging.log4j.LogManager;

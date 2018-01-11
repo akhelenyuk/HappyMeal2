@@ -1,9 +1,9 @@
 package com.khelenyuk.service.impl;
 
 
-import com.khelenyuk.dao.mysql.MealDAO;
-import com.khelenyuk.entity.Meal;
-import com.khelenyuk.entity.MealFull;
+import com.khelenyuk.dao.mysql.impl.MealDAOImpl;
+import com.khelenyuk.model.Meal;
+import com.khelenyuk.model.MealFull;
 import com.khelenyuk.service.IMenuService;
 
 import java.text.DecimalFormat;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class MenuServiceImpl implements IMenuService {
-    private static final MealDAO mealDAO = new MealDAO();
+    private static final MealDAOImpl MEAL_DAO_IMPL = new MealDAOImpl();
     private static MenuServiceImpl instance = new MenuServiceImpl();
 
     private MenuServiceImpl() {
@@ -23,12 +23,12 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
     public boolean addMeal(Meal meal) {
-        return mealDAO.add(meal);
+        return MEAL_DAO_IMPL.add(meal);
     }
 
     @Override
     public List<MealFull> getUserMenu(int id, LocalDate chosenDate) {
-        return mealDAO.getMenu(id, chosenDate);
+        return MEAL_DAO_IMPL.getMenu(id, chosenDate);
     }
 
     @Override

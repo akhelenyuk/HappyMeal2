@@ -2,20 +2,25 @@ package com.khelenyuk.service.impl;
 
 
 import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.dao.mysql.LifestyleDAOImpl;
-import com.khelenyuk.dao.mysql.SexDAOImpl;
-import com.khelenyuk.dao.mysql.UserDAOImpl;
-import com.khelenyuk.entity.Lifestyle;
-import com.khelenyuk.entity.Sex;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.dao.LifestyleDAO;
+import com.khelenyuk.dao.SexDAO;
+import com.khelenyuk.dao.UserDAO;
+import com.khelenyuk.dao.mysql.factory.DAOFactory;
+import com.khelenyuk.dao.mysql.impl.LifestyleDAOImpl;
+import com.khelenyuk.dao.mysql.impl.SexDAOImpl;
+import com.khelenyuk.dao.mysql.impl.UserDAOImpl;
+import com.khelenyuk.model.Lifestyle;
+import com.khelenyuk.model.Sex;
+import com.khelenyuk.model.User;
 import com.khelenyuk.service.IUserService;
 
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
-    private static CrudDAO<User> userDAO = new UserDAOImpl();
-    private static CrudDAO<Sex> sexDAO = new SexDAOImpl();
-    private static CrudDAO<Lifestyle> lifestyleDAO = new LifestyleDAOImpl();
+    private static UserDAO userDAO = DAOFactory.getUserMethods();
+    private static SexDAO sexDAO = DAOFactory.getSexMethods();
+    private static LifestyleDAO lifestyleDAO = DAOFactory.getLifestyleMethods();
+
     private static UserServiceImpl instance = new UserServiceImpl();
 
     private UserServiceImpl() {

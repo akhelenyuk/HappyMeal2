@@ -1,4 +1,4 @@
-package com.khelenyuk.servlet;
+package com.khelenyuk.controller;
 
 import com.khelenyuk.command.ActionCommand;
 import com.khelenyuk.command.factory.ActionFactory;
@@ -39,7 +39,7 @@ public class MyServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         } else {
-            page = com.khelenyuk.servlet.ConfigurationManager.getProperty("path.page.index");
+            page = com.khelenyuk.controller.ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }

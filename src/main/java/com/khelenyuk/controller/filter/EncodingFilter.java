@@ -1,4 +1,4 @@
-package com.khelenyuk.servlet.filter;
+package com.khelenyuk.controller.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

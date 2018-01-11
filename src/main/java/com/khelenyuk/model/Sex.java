@@ -1,16 +1,16 @@
-package com.khelenyuk.entity;
+package com.khelenyuk.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Lifestyle implements Serializable{
+public class Sex implements Serializable{
     private int id;
     private String name;
 
-    public Lifestyle() {
+    public Sex() {
     }
 
-    public Lifestyle(int id, String name) {
+    public Sex(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -35,9 +35,9 @@ public class Lifestyle implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lifestyle lifestyle = (Lifestyle) o;
-        return id == lifestyle.id &&
-                Objects.equals(name, lifestyle.name);
+        Sex sex = (Sex) o;
+        return id == sex.id &&
+                Objects.equals(name, sex.name);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Lifestyle implements Serializable{
 
     @Override
     public String toString() {
-        return "Lifestyle{" +
+        return "Sex{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

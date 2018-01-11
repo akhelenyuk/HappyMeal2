@@ -1,4 +1,4 @@
-package com.khelenyuk.entity;
+package com.khelenyuk.model;
 
 import java.io.Serializable;
 import java.util.Objects;

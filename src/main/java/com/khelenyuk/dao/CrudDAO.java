@@ -5,9 +5,8 @@ import java.util.List;
 public interface CrudDAO<T> {
     List<T> getAll();
     T get(int id);
-    T get(String login);
-    boolean add(T newObject);
-    boolean update(int oldId, T newObject);
+    boolean add(T newEntity);
+    boolean update(int oldId, T newEntity);
     boolean delete(int id);
 }
 

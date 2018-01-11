@@ -1,15 +1,17 @@
 package com.khelenyuk.service.impl;
 
 import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.dao.mysql.UserDAOImpl;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.dao.UserDAO;
+import com.khelenyuk.dao.mysql.factory.DAOFactory;
+import com.khelenyuk.dao.mysql.impl.UserDAOImpl;
+import com.khelenyuk.model.User;
 import com.khelenyuk.service.ILoginRegistrationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class LoginRegistrationServiceImpl implements ILoginRegistrationService {
     private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
-    private static CrudDAO<User> userDAO = new UserDAOImpl();
+    private static UserDAO userDAO = DAOFactory.getUserMethods();
     private static LoginRegistrationServiceImpl instance = new LoginRegistrationServiceImpl();
 
     private LoginRegistrationServiceImpl() {

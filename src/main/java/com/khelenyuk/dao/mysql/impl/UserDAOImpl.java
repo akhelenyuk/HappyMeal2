@@ -1,8 +1,9 @@
-package com.khelenyuk.dao.mysql;
+package com.khelenyuk.dao.mysql.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.dao.UserDAO;
+import com.khelenyuk.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserDAOImpl implements CrudDAO<User> {
+public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
 
     private final String TABLE = "users";
@@ -129,22 +130,22 @@ public class UserDAOImpl implements CrudDAO<User> {
     }
 
     @Override
-    public boolean add(User newObject) {
+    public boolean add(User newEntity) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(insert)
         ) {
-            statement.setString(1, newObject.getLogin());
-            statement.setString(2, newObject.getPassword());
-            statement.setString(3, newObject.getFirstName());
-            statement.setString(4, newObject.getLastName());
-            statement.setString(5, newObject.getEmail());
-            statement.setDate(6, new Date(newObject.getBirthday().getTime()));
-            statement.setInt(7, newObject.getSexId());
-            statement.setInt(8, newObject.getWeight());
-            statement.setInt(9, newObject.getHeight());
-            statement.setInt(10, newObject.getLifestyleId());
-            statement.setInt(11, newObject.getCalorieNorm());
+            statement.setString(1, newEntity.getLogin());
+            statement.setString(2, newEntity.getPassword());
+            statement.setString(3, newEntity.getFirstName());
+            statement.setString(4, newEntity.getLastName());
+            statement.setString(5, newEntity.getEmail());
+            statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
+            statement.setInt(7, newEntity.getSexId());
+            statement.setInt(8, newEntity.getWeight());
+            statement.setInt(9, newEntity.getHeight());
+            statement.setInt(10, newEntity.getLifestyleId());
+            statement.setInt(11, newEntity.getCalorieNorm());
 
             logger.debug("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
@@ -158,21 +159,21 @@ public class UserDAOImpl implements CrudDAO<User> {
     }
 
     @Override
-    public boolean update(int oldId, User newObject) {
+    public boolean update(int oldId, User newEntity) {
         int resultUpdate = 0;
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateById)
         ) {
-            statement.setString(1, newObject.getLogin());
-            statement.setString(2, newObject.getPassword());
-            statement.setString(3, newObject.getFirstName());
-            statement.setString(4, newObject.getLastName());
-            statement.setString(5, newObject.getEmail());
-            statement.setDate(6, new Date(newObject.getBirthday().getTime()));
-            statement.setInt(7, newObject.getSexId());
-            statement.setInt(8, newObject.getWeight());
-            statement.setInt(9, newObject.getHeight());
-            statement.setInt(10, newObject.getLifestyleId());
+            statement.setString(1, newEntity.getLogin());
+            statement.setString(2, newEntity.getPassword());
+            statement.setString(3, newEntity.getFirstName());
+            statement.setString(4, newEntity.getLastName());
+            statement.setString(5, newEntity.getEmail());
+            statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
+            statement.setInt(7, newEntity.getSexId());
+            statement.setInt(8, newEntity.getWeight());
+            statement.setInt(9, newEntity.getHeight());
+            statement.setInt(10, newEntity.getLifestyleId());
             statement.setInt(11, oldId);
 
             logger.debug("Query: " + statement.toString());

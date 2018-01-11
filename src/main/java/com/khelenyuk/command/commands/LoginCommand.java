@@ -5,7 +5,7 @@ import com.khelenyuk.service.ILoginRegistrationService;
 import com.khelenyuk.service.IPageService;
 import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.servlet.MessageManager;
+import com.khelenyuk.controller.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,10 +31,10 @@ public class LoginCommand implements ActionCommand {
 
         if (loginRegistrationService.checkLogin(login, password)) {
             pageService.updatePageData(session, userService.getUser(login).getId());
-            page = com.khelenyuk.servlet.ConfigurationManager.getProperty("path.page.main");
+            page = com.khelenyuk.controller.ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
-            page = com.khelenyuk.servlet.ConfigurationManager.getProperty("path.page.login");
+            page = com.khelenyuk.controller.ConfigurationManager.getProperty("path.page.login");
         }
 
 

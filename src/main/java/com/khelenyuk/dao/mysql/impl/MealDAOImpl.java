@@ -1,8 +1,9 @@
-package com.khelenyuk.dao.mysql;
+package com.khelenyuk.dao.mysql.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.entity.MealFull;
-import com.khelenyuk.entity.Meal;
+import com.khelenyuk.dao.MealDAO;
+import com.khelenyuk.model.MealFull;
+import com.khelenyuk.model.Meal;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,8 +14,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class MealDAO {
-    private static final Logger logger = LogManager.getLogger(MealDAO.class);
+public class MealDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
+    private static final Logger logger = LogManager.getLogger(MealDAOImpl.class);
 
     private final String TABLE = "meal";
     private final String selectByUserId = "SELECT meal_number.name as meal, products.name as prod, weight, (SELECT products.calories*weight/100 FROM products WHERE products.id = product_id) as calories, (SELECT products.protein*weight/100 FROM products WHERE products.id = product_id) as protein, (SELECT products.fat*weight/100 FROM products WHERE products.id = product_id) as fat, (SELECT products.carbs*weight/100 FROM products WHERE products.id = product_id) as carbs FROM ((happy_meal.meal INNER JOIN happy_meal.products ON happy_meal.meal.product_id = happy_meal.products.id) INNER JOIN happy_meal.meal_number ON happy_meal.meal.meal_number_id = happy_meal.meal_number.id) WHERE meal.user_id=? AND meal.date=? ORDER BY meal_number.id;";
@@ -50,6 +51,7 @@ public class MealDAO {
         return menu;
     }
 
+    @Override
     public boolean add(Meal newMeal) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
@@ -69,7 +71,6 @@ public class MealDAO {
         }
         return resultInsert > 0;
     }
-
 
 
 }

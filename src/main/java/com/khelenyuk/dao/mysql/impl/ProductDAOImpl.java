@@ -1,8 +1,8 @@
-package com.khelenyuk.dao.mysql;
+package com.khelenyuk.dao.mysql.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.entity.Product;
+import com.khelenyuk.dao.ProductDAO;
+import com.khelenyuk.model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductDAOImpl implements CrudDAO<Product> {
+public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
     private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
 
     private final String TABLE = "products";
@@ -50,13 +50,13 @@ public class ProductDAOImpl implements CrudDAO<Product> {
     }
 
     @Override
-    public Product get(int productId) {
+    public Product get(int id) {
         Product product = null;
 
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(selectById)) {
 
-            statement.setInt(1, productId);
+            statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 logger.debug("Query: " + statement.toString());
@@ -69,23 +69,23 @@ public class ProductDAOImpl implements CrudDAO<Product> {
                             resultSet.getFloat("fat"),
                             resultSet.getFloat("carbs"));
                 } else {
-                    logger.info("No product with id=" + productId + " found");
+                    logger.info("No product with id=" + id + " found");
                 }
             }
         } catch (SQLException e) {
-            logger.error("Error in getting product with id=" + productId, e.getCause());
+            logger.error("Error in getting product with id=" + id, e.getCause());
         }
         return product;
     }
 
     @Override
-    public Product get(String productName) {
+    public Product get(String name) {
         Product product = null;
 
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(selectByName)) {
 
-            statement.setString(1, productName);
+            statement.setString(1, name);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 logger.debug("Query: " + statement.toString());
@@ -98,26 +98,26 @@ public class ProductDAOImpl implements CrudDAO<Product> {
                             resultSet.getFloat("fat"),
                             resultSet.getFloat("carbs"));
                 } else {
-                    logger.info("No product with name='" + productName + "' found");
+                    logger.info("No product with name='" + name + "' found");
                 }
             }
         } catch (SQLException e) {
-            logger.error("Error in getting product with name=" + productName, e.getCause());
+            logger.error("Error in getting product with name=" + name, e.getCause());
         }
         return product;
     }
 
     @Override
-    public boolean add(Product productNew) {
+    public boolean add(Product product) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(insert)
         ) {
-            statement.setString(1, productNew.getName());
-            statement.setFloat(2, productNew.getCalories());
-            statement.setFloat(3, productNew.getProtein());
-            statement.setFloat(4, productNew.getFat());
-            statement.setFloat(5, productNew.getCarbs());
+            statement.setString(1, product.getName());
+            statement.setFloat(2, product.getCalories());
+            statement.setFloat(3, product.getProtein());
+            statement.setFloat(4, product.getFat());
+            statement.setFloat(5, product.getCarbs());
 
             logger.debug("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
@@ -131,16 +131,16 @@ public class ProductDAOImpl implements CrudDAO<Product> {
     }
 
     @Override
-    public boolean update(int productOldId, Product productNew) {
+    public boolean update(int productOldId, Product newEntity) {
         int resultUpdate = 0;
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateById)
         ) {
-            statement.setString(1, productNew.getName());
-            statement.setFloat(2, productNew.getCalories());
-            statement.setFloat(3, productNew.getProtein());
-            statement.setFloat(4, productNew.getFat());
-            statement.setFloat(5, productNew.getCarbs());
+            statement.setString(1, newEntity.getName());
+            statement.setFloat(2, newEntity.getCalories());
+            statement.setFloat(3, newEntity.getProtein());
+            statement.setFloat(4, newEntity.getFat());
+            statement.setFloat(5, newEntity.getCarbs());
             statement.setInt(6, productOldId);
 
             logger.debug("Query: " + statement.toString());

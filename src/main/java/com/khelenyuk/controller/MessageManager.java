@@ -1,4 +1,4 @@
-package com.khelenyuk.servlet;
+package com.khelenyuk.controller;
 
 import java.util.ResourceBundle;
 

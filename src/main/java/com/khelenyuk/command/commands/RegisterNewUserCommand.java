@@ -1,12 +1,12 @@
 package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.entity.User;
+import com.khelenyuk.model.User;
 import com.khelenyuk.service.ILoginRegistrationService;
 import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.servlet.ConfigurationManager;
-import com.khelenyuk.servlet.MessageManager;
+import com.khelenyuk.controller.ConfigurationManager;
+import com.khelenyuk.controller.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

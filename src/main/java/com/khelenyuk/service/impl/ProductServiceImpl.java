@@ -2,8 +2,8 @@ package com.khelenyuk.service.impl;
 
 
 import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.dao.mysql.ProductDAOImpl;
-import com.khelenyuk.entity.Product;
+import com.khelenyuk.dao.mysql.impl.ProductDAOImpl;
+import com.khelenyuk.model.Product;
 import com.khelenyuk.service.IProductService;
 
 import java.util.List;
