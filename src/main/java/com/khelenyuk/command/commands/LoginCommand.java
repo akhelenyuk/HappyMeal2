@@ -1,9 +1,10 @@
 package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.service.LoginRegistrationLogic;
-import com.khelenyuk.service.PageLogic;
-import com.khelenyuk.service.UserLogic;
+import com.khelenyuk.service.ILoginRegistrationService;
+import com.khelenyuk.service.IPageService;
+import com.khelenyuk.service.factory.ServiceFactory;
+import com.khelenyuk.service.IUserService;
 import com.khelenyuk.servlet.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,12 @@ public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     private HttpSession session;
 
+    private IUserService userService = ServiceFactory.getUserService();
+    private ILoginRegistrationService loginRegistrationService = ServiceFactory.getLoginRegistrationService();
+    private IPageService pageService = ServiceFactory.getPageService();
+
+
+
     @Override
     public String execute(HttpServletRequest request) {
         String page = null;
@@ -22,8 +29,8 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
 
 
-        if (LoginRegistrationLogic.checkLogin(login, password)) {
-            PageLogic.updatePageData(session, UserLogic.getUser(login).getId());
+        if (loginRegistrationService.checkLogin(login, password)) {
+            pageService.updatePageData(session, userService.getUser(login).getId());
             page = com.khelenyuk.servlet.ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));

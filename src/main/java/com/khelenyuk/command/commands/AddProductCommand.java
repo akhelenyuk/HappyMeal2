@@ -3,8 +3,9 @@ package com.khelenyuk.command.commands;
 import com.khelenyuk.command.ActionCommand;
 import com.khelenyuk.entity.Product;
 import com.khelenyuk.entity.User;
-import com.khelenyuk.service.PageLogic;
-import com.khelenyuk.service.ProductLogic;
+import com.khelenyuk.service.IPageService;
+import com.khelenyuk.service.IProductService;
+import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.servlet.ConfigurationManager;
 import com.khelenyuk.servlet.MessageManager;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,9 @@ public class AddProductCommand implements ActionCommand {
     private static final String PARAM_NAME_FAT = "fat";
     private static final String PARAM_NAME_CARBS = "carbs";
     private static final String PARAM_NAME_BUTTON = "button";
+
+    private IPageService pageService = ServiceFactory.getPageService();
+    private IProductService productService = ServiceFactory.getProductService();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -43,9 +47,9 @@ public class AddProductCommand implements ActionCommand {
 
 
 
-        if (ProductLogic.addProduct(product)) {
+        if (productService.addProduct(product)) {
             session.setAttribute("successAddProductMessage", MessageManager.getProperty("message.addproductsuccess"));
-            PageLogic.updatePageData(session, ((User)session.getAttribute("user")).getId());
+            pageService.updatePageData(session, ((User)session.getAttribute("user")).getId());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             session.setAttribute("errorAddProductMessage", MessageManager.getProperty("message.addproducterror"));

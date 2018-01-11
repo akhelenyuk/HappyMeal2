@@ -2,7 +2,7 @@ package com.khelenyuk.dao;
 
 import java.util.List;
 
-public interface EntityDAO<T> {
+public interface CrudDAO<T> {
     List<T> getAll();
     T get(int id);
     T get(String login);

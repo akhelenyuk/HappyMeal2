@@ -2,8 +2,9 @@ package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
 import com.khelenyuk.entity.User;
-import com.khelenyuk.service.LoginRegistrationLogic;
-import com.khelenyuk.service.UserLogic;
+import com.khelenyuk.service.ILoginRegistrationService;
+import com.khelenyuk.service.factory.ServiceFactory;
+import com.khelenyuk.service.IUserService;
 import com.khelenyuk.servlet.ConfigurationManager;
 import com.khelenyuk.servlet.MessageManager;
 
@@ -24,6 +25,10 @@ public class RegisterNewUserCommand implements ActionCommand {
     private static final String PARAM_NAME_SEX = "sex";
     private static final String PARAM_NAME_LIFESTYLE = "lifestyle";
 
+    private IUserService userService = ServiceFactory.getUserService();
+    private ILoginRegistrationService loginRegistrationService = ServiceFactory.getLoginRegistrationService();
+
+
     private HttpSession session;
 
     @Override
@@ -35,12 +40,12 @@ public class RegisterNewUserCommand implements ActionCommand {
         String password_confirm = request.getParameter(PARAM_NAME_PASSWORD_CONFIRM);
         String login = request.getParameter(PARAM_NAME_LOGIN);
 
-        if (!LoginRegistrationLogic.confirmPassword(password, password_confirm)) {
+        if (!loginRegistrationService.confirmPassword(password, password_confirm)) {
             session.setAttribute("errorPassConfirmMessage", MessageManager.getProperty("message.passconfirmerror"));
             return page;
         }
 
-        if (LoginRegistrationLogic.checkLoginExist(login)) {
+        if (loginRegistrationService.checkLoginExist(login)) {
             session.setAttribute("errorLoginExistMessage", MessageManager.getProperty("message.loginexisterror"));
             return page;
         }
@@ -57,7 +62,7 @@ public class RegisterNewUserCommand implements ActionCommand {
                 Integer.valueOf(request.getParameter(PARAM_NAME_LIFESTYLE))
         );
         user.setCalorieNorm(2222);
-        if(UserLogic.addUser(user)){
+        if(userService.addUser(user)){
             session.setAttribute("registrationSuccessMessage", MessageManager.getProperty("message.registrationconfirm"));
             page = ConfigurationManager.getProperty("path.page.login");
         } else{

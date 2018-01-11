@@ -2,7 +2,8 @@ package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
 import com.khelenyuk.entity.User;
-import com.khelenyuk.service.PageLogic;
+import com.khelenyuk.service.IPageService;
+import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.servlet.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,10 @@ public class SelectDateCommand implements ActionCommand {
 
     private static final String PARAM_NAME_SELECTED_DATE = "chosenDate";
 
+    private IPageService pageService = ServiceFactory.getPageService();
+
+
+
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -25,7 +30,7 @@ public class SelectDateCommand implements ActionCommand {
         session.setAttribute("chosenDateSession", LocalDate.parse(
                 request.getParameter(PARAM_NAME_SELECTED_DATE).toString()));
 
-        PageLogic.updatePageData(session, ((User)session.getAttribute("user")).getId());
+        pageService.updatePageData(session, ((User)session.getAttribute("user")).getId());
 
         return page;
     }

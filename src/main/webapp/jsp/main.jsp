@@ -5,8 +5,10 @@
 <html>
 <head>
     <title>Welcome</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -25,31 +27,56 @@
                 </div>
             </c:otherwise>
         </c:choose>
-
     </div>
+
+    <%--Button: add product--%>
     <form action="controller" method="post">
         <input type="hidden" name="command" value="to_add_product_page">
         <input type="submit" value="Добавить продукт">
     </form>
 
-    <br/>
-    ${successAddProductMessage}
-    ${errorAddProductMessage}
-
     <%-- Choose date for meals --%>
     <form name="calendarForm" method="post" action="controller">
         <input type="hidden" name="command" value="Select_date">
-        <input type="date"  name="chosenDate" value="${chosenDateSession}"/>
+        <input type="date" name="chosenDate" value="${chosenDateSession}"/>
 
         <input type="submit" class="button" value="Select Date">
     </form>
+    <br/>
+
+    <%--Tabs: sport, water, stats--%>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#food">Food</a></li>
+        <li><a data-toggle="tab" href="#exercise">Exercise</a></li>
+        <li><a data-toggle="tab" href="#water">Water</a></li>
+        <li><a data-toggle="tab" href="#stats">Statistics</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="food" class="tab-pane fade in active">
+            <h3>Food</h3>
+            <p>Some content</p>
+        </div>
+        <div id="exercise" class="tab-pane fade">
+            <h3>Exercise</h3>
+        </div>
+        <div id="water" class="tab-pane fade">
+            <h3>Water</h3>
+        </div>
+        <div id="stats" class="tab-pane fade">
+            <h3>Statistics</h3>
+        </div>
+    </div>
+
+
+    ${successAddProductMessage}
+    ${errorAddProductMessage}
 
 
     <form method="post" action="controller">
         <input type="hidden" name="command" value="add_meal"/>
         <input type="hidden" name="user_id" value="${user.id}"/>
         <%--<input type="hidden" name="chosenDateHidden" value="${test2}"/>--%>
-
 
 
         <%--Search--%>

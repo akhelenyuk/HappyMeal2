@@ -1,7 +1,7 @@
 package com.khelenyuk.dao.mysql;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.EntityDAO;
+import com.khelenyuk.dao.CrudDAO;
 import com.khelenyuk.entity.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductDAOImpl implements EntityDAO<Product> {
+public class ProductDAOImpl implements CrudDAO<Product> {
     private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
 
     private final String TABLE = "products";

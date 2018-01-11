@@ -2,8 +2,9 @@ package com.khelenyuk.command.commands;
 
 import com.khelenyuk.command.ActionCommand;
 import com.khelenyuk.entity.Meal;
-import com.khelenyuk.service.MenuLogic;
-import com.khelenyuk.service.PageLogic;
+import com.khelenyuk.service.IMenuService;
+import com.khelenyuk.service.IPageService;
+import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.servlet.ConfigurationManager;
 import com.khelenyuk.servlet.MessageManager;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,9 @@ public class AddMealCommand implements ActionCommand {
     private static final String PARAM_NAME_WEIGHT = "weight";
     private static final String PARAM_NAME_MEAL_NUMBER = "meal_number";
 
+    private IPageService pageService = ServiceFactory.getPageService();
+    private IMenuService menuService = ServiceFactory.getMenuService();
+
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -39,8 +43,8 @@ public class AddMealCommand implements ActionCommand {
         );
 
 
-        if (MenuLogic.addMeal(meal)) {
-            PageLogic.updatePageData(session, meal.getUserId());
+        if (menuService.addMeal(meal)) {
+            pageService.updatePageData(session, meal.getUserId());
         } else {
             session.setAttribute("errorAddMealMessage", MessageManager.getProperty("message.addmealerror"));
         }

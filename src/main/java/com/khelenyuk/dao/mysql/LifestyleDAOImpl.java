@@ -1,7 +1,7 @@
 package com.khelenyuk.dao.mysql;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.EntityDAO;
+import com.khelenyuk.dao.CrudDAO;
 import com.khelenyuk.entity.Lifestyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LifestyleDAOImpl implements EntityDAO<Lifestyle> {
+public class LifestyleDAOImpl implements CrudDAO<Lifestyle> {
     private static final Logger logger = LogManager.getLogger(LifestyleDAOImpl.class);
     private final String TABLE = "lifestyle";
     private String selectAll = "SELECT * FROM " + TABLE;
