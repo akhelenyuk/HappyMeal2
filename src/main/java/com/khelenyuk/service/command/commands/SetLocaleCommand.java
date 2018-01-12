@@ -1,12 +1,15 @@
-package com.khelenyuk.command.commands;
+package com.khelenyuk.service.command.commands;
 
-import com.khelenyuk.command.ActionCommand;
+import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.controller.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SetLocaleCommand implements ActionCommand {
+    /**
+     *
+     */
     @Override
     public String execute(HttpServletRequest request) {
         // тут нужна ссылка на ту же страницу, откуда пришел запрос
@@ -22,7 +25,8 @@ public class SetLocaleCommand implements ActionCommand {
                 session.setAttribute("locale", "ru_RU");
                 session.setAttribute("selectedLocale", "RU");
                 break;
-            case "UA":default:
+            case "UA":
+                default:
                 session.setAttribute("locale", "uk_UA");
                 session.setAttribute("selectedLocale", "UA");
                 break;

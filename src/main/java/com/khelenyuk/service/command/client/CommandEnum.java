@@ -1,7 +1,7 @@
-package com.khelenyuk.command.client;
+package com.khelenyuk.service.command.client;
 
-import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.command.commands.*;
+import com.khelenyuk.service.command.ActionCommand;
+import com.khelenyuk.service.command.commands.*;
 
 public enum CommandEnum {
     LOGIN{

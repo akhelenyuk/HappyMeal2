@@ -1,7 +1,7 @@
 package com.khelenyuk.controller;
 
-import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.command.factory.ActionFactory;
+import com.khelenyuk.service.command.ActionCommand;
+import com.khelenyuk.service.command.factory.ActionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +25,7 @@ public class MyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
+
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

@@ -1,8 +1,8 @@
-package com.khelenyuk.command.factory;
+package com.khelenyuk.service.command.factory;
 
-import com.khelenyuk.command.ActionCommand;
-import com.khelenyuk.command.client.CommandEnum;
-import com.khelenyuk.command.commands.EmptyCommand;
+import com.khelenyuk.service.command.ActionCommand;
+import com.khelenyuk.service.command.client.CommandEnum;
+import com.khelenyuk.service.command.commands.EmptyCommand;
 import com.khelenyuk.controller.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;

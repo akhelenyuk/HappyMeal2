@@ -1,6 +1,6 @@
-package com.khelenyuk.command.commands;
+package com.khelenyuk.service.command.commands;
 
-import com.khelenyuk.command.ActionCommand;
+import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.controller.MyServlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

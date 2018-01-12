@@ -1,6 +1,6 @@
-package com.khelenyuk.command.commands;
+package com.khelenyuk.service.command.commands;
 
-import com.khelenyuk.command.ActionCommand;
+import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.controller.ConfigurationManager;
 import com.khelenyuk.controller.MessageManager;
 import com.khelenyuk.model.Meal;
@@ -26,6 +26,9 @@ public class AddMealCommand implements ActionCommand {
     private IPageService pageService = ServiceFactory.getPageService();
     private IMenuService menuService = ServiceFactory.getMenuService();
 
+    /**
+     * {@inheritDoc}.
+     */
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
