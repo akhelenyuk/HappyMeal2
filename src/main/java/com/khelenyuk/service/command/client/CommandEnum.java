@@ -14,6 +14,11 @@ public enum CommandEnum {
             this.command = new ToLoginPageCommand();
         }
     },
+    HOME{
+        {
+            this.command = new ToMainPageCommand();
+        }
+    },
     TO_REGISTRATION_PAGE{
         {
             this.command = new ToRegistrationPageCommand();

@@ -5,8 +5,8 @@ import com.khelenyuk.model.User;
 import com.khelenyuk.service.ILoginRegistrationService;
 import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.controller.ConfigurationManager;
-import com.khelenyuk.controller.MessageManager;
+import com.khelenyuk.utils.ConfigurationManager;
+import com.khelenyuk.utils.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -1,8 +1,8 @@
 package com.khelenyuk.service.command.commands;
 
 import com.khelenyuk.service.command.ActionCommand;
-import com.khelenyuk.controller.ConfigurationManager;
-import com.khelenyuk.controller.MessageManager;
+import com.khelenyuk.utils.ConfigurationManager;
+import com.khelenyuk.utils.MessageManager;
 import com.khelenyuk.model.Meal;
 import com.khelenyuk.service.IMenuService;
 import com.khelenyuk.service.IPageService;

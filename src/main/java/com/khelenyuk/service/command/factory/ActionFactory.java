@@ -3,7 +3,7 @@ package com.khelenyuk.service.command.factory;
 import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.service.command.client.CommandEnum;
 import com.khelenyuk.service.command.commands.EmptyCommand;
-import com.khelenyuk.controller.MessageManager;
+import com.khelenyuk.utils.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 

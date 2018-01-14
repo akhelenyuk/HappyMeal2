@@ -2,6 +2,8 @@ package com.khelenyuk.controller;
 
 import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.service.command.factory.ActionFactory;
+import com.khelenyuk.utils.ConfigurationManager;
+import com.khelenyuk.utils.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,10 +39,11 @@ public class MyServlet extends HttpServlet {
         page = command.execute(request);
 
         if (page != null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
+            response.sendRedirect(page);
+//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+//            dispatcher.forward(request, response);
         } else {
-            page = com.khelenyuk.controller.ConfigurationManager.getProperty("path.page.index");
+            page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }

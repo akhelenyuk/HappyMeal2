@@ -1,7 +1,10 @@
 package com.khelenyuk.model;
 
+import com.khelenyuk.utils.UtilManager;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -17,7 +20,19 @@ public class User implements Serializable {
     private int height;
     private int lifestyleId;
     private int calorieNorm;
+    // Переписать под class Role
     private int roleId;
+
+    // ---------------------------Test methods -- to delete---------------------------
+    public User getUser() {
+        return new com.khelenyuk.dao.mysql.impl.UserDAOImpl().get(9);
+    }
+
+    public List<User> getUsers() {
+        return new com.khelenyuk.dao.mysql.impl.UserDAOImpl().getAll();
+    }
+    // ---------------------------------------------------------
+
 
     public User() {
     }
@@ -98,6 +113,11 @@ public class User implements Serializable {
 
     public int getCalorieNorm() {
         return calorieNorm;
+    }
+
+    // Переписать под class Role
+    public boolean isAdmin() {
+        return UtilManager.getProperty("role.admin").equalsIgnoreCase(String.valueOf(roleId));
     }
 
 

@@ -1,22 +1,35 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="error" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
-<html>
-<head>
-    <title>Welcome</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<%--<html>--%>
+<%--<head>--%>
+    <%--<title>Title</title>--%>
+    <%--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">--%>
+    <%--<link rel="stylesheet" href="/bootstrap/css/header.css">--%>
+<%--</head>--%>
 
+
+<jsp:include page="header.jsp"></jsp:include>
 <body>
+
+<jsp:include page="headerNavbar.jsp"></jsp:include>
+<%--<nav class="navbar">--%>
+    <%--<a class="navbar-brand fitness-buddy" href="#"><span class="fitness">Fitness</span>Buddy</a>--%>
+    <%--<div class="form-inline">--%>
+        <%--<c:if test="${not empty user}">--%>
+            <%--<c:if test="${user.admin}">--%>
+                <%--<a class="nav-item nav-link" href="/controller?command=home">Home</a>--%>
+            <%--</c:if>--%>
+        <%--</c:if>--%>
+        <%--<a class="nav-item nav-link" href="controller?command=logout">Log out</a>--%>
+    <%--</div>--%>
+<%--</nav>--%>
+
 <div class="container">
     <%-- Log out --%>
     <div align="right"><a href="controller?command=logout">Logout</a></div>
 
-        <h1>Testing github</h1>
+    <h1>Testing github</h1>
     <div>
         <div class="row">
             <div class="col-sm-4">
@@ -43,11 +56,8 @@
             </div>
 
 
-
-
         </div>
     </div>
-
 
 
     <%--Tabs: sport, water, stats--%>
@@ -181,7 +191,22 @@
 
 </div>
 
-</div>
 
 </body>
 </html>
+
+
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="error" %>--%>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>--%>
+
+<%--<html>--%>
+<%--<head>--%>
+<%--<title>Welcome</title>--%>
+<%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
+<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+<%--</head>--%>
+
+<%--<body>--%>

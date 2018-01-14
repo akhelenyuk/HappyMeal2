@@ -4,7 +4,7 @@ import com.khelenyuk.service.command.ActionCommand;
 import com.khelenyuk.model.User;
 import com.khelenyuk.service.IPageService;
 import com.khelenyuk.service.factory.ServiceFactory;
-import com.khelenyuk.controller.ConfigurationManager;
+import com.khelenyuk.utils.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

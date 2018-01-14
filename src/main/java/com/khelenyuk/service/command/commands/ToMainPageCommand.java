@@ -5,11 +5,12 @@ import com.khelenyuk.utils.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class LogoutCommand implements ActionCommand {
+
+public class ToMainPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("path.page.index");
-        request.getSession().invalidate();
+        String page = ConfigurationManager.getProperty("path.page.main");
+
         return page;
     }
 }

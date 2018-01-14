@@ -5,7 +5,7 @@ import com.khelenyuk.model.Lifestyle;
 import com.khelenyuk.model.Sex;
 import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.controller.ConfigurationManager;
+import com.khelenyuk.utils.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
