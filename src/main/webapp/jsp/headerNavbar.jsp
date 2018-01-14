@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar navbar-header">
     <form action="/controller" method="post">
         <button class="navbar-brand fitness-buddy btn btn-link" name="command" value="HOME"><span class="fitness">Fitness</span>Buddy
         </button>

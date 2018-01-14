@@ -17,9 +17,9 @@
     text-decoration: none;
 }
 
-.navbar {
+.navbar-header {
     background-color: #000000;
-    size: 100px;
+    size: 92px;
     padding-left: 35px;
     padding-right: 35px;
 }
