@@ -39,9 +39,10 @@ public class MyServlet extends HttpServlet {
         page = command.execute(request);
 
         if (page != null) {
-            response.sendRedirect(page);
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-//            dispatcher.forward(request, response);
+            // TODO Need option to choose sendRedirect or forward
+//            response.sendRedirect(page);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            dispatcher.forward(request, response);
         } else {
             page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));

@@ -3,9 +3,9 @@
 
 <%--<html>--%>
 <%--<head>--%>
-    <%--<title>Title</title>--%>
-    <%--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">--%>
-    <%--<link rel="stylesheet" href="/bootstrap/css/header.css">--%>
+<%--<title>Title</title>--%>
+<%--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">--%>
+<%--<link rel="stylesheet" href="/bootstrap/css/header.css">--%>
 <%--</head>--%>
 
 
@@ -14,15 +14,15 @@
 
 <jsp:include page="headerNavbar.jsp"></jsp:include>
 <%--<nav class="navbar">--%>
-    <%--<a class="navbar-brand fitness-buddy" href="#"><span class="fitness">Fitness</span>Buddy</a>--%>
-    <%--<div class="form-inline">--%>
-        <%--<c:if test="${not empty user}">--%>
-            <%--<c:if test="${user.admin}">--%>
-                <%--<a class="nav-item nav-link" href="/controller?command=home">Home</a>--%>
-            <%--</c:if>--%>
-        <%--</c:if>--%>
-        <%--<a class="nav-item nav-link" href="controller?command=logout">Log out</a>--%>
-    <%--</div>--%>
+<%--<a class="navbar-brand fitness-buddy" href="#"><span class="fitness">Fitness</span>Buddy</a>--%>
+<%--<div class="form-inline">--%>
+<%--<c:if test="${not empty user}">--%>
+<%--<c:if test="${user.admin}">--%>
+<%--<a class="nav-item nav-link" href="/controller?command=home">Home</a>--%>
+<%--</c:if>--%>
+<%--</c:if>--%>
+<%--<a class="nav-item nav-link" href="controller?command=logout">Log out</a>--%>
+<%--</div>--%>
 <%--</nav>--%>
 
 <div class="container">

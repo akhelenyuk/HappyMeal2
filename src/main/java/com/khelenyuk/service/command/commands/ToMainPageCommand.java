@@ -10,6 +10,7 @@ public class ToMainPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.main");
+//        request.getSession().setAttribute("title", ConfigurationManager.getProperty(page));
 
         return page;
     }
