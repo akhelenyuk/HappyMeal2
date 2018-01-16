@@ -1,212 +1,174 @@
-<%--<%@ page contentType="text/html;charset=UTF-8" %>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--<title>Title</title>--%>
-<%--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">--%>
-<%--<link rel="stylesheet" href="/bootstrap/css/header.css">--%>
-<%--</head>--%>
+<html>
+<head>
+    <title>Home page</title>
+    <jsp:include page="header.jsp"/>
+    <link rel="stylesheet" href="/bootstrap/css/main.css">
+    <link rel="stylesheet" href="/bootstrap/css/adminpage.css">
+</head>
 
 
-<jsp:include page="header.jsp"></jsp:include>
-<body>
+<body class="bg">
+<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>
+<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>
+<%--<jsp:useBean id="menuBean" class="com.khelenyuk.model.Meal"></jsp:useBean>--%>
+<%--<jsp:useBean id="localDate" class="java.time.LocalDate"></jsp:useBean>--%>
 
-<jsp:include page="headerNavbar.jsp"></jsp:include>
-<%--<nav class="navbar">--%>
-<%--<a class="navbar-brand fitness-buddy" href="#"><span class="fitness">Fitness</span>Buddy</a>--%>
-<%--<div class="form-inline">--%>
-<%--<c:if test="${not empty user}">--%>
-<%--<c:if test="${user.admin}">--%>
-<%--<a class="nav-item nav-link" href="/controller?command=home">Home</a>--%>
-<%--</c:if>--%>
-<%--</c:if>--%>
-<%--<a class="nav-item nav-link" href="controller?command=logout">Log out</a>--%>
-<%--</div>--%>
-<%--</nav>--%>
+<c:set var="user" value="${userBean.user}"/>
+<c:set var="products" value="${productBean.products}"/>
+<%--<c:set var="menu" value="${menuBean.menu}"/>--%>
+<%--<c:set var="chosenDateSession" value="${menu.date}"/>--%>
 
-<div class="container">
-    <%-- Log out --%>
-    <div align="right"><a href="controller?command=logout">Logout</a></div>
 
-    <h1>Testing github</h1>
-    <div>
+<div class="container bg-container">
+    <jsp:include page="headerNavbar.jsp"></jsp:include>
+
+    <br/>
+    <%----------- JUMBOTRONs ------------%>
+
+    <div class="container container-fluid table-bordered">
         <div class="row">
-            <div class="col-sm-4">
-                <h3><c:out value="Hello, ${user.firstName}"/></h3>
-                <h2>You are on track today!</h2>
+            <div class="col-4 jumbotron jumbotron1">
+                <div class="hello">Hello, ${user.firstName}!</div>
+                <div class="on_track">You are on track today!</div>
+                <div class="still_to_go_text"><span class="still_to_go_number">15 kg </span>to your goal weight</div>
+                <div class="still_to_go_text"><span class="still_to_go_number">500 calories </span>left to spend today
+                </div>
+                <div class="still_to_go_text"><span class="still_to_go_number">4 glasses </span> of water left to drink
+                </div>
             </div>
-
-            <%-- Choose date for meals --%>
-            <div class="col-sm-8">
-                <ul class="pager">
-                    <li><a href="#">&lt</a></li>
-                    <li>${chosenDateSession} </li>
-                    <li><a href="#">&gt</a></li>
-                </ul>
-                <ul class="row">
-                    <li>1900</li>
-                    <li>-</li>
-                    <li>900</li>
-                    <li>+</li>
-                    <li>500</li>
-                    <li>=</li>
-                    <li>1400</li>
-                </ul>
+            <div class="col jumbotron jumbotron2 text-center">
+                <div class="your-daily-summary">Your Daily Summary</div>
+                <table class="table text-center borderless">
+                    <thead>
+                    <tr class="your-daily-summary-numbers your-daily-summary-table">
+                        <th class="">1,900</th>
+                        <th>-</th>
+                        <th>900</th>
+                        <th>+</th>
+                        <th>500</th>
+                        <th>=</th>
+                        <th class="remaining">1,400</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="main-caption">
+                        <td>GOAL</td>
+                        <td></td>
+                        <td>FOOD</td>
+                        <td></td>
+                        <td>EXERCISE</td>
+                        <td></td>
+                        <td>REMAINING</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-
         </div>
     </div>
 
 
-    <%--Tabs: sport, water, stats--%>
-    <ul class="nav nav-tabs nav-justified">
-        <li class="active"><a data-toggle="tab" href="#food">Food</a></li>
-        <li><a data-toggle="tab" href="#exercise">Exercise</a></li>
-        <li><a data-toggle="tab" href="#water">Water</a></li>
-        <li><a data-toggle="tab" href="#stats">Statistics</a></li>
-    </ul>
+    <div class="container table-bordered">
 
-    <div class="tab-content">
-        <div id="food" class="tab-pane fade in active">
-            <form method="post" action="controller">
-                <input type="hidden" name="command" value="add_meal"/>
-                <input type="hidden" name="user_id" value="${user.id}"/>
-                <%--<input type="hidden" name="chosenDateHidden" value="${test2}"/>--%>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#food">Food</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#exercise">Exercise</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#stats">Statistics</a>
+            </li>
+        </ul>
 
 
-                <%--Choose product--%>
-                <div class="row well">
-                    <h3>Select product</h3>
-                    <p>
-                        <%--Choose product--%>
-                        <select name="product_id">
-                            <c:forEach var="product" items="${products}">
-                                <option value="${product.id}">
-                                    <c:out value="${product.name}"/>
-                                </option>
-                            </c:forEach>
-                        </select>
+        <div class="tab-content table-bordered">
+            <br/><br/>
 
-                        <%--enter amount--%>
-                        <label>Amount consumed</label>
-                        <input type="number" name="weight" step="1" min="1" value="100">
-                        <label> grammes </label>
-                    </p>
+            <%---------- FOOD -----------%>
+            <div class="tab-pane active" id="food" role="tabpanel">
+
+
+                <%---------- FOOD -----------%>
+                <div class="container container-fluid table-bordered">
+                    <form action="/controller" method="post">
+
+
+                        <%---------------   select product  ---------------%>
+                        <div class="row ">
+                            <%----------------   SELECT PRODUCT   -----------------%>
+                            <div class="col">
+                                <div class="main-caption">SELECT PRODUCT</div>
+
+                                <%------------  Choose product ------------%>
+                                <select class="form-control" name="product_id">
+                                    <c:forEach var="product" items="${products}">
+                                        <option value="${product.id}">
+                                            <c:out value="${product.name}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+
+                                <%------------- Add New product ------------%>
+                                <div class="form-inline font12">
+                                    <label>Can't find a product?</label>
+                                    <button type="submit" class="btn btn-link font12">Add new</button>
+                                </div>
+                            </div>
+
+                            <%-----------------   ENTER QUANTITY CONSUMED   ------------------%>
+                            <div class="col">
+                                <%---------- Enter product amount --------------%>
+                                <div class="main-caption">ENTER QUANTITY (grams)</div>
+                                <input class="form-control" type="number" name="weight" step="1" min="1" value="100">
+
+                            </div>
+
+                            <div class="col">
+                                <div class="main-caption">SELECT MEAL</div>
+
+                                <%------------  Choose product ------------%>
+                                <select class="form-control" name="product_id">
+                                    <c:forEach var="product" items="${products}">
+                                        <option value="${product.id}">
+                                            <c:out value="${product.name}"/>
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+
+                        <%------------  BUTTON: add to diary  ---------%>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" name="command" value="ADD_MEAL">Add to Food
+                                Diary
+                            </button>
+                        </div>
+                    </form>
                 </div>
+<br>
+                <%-------------  SHOW FOOD DIARY  ------------%>
+                <%--menu--%>
+                <c:if test="${ empty menu}">
+                    <jsp:include page="includeFoodTab.jsp"/>
+                </c:if>
+            </div>
 
-                <div>
-                    <h6>Can't find a product?
-                        <a href="addProduct.jsp">Add new</a></h6>
-                </div>
+            <%------------ EXERCISE ---------------%>
+            <div class="tab-pane" id="exercise" role="tabpanel">Exercise me</div>
 
-                <%--choose meal--%>
-                <h3>Select meal</h3>
-                <div class="row well">
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <div><label><input name="meal_number" value="1" type="radio" checked>Breakfast</label></div>
-                        <div><label><input name="meal_number" value="2" type="radio">Early lunch</label></div>
-                        <div><label><input name="meal_number" value="3" type="radio">Lunch</label></div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <div><label><input name="meal_number" value="4" type="radio">Early Dinner</label></div>
-                        <div><label><input name="meal_number" value="5" type="radio">Dinner</label></div>
-                        <div><label><input name="meal_number" value="6" type="radio">Late Dinner</label></div>
-                    </div>
-                </div>
+            <%------------- WATER ------------%>
+            <div class="tab-pane" id="water" role="tabpanel">Water</div>
 
-                <div>
-                    <input type="submit" value="Add to Food Diary">
-                </div>
-
-            </form>
-
-            <%--menu--%>
-            <c:if test="${not empty menu}">
-                <div class="row well">
-
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>AMOUNT</th>
-                            <th>CALORIES</th>
-                            <th>PROTEIN</th>
-                            <th>FAT</th>
-                            <th>CARBOHYDRATE</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="meal" items="${menu}">
-                            <tr>
-                                <td><c:out value="${meal.mealNumber}"></c:out></td>
-                                <td><c:out value="${meal.product}"></c:out></td>
-                                <td><c:out value="${meal.weight}"></c:out></td>
-                                <td><c:out value="${meal.calories}"></c:out></td>
-                                <td><c:out value="${meal.protein}"></c:out></td>
-                                <td><c:out value="${meal.fat}"></c:out></td>
-                                <td><c:out value="${meal.carbs}"></c:out></td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td>Итого за день:</td>
-                            <td><c:out value="${userTotalWeight}"></c:out></td>
-                            <td><c:out value="${userTotalCalories}"></c:out></td>
-                            <td><c:out value="${userTotalProteins}"></c:out></td>
-                            <td><c:out value="${userTotalFat}"></c:out></td>
-                            <td><c:out value="${userTotalCarbs}"></c:out></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Норма:</td>
-                            <td></td>
-                            <td><c:out value="${user.calorieNorm}"></c:out></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </c:if>
+            <%------------- Statistics ------------%>
+            <div class="tab-pane" id="stats" role="tabpanel">Statistics</div>
         </div>
-        <div id="exercise" class="tab-pane fade">
-            <h3>Exercise</h3>
-        </div>
-        <div id="water" class="tab-pane fade">
-            <h3>Water</h3>
-        </div>
-        <div id="stats" class="tab-pane fade">
-            <h3>Statistics</h3>
-        </div>
+
     </div>
-
-
-    ${successAddProductMessage}
-    ${errorAddProductMessage}
-
-
-</div>
 
 
 </body>
 </html>
 
-
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="error" %>--%>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>--%>
-
-<%--<html>--%>
-<%--<head>--%>
-<%--<title>Welcome</title>--%>
-<%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
-<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-<%--</head>--%>
-
-<%--<body>--%>

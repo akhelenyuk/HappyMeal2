@@ -2,9 +2,6 @@
     font-family: "HelveticaNeue-Medium";
     src: url(/bootstrap/font/HelveticaNeue-Medium.otf);
 }
-.container{
-    margin-top: 24px;
-}
 
 .admin {
     font-family: HelveticaNeue-Medium;

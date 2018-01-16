@@ -20,17 +20,18 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error/error.jsp</location>
-    </error-page>
-    <error-page>
-        <exception-type>java.lang.RuntimeException</exception-type>
-        <location>/jsp/error/error.jsp</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/jsp/error/error.jsp</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<exception-type>java.lang.RuntimeException</exception-type>-->
+        <!--<location>/jsp/error/error.jsp</location>-->
+    <!--</error-page>-->
 
+    
     <filter>
-        <filter-name>encodingfilter</filter-name>
+        <filter-name>EncodingFilter</filter-name>
         <filter-class>com.khelenyuk.controller.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
@@ -38,7 +39,16 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>encodingfilter</filter-name>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>CacheControlFilter</filter-name>
+        <filter-class>com.khelenyuk.controller.filter.CacheControlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CacheControlFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

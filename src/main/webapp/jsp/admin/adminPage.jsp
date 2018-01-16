@@ -15,7 +15,7 @@
 <c:set var="userList" value="${userBean.users}"/>
 <c:set var="user1" value="${userBean.user}"/>
 
-<jsp:include page="headerNavbar.jsp"/>
+<jsp:include page="../headerNavbar.jsp"/>
 
 <div class="container">
 

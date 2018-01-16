@@ -23,7 +23,7 @@ public class User implements Serializable {
     // Переписать под class Role
     private int roleId;
 
-    // ---------------------------Test methods -- to delete---------------------------
+    // TODO ---------------------------Test methods -- to delete---------------------------
     public User getUser() {
         return new com.khelenyuk.dao.mysql.impl.UserDAOImpl().get(9);
     }

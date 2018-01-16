@@ -7,6 +7,10 @@
     font-family: "HelveticaNeue-Bold";
     src: url(/bootstrap/font/helvetica-neue-bold.ttf);
 }
+.navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .btn-link {
     color: #19a9a9;
@@ -19,7 +23,7 @@
 
 .navbar-header {
     background-color: #000000;
-    size: 92px;
+    size: 90px;
     padding-left: 35px;
     padding-right: 35px;
 }
@@ -31,4 +35,8 @@
 
 .fitness {
     font-family: HelveticaNeue-Bold;
+}
+
+.form-no-margin-bottom{
+    margin-bottom: 0px;
 }

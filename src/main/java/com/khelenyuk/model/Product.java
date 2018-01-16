@@ -1,6 +1,7 @@
 package com.khelenyuk.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Product implements Serializable {
@@ -10,6 +11,12 @@ public class Product implements Serializable {
     private Float protein;
     private Float fat;
     private Float carbs;
+
+    // TODO ---------------------------Test methods -- to delete---------------------------
+    public List<Product> getProducts() {
+        return new com.khelenyuk.dao.mysql.impl.ProductDAOImpl().getAll();
+    }
+    // ---------------------------------------------------------
 
     public Product() {
     }

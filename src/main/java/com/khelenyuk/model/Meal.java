@@ -2,17 +2,23 @@ package com.khelenyuk.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
-public class Meal implements Serializable{
-    private int id;
-    private int userId;
+public class Meal implements Serializable {
+    private Integer id;
+    private Integer userId;
     private LocalDate date;
-    private int productId;
-    private int weight;
+    private Integer productId;
+    private Integer weight;
     private MealNumber mealNumber;
 
-    public Meal(int userId, LocalDate date, int productId, int weight, int mealNumber) {
+
+    public Meal() {
+    }
+
+    public Meal(Integer userId, LocalDate date, Integer productId, Integer weight, Integer mealNumber) {
         this.userId = userId;
         this.date = date;
         this.productId = productId;
@@ -20,15 +26,15 @@ public class Meal implements Serializable{
         this.mealNumber = new MealNumber(mealNumber);
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
@@ -45,11 +51,11 @@ public class Meal implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meal meal = (Meal) o;
-        return id == meal.id &&
-                userId == meal.userId &&
-                productId == meal.productId &&
-                weight == meal.weight &&
+        return Objects.equals(id, meal.id) &&
+                Objects.equals(userId, meal.userId) &&
                 Objects.equals(date, meal.date) &&
+                Objects.equals(productId, meal.productId) &&
+                Objects.equals(weight, meal.weight) &&
                 Objects.equals(mealNumber, meal.mealNumber);
     }
 
