@@ -8,51 +8,53 @@
 <html>
 <head>
     <title><fmt:message key="label.title"/></title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/css/main.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/login.css">
 </head>
 <body>
-
-<div class="container">
-    <div align="right">
-        <form name="localeForm" method="post" action="controller">
-            <input type="hidden" name="command" value="set_Locale"/>
-
-            <select name="locale">
-                <option value="EN" ${selectedLocale == "EN"? 'selected="selected"':''}>english</option>
-                <option value="RU" ${selectedLocale == "RU" ? 'selected="selected"':''}>русский</option>
-                <option value="UA" ${selectedLocale == "UA" ? 'selected="selected"':''}>українська</option>
-            </select>
-            <input type="submit" value="<fmt:message key="label.setlanguage"/>"/>
-            <br/>
-        </form>
-    </div>
-
-
-    <div align="center">
-        <form name="loginForm" method="POST" action="controller">
-
-            <input type="hidden" name="command" value="login"/>
-            <fmt:message key="label.login"/>:<br/>
-            <input type="text" name="login" value=""/>
-            <br/><fmt:message key="label.password"/>:<br/>
-            <input type="password" name="password" value=""/>
-            <br/><br/>
-            <input type="submit" value="<fmt:message key="label.loginbutton"/>"/>
-        </form>
-
-        <form name="registrationForm" method="post" action="controller">
-            <input type="hidden" name="command" value="to_registration_page">
-            <input type="submit" class="alert-success" value="<fmt:message key="label.registrationbutton"/>"/>
-        </form>
-
-        <div>
-            ${registrationSuccessMessage}
-            ${errorLoginPassMessage}
-            ${wrongAction}
-            ${nullPage}
+<%--<div id="fullscreen_bg" class="fullscreen_bg"/>--%>
+<div class="row">
+    <nav class="navbar container-fluid navbar-header">
+        <div class="navbar-brand fitness-buddy"><span class="fitness">Fitness</span>Buddy
         </div>
-    </div>
+
+        <form class="form-inline" method="post" action="/controller">
+            <button type="submit" class="btn btn-link btn-sm" name="command" value="en">en</button>
+            <button type="submit" class="btn btn-link btn-sm" name="command" value="ua">ua</button>
+        </form>
+    </nav>
 </div>
+
+<h4>${registrationSuccessMessage}</h4>
+<div class="container">
+    <form class="text-center" method="get" action="/controller">
+        <h2>Track meals. Stay committed.</h2>
+        <br/>
+        <div class="form-row align-items-center justify-content-center">
+            <div class="col col-lg-3">
+                <input type="text" name="username" class="form-control " placeholder="login">
+            </div>
+            <div class="col col-lg-3">
+                <input type="text" class="form-control" name="password" placeholder="password">
+            </div>
+        </div>
+        <br>
+        <div class="form-row align-items-center justify-content-center">
+            <div class="col col-lg-3">
+                <button type="submit" name="command" value="TO_LOGIN_PAGE">Login</button>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <label for="registration-btn">Not a member?</label>
+            <button id="registration-btn" type="submit" class="btn btn-link justify-content-center" name="command"
+                    value="to_registration_page">Register
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
 </body>
 </html>

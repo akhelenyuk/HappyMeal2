@@ -9,7 +9,7 @@
 
             <c:if test="${not empty user}">
                 <c:if test="${user.admin}">
-                    <button type="submit" class="btn btn-link" name="command" value="HOME">Home</button>
+                    <button type="submit" class="btn btn-link" name="command" value="TO_ADMIN_PAGE">Admin</button>
                 </c:if>
                 <%--<input type="submit" name="<command>" value="TO_LOGIN_PAGE">--%>
                 <button type="submit" class="btn btn-link" name="command" value="LOGOUT">Logout</button>

@@ -11,12 +11,12 @@
 </head>
 <body>
 
-<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>
-<c:set var="userList" value="${userBean.users}"/>
-<c:set var="user1" value="${userBean.user}"/>
+<%--<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>--%>
+<%--<c:set var="userList" value="${userBean.users}"/>--%>
+<%--<c:set var="user1" value="${userBean.user}"/>--%>
 
 <jsp:include page="../headerNavbar.jsp"/>
-
+<br/>
 <div class="container">
 
     <table class="table table-striped table-bordered table-sm">
@@ -33,7 +33,7 @@
         </thead>
 
         <tbody>
-        <c:forEach var="user" items="${userList}">
+        <c:forEach var="user" items="${users}">
             <tr>
                 <th scope="row"><input type="checkbox" class="checkthis"/></th>
                 <td>${user.firstName}</td>
@@ -42,17 +42,17 @@
                 <td>${user.roleId}</td>
                 <td>${user.email}</td>
                 <td class="align-right">
-                    <button class="btn btn-outline-info btn-block" type="submit"> Unblocked</button>
+                    <button class="btn btn-outline-info btn-block" type="submit" name="command" value="block_unblock_user"> Unblocked</button>
                 </td>
             </tr>
         </c:forEach>
         <tr>
             <th scope="row"><input type="checkbox" class="checkthis"/></th>
-            <td>${user1.firstName}</td>
-            <td>${user1.lastName}</td>
-            <td>${user1.login}</td>
-            <td>${user1.roleId}</td>
-            <td>${user1.email}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.login}</td>
+            <td>${user.roleId}</td>
+            <td>${user.email}</td>
             <td class="align-right">
                 <button class="btn btn-danger btn-block" type="submit">Blocked</button>
             </td>

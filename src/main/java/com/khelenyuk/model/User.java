@@ -19,8 +19,10 @@ public class User implements Serializable {
     private int weight;
     private int height;
     private int lifestyleId;
-    private int calorieNorm;
-    // Переписать под class Role
+
+//    TODO need method to calculate this value
+    private int calorieNorm = 2345;
+    // TODO Переписать под class Role
     private int roleId;
 
     // TODO ---------------------------Test methods -- to delete---------------------------
@@ -113,6 +115,10 @@ public class User implements Serializable {
 
     public int getCalorieNorm() {
         return calorieNorm;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     // Переписать под class Role

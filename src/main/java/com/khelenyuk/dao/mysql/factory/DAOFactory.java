@@ -23,4 +23,7 @@ public class DAOFactory {
     public static SexDAO getSexMethods(){
         return new SexDAOImpl();
     }
+    public static MealTypeDAO getMealTypeMethods(){
+        return new MealTypeDAOImpl();
+    }
 }

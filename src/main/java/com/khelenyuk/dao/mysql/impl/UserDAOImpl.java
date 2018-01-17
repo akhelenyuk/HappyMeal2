@@ -149,9 +149,8 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
 
             logger.debug("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
-            if (resultInsert < 1) {
-                logger.info("User was not added.");
-            }
+            logger.info((resultInsert < 1) ? "User was not added." : resultInsert + " user was successfully added.");
+
         } catch (SQLException e) {
             logger.error("Error in adding user", e.getCause());
         }

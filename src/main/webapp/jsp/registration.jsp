@@ -9,56 +9,75 @@
 
 </head>
 <body>
-
+<%--<jsp:useBean id="registrationUser" class="com.khelenyuk.model.User"/>--%>
 <div class="container">
     <div align="center">
-            <form name="registrationForm" action="controller" method="post">
-                <input type="hidden" name="command" value="register_new_user"/>
+        <form action="/controller" method="post">
+            <c:if test="${not empty errorLoginExistMessage}"><h4
+                    class="alert-danger">${errorLoginExistMessage}</h4></c:if>
+            <h3>Sign Up</h3>
+            <h6>Already have a FitnessBuddy acount?
+                <button type="submit" class="btn btn-link" name="command" value="TO_LOGIN_PAGE">Log in</button>
+            </h6>
+        </form>
+        <form name="registrationForm" action="/controller" method="post">
+            <input type="text"
+                   required
+                   name="first_name"
+                   value="${registrationUser.firstName}"
+                   placeholder="First name">
+            <input type="text"
+                   required
+                   name="last_name"
+                   value="${registrationUser.lastName}"
+                   placeholder="Last name"><br/>
+            <input type="text"
+                   required
+                   name="login"
+                   value="${registrationUser.login}"
+                   <c:if test="${not empty errorLoginExistMessage}">class="border-danger"</c:if>
+                   placeholder="Login">
 
-                <div>
-                    <h3>Регистрация нового пользователя</h3>
-                </div>
-                <input type="text" required name="first_name" placeholder="Имя">
-                <input type="text" required name="last_name" placeholder="Фамилия"><br/>
-                <input type="text" required name="login" placeholder="Логин">
-                <label class="alert-danger">${errorLoginExistMessage}</label>
-                <input type="email" name="email" placeholder="e-mail"><br/>
-                <input type="password" required name="password" placeholder="Пароль">
-                <input type="password" required name="password_confirmation" placeholder="Подтвердите пароль">
-                <label class="alert-danger">${errorPassConfirmMessage}</label>
-                <div><br/><br/></div>
+            <input type="email" value="${registrationUser.email}" name="email" placeholder="e-mail"><br/>
+            <input type="password" required name="password" placeholder="Пароль">
+            <input type="password" required name="password_confirmation" placeholder="Подтвердите пароль">
+            <label class="alert-danger">${errorPassConfirmMessage}</label>
+            <div><br/><br/></div>
 
-                <div>
-                    <label>Дата рождения:</label><input type="date" name="birthday"><br/>
-                    <input type="number" name="weight" min="0" max="300" step="0.1" placeholder="Вес(кг)">
-                    <input type="number" name="height" min="0" max="250" step="0.1" placeholder="Рост(см)"><br/>
-                </div><br/>
+            <div>
+                <label>Дата рождения:</label><input type="date" name="birthday"
+                                                    value="${registrationUser.birthday}"><br/>
+                <input type="number" name="weight" min="0" max="300" step="0.1" value="${registrationUser.weight}"
+                       placeholder="Вес(кг)">
+                <input type="number" name="height" min="0" max="250" step="0.1" value="${registrationUser.height}"
+                       placeholder="Рост(см)"><br/>
+            </div>
+            <br/>
 
-                <label>Укажите ваш пол:</label>
-                <select name="sex">
-                    <c:forEach var="item" items="${sex}">
-                        <option value="${item.id}">
-                            <c:out value="${item.name}"></c:out>
-                        </option>
-                    </c:forEach>
-                </select><br/>
+            <label>Укажите ваш пол:</label>
+            <select name="sex">
+                <c:forEach var="item" items="${sex}">
+                    <option value="${item.id}">
+                        <c:out value="${item.name}"></c:out>
+                    </option>
+                </c:forEach>
+            </select><br/>
 
-                <label>Укажите вашу активность:</label>
+            <label>Укажите вашу активность:</label>
 
-                <select name="lifestyle">
-                    <c:forEach var="item" items="${lifestyle}">
-                        <option value="${item.id}">
-                            <c:out value="${item.name}"></c:out>
-                        </option>
-                    </c:forEach>
-                </select>
-                <div><br/><br/></div>
+            <select name="lifestyle">
+                <c:forEach var="item" items="${lifestyle}">
+                    <option value="${item.id}">
+                        <c:out value="${item.name}"></c:out>
+                    </option>
+                </c:forEach>
+            </select>
+            <div><br/><br/></div>
 
-
-                <input type="submit" class="button alert-success" value="Зарегистрироваться">
-                <input type="submit" class="button alert-secondary" value="Отмена">
-
-            </form>
+            <button type="submit" name="command" class="btn" value="REGISTER_NEW_USER">Register</button>
+            <%--TODO implement "to previous page" functionality --%>
+            <button type="submit" formnovalidate name="command" class="btn" value="TO_LOGIN_PAGE">Cancel</button>
+        </form>
 
         <div>${errorRegistrationMessage}</div>
     </div>

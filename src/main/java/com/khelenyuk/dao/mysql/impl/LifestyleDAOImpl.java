@@ -1,9 +1,17 @@
 package com.khelenyuk.dao.mysql.impl;
 
+import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.LifestyleDAO;
 import com.khelenyuk.model.Lifestyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LifestyleDAOImpl extends CrudDaoImpl<Lifestyle> implements LifestyleDAO {
     private static final Logger logger = LogManager.getLogger(LifestyleDAOImpl.class);
@@ -16,6 +24,26 @@ public class LifestyleDAOImpl extends CrudDaoImpl<Lifestyle> implements Lifestyl
     @Override
     public Lifestyle get(int id) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Lifestyle> getAll() {
+        List<Lifestyle> lifestyles = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectAll);
+             ResultSet resultSet = statement.executeQuery()
+        ) {
+            logger.info("Query: " + statement.toString());
+            while (resultSet.next()) {
+                lifestyles.add(new Lifestyle(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name")));
+            }
+        } catch (SQLException e) {
+            logger.error("Error in 'get all lifestyles' method", e.getCause());
+        }
+        return lifestyles;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
              PreparedStatement statement = connection.prepareStatement(selectAll);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 products.add(new Product(
                         resultSet.getInt("id"),
@@ -59,7 +59,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.debug("Query: " + statement.toString());
+                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     product = new Product(
                             resultSet.getInt("id"),
@@ -88,7 +88,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
             statement.setString(1, name);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.debug("Query: " + statement.toString());
+                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     product = new Product(
                             resultSet.getInt("id"),
@@ -119,7 +119,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
             statement.setFloat(4, product.getFat());
             statement.setFloat(5, product.getCarbs());
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
             if (resultInsert < 1) {
                 logger.info("Product was not added.");
@@ -143,7 +143,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
             statement.setFloat(5, newEntity.getCarbs());
             statement.setInt(6, productOldId);
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();
             if (resultUpdate < 1) {
                 logger.info("Product was not updated.");
@@ -162,7 +162,7 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
         ) {
             statement.setInt(1, productId);
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultDelete = statement.executeUpdate();
             if (resultDelete < 1) {
                 logger.info("Product was not deleted.");

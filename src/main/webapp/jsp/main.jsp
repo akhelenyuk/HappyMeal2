@@ -11,13 +11,13 @@
 
 
 <body class="bg">
-<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>
-<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>
+<%--<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>--%>
+<%--<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>--%>
 <%--<jsp:useBean id="menuBean" class="com.khelenyuk.model.Meal"></jsp:useBean>--%>
 <%--<jsp:useBean id="localDate" class="java.time.LocalDate"></jsp:useBean>--%>
 
-<c:set var="user" value="${userBean.user}"/>
-<c:set var="products" value="${productBean.products}"/>
+<%--<c:set var="user" value="${userBean.user}"/>--%>
+<%--<c:set var="products" value="${productBean.products}"/>--%>
 <%--<c:set var="menu" value="${menuBean.menu}"/>--%>
 <%--<c:set var="chosenDateSession" value="${menu.date}"/>--%>
 
@@ -79,7 +79,7 @@
             </li>
             <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
             </li>
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#stats">Statistics</a>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#weight_monitor">Weight monitor</a>
             </li>
         </ul>
 
@@ -114,7 +114,7 @@
                                 <%------------- Add New product ------------%>
                                 <div class="form-inline font12">
                                     <label>Can't find a product?</label>
-                                    <button type="submit" class="btn btn-link font12">Add new</button>
+                                    <button type="submit" class="btn btn-link font12" name="command" value="TO_ADD_PRODUCT_PAGE">Add new</button>
                                 </div>
                             </div>
 
@@ -162,8 +162,8 @@
             <%------------- WATER ------------%>
             <div class="tab-pane" id="water" role="tabpanel">Water</div>
 
-            <%------------- Statistics ------------%>
-            <div class="tab-pane" id="stats" role="tabpanel">Statistics</div>
+            <%------------- Weight monitor ------------%>
+            <div class="tab-pane" id="weight_monitor" role="tabpanel">Weight monitor</div>
         </div>
 
     </div>

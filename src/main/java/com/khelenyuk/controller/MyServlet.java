@@ -1,7 +1,9 @@
 package com.khelenyuk.controller;
 
-import com.khelenyuk.service.command.ActionCommand;
-import com.khelenyuk.service.command.factory.ActionFactory;
+import com.khelenyuk.controller.command.ActionCommand;
+import com.khelenyuk.controller.command.factory.ActionFactory;
+import com.khelenyuk.controller.service.IPageService;
+import com.khelenyuk.controller.service.factory.ServiceFactory;
 import com.khelenyuk.utils.ConfigurationManager;
 import com.khelenyuk.utils.MessageManager;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +19,8 @@ import java.io.IOException;
 
 public class MyServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(MyServlet.class);
+    private IPageService pageService = ServiceFactory.getPageService();
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +34,7 @@ public class MyServlet extends HttpServlet {
 
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // todo check if this is needed
         request.setCharacterEncoding("UTF-8");
 
         String page = null;
@@ -39,12 +44,16 @@ public class MyServlet extends HttpServlet {
         page = command.execute(request);
 
         if (page != null) {
-            // TODO Need option to choose sendRedirect or forward
-//            response.sendRedirect(page);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
+            if (pageService.toBeForwarded()) {
+                pageService.setIsForwarded(false);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+                dispatcher.forward(request, response);
+            } else {
+                response.sendRedirect(page);
+            }
+
         } else {
-            page = ConfigurationManager.getProperty("path.page.index");
+            page = ConfigurationManager.getProperty("path.page.error");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }

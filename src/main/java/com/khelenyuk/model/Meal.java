@@ -2,8 +2,6 @@ package com.khelenyuk.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Objects;
 
 public class Meal implements Serializable {
@@ -12,18 +10,18 @@ public class Meal implements Serializable {
     private LocalDate date;
     private Integer productId;
     private Integer weight;
-    private MealNumber mealNumber;
+    private MealType mealType;
 
 
     public Meal() {
     }
 
-    public Meal(Integer userId, LocalDate date, Integer productId, Integer weight, Integer mealNumber) {
+    public Meal(Integer userId, LocalDate date, Integer productId, Integer weight, Integer mealTypeId) {
         this.userId = userId;
         this.date = date;
         this.productId = productId;
         this.weight = weight;
-        this.mealNumber = new MealNumber(mealNumber);
+        this.mealType = new MealType(mealTypeId);
     }
 
     public Integer getUserId() {
@@ -38,8 +36,8 @@ public class Meal implements Serializable {
         return weight;
     }
 
-    public MealNumber getMealNumber() {
-        return mealNumber;
+    public MealType getMealType() {
+        return mealType;
     }
 
     public LocalDate getDate() {
@@ -56,13 +54,13 @@ public class Meal implements Serializable {
                 Objects.equals(date, meal.date) &&
                 Objects.equals(productId, meal.productId) &&
                 Objects.equals(weight, meal.weight) &&
-                Objects.equals(mealNumber, meal.mealNumber);
+                Objects.equals(mealType, meal.mealType);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, userId, date, productId, weight, mealNumber);
+        return Objects.hash(id, userId, date, productId, weight, mealType);
     }
 
     @Override
@@ -73,7 +71,7 @@ public class Meal implements Serializable {
                 ", date=" + date +
                 ", productId=" + productId +
                 ", weight=" + weight +
-                ", mealNumber=" + mealNumber +
+                ", mealType=" + mealType +
                 '}';
     }
 }

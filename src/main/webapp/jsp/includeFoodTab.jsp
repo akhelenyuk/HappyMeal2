@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>
-<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>
-<c:set var="userList" value="${userBean.users}"/>
-<c:set var="productList" value="${productBean.products}"/>
-<c:set var="user1" value="${userBean.user}"/>
+<%--<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>--%>
+<%--<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>--%>
+<%--<c:set var="userList" value="${userBean.users}"/>--%>
+<%--<c:set var="productList" value="${productBean.products}"/>--%>
+<%--<c:set var="user1" value="${userBean.user}"/>--%>
 
 
 <div class="">
