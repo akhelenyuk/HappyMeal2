@@ -13,10 +13,14 @@ import com.khelenyuk.model.Lifestyle;
 import com.khelenyuk.model.Sex;
 import com.khelenyuk.model.User;
 import com.khelenyuk.controller.service.IUserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
+    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+
     private static UserDAO userDAO = DAOFactory.getUserMethods();
     private static SexDAO sexDAO = DAOFactory.getSexMethods();
     private static LifestyleDAO lifestyleDAO = DAOFactory.getLifestyleMethods();

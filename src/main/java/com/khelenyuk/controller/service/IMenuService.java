@@ -21,6 +21,4 @@ public interface IMenuService {
      String getTotalFat(List<MealFull> menu);
 
      String getTotalCarbs(List<MealFull> menu);
-
-    List<MealType> getMealTypes();
 }

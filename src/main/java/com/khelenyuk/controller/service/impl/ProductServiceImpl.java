@@ -5,10 +5,14 @@ import com.khelenyuk.dao.CrudDAO;
 import com.khelenyuk.dao.mysql.impl.ProductDAOImpl;
 import com.khelenyuk.model.Product;
 import com.khelenyuk.controller.service.IProductService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class ProductServiceImpl implements IProductService{
+    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+
     private static CrudDAO<Product> productDAO = new ProductDAOImpl();
     private static ProductServiceImpl instance = new ProductServiceImpl();
 

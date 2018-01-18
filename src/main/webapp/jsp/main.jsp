@@ -122,7 +122,7 @@
                             <div class="col">
                                 <%---------- Enter product amount --------------%>
                                 <div class="main-caption">ENTER QUANTITY (grams)</div>
-                                <input class="form-control" type="number" name="weight" step="1" min="1" value="100">
+                                <input class="form-control" type="number" name="weight" step="1" min="1" max="999" value="100">
 
                             </div>
 

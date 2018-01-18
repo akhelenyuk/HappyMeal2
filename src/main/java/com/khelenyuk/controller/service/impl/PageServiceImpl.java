@@ -1,9 +1,12 @@
 package com.khelenyuk.controller.service.impl;
 
 
+import com.khelenyuk.dao.MealTypeDAO;
+import com.khelenyuk.dao.mysql.factory.DAOFactory;
 import com.khelenyuk.model.MealFull;
 import com.khelenyuk.controller.service.*;
 import com.khelenyuk.controller.service.factory.ServiceFactory;
+import com.khelenyuk.model.MealType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +26,7 @@ public class PageServiceImpl implements IPageService {
     private IUserService userService = ServiceFactory.getUserService();
     private IProductService productService = ServiceFactory.getProductService();
     private IMenuService menuService = ServiceFactory.getMenuService();
+    private IMealTypeService mealTypeService = ServiceFactory.getMealTypeService();
 
 
     private PageServiceImpl() {
@@ -41,10 +45,17 @@ public class PageServiceImpl implements IPageService {
         logger.info("Attribute user is set");
 
         /**
-         * writes updated list of products into session
+         * gets list of current products from db and writes them into session
          */
         session.setAttribute("products", productService.getAllProducts());
         logger.info("Attribute products is set");
+
+        /**
+         * gets list of current meal types from db and writes them into session
+         */
+        session.setAttribute("mealTypes", mealTypeService.getAll());
+        logger.info("Attribute meal_types is set");
+
         /**
          * writes chosenDate to session. If attribute is not set then
          * setting chosenDate to now() value.
@@ -85,12 +96,14 @@ public class PageServiceImpl implements IPageService {
         this.redirect = redirect;
     }
 
-    @Override
-    public void toMainPageAttributesUpdate(HttpSession session) {
-        session.setAttribute("products", productService.getAllProducts());
-        logger.info("Attribute 'products' is added to session");
+//    @Override
+//    public void toMainPageAttributesUpdate(HttpSession session) {
+//        session.setAttribute("products", productService.getAllProducts());
+//        logger.info("Attribute 'products' is added to session");
+//
+//        session.setAttribute("mealTypes", menuService.getMealTypes());
+//        logger.info("Attribute mealTypes is set");
+//    }
 
-        session.setAttribute("mealTypes", menuService.getMealTypes());
-        logger.info("Attribute mealTypes is set");
-    }
+
 }

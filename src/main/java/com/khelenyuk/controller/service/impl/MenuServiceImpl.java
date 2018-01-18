@@ -6,12 +6,17 @@ import com.khelenyuk.model.Meal;
 import com.khelenyuk.model.MealFull;
 import com.khelenyuk.controller.service.IMenuService;
 import com.khelenyuk.model.MealType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 
 public class MenuServiceImpl implements IMenuService {
+    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+
+    //todo rewrite to Interface
     private static final MealDAOImpl MEAL_DAO_IMPL = new MealDAOImpl();
     private static MenuServiceImpl instance = new MenuServiceImpl();
 
@@ -85,11 +90,5 @@ public class MenuServiceImpl implements IMenuService {
             total += meal.getCarbs();
         }
         return new DecimalFormat(".##").format(total);
-    }
-
-    @Override
-    public List<MealType> getMealTypes() {
-
-        return null;
     }
 }
