@@ -18,6 +18,7 @@ public class User implements Serializable {
     private int sexId;
     private int weight;
     private int height;
+    // todo if change to Lifestyle class, change in registration.jsp - select option
     private int lifestyleId;
 
 //    TODO need method to calculate this value

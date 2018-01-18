@@ -45,18 +45,18 @@ public class RegisterNewUserCommand implements ActionCommand {
         User newUser = getUserFromRequest(request);
         logger.info("New user to be registered: " + newUser);
         request.setAttribute("registrationUser", newUser);
+        logger.info("Sex selected: " + ((User)request.getAttribute("registrationUser")).getSexId());
+        logger.info("Lifestyle selected: " + ((User)request.getAttribute("registrationUser")).getLifestyleId());
 
 
         String password_confirm = request.getParameter(PARAM_NAME_PASSWORD_CONFIRM);
 
         if (!loginRegistrationService.confirmPassword(newUser.getPassword(), password_confirm)) {
-            pageService.setIsForwarded(true);
             request.setAttribute("errorPassConfirmMessage", MessageManager.getProperty("message.passconfirmerror"));
             return page;
         }
 
         if (loginRegistrationService.checkLoginExist(newUser.getLogin())) {
-            pageService.setIsForwarded(true);
             request.setAttribute("errorLoginExistMessage", MessageManager.getProperty("message.loginexisterror"));
             return page;
         }
@@ -65,7 +65,6 @@ public class RegisterNewUserCommand implements ActionCommand {
             request.setAttribute("registrationSuccessMessage", MessageManager.getProperty("message.registrationconfirm"));
             page = ConfigurationManager.getProperty("path.page.login");
         } else {
-            pageService.setIsForwarded(true);
             request.setAttribute("errorRegistrationMessage", MessageManager.getProperty("message.registrationerror"));
         }
 

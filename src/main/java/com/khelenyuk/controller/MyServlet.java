@@ -44,12 +44,14 @@ public class MyServlet extends HttpServlet {
         page = command.execute(request);
 
         if (page != null) {
-            if (pageService.toBeForwarded()) {
-                pageService.setIsForwarded(false);
+            if (pageService.isRedirect()) {
+                logger.info("Request will be redirected to " + page);
+                pageService.setRedirect(false);
+                response.sendRedirect(page);
+            } else {
+                logger.info("Request will be forwarded to " + page);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(request, response);
-            } else {
-                response.sendRedirect(page);
             }
 
         } else {

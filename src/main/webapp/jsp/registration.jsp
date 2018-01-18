@@ -9,7 +9,6 @@
 
 </head>
 <body>
-<%--<jsp:useBean id="registrationUser" class="com.khelenyuk.model.User"/>--%>
 <div class="container">
     <div align="center">
         <form action="/controller" method="post">
@@ -45,8 +44,8 @@
             <div><br/><br/></div>
 
             <div>
-                <label>Дата рождения:</label><input type="date" name="birthday"
-                                                    value="${registrationUser.birthday}"><br/>
+                <label>Birthday:</label><input type="date" name="birthday"
+                                               value="${registrationUser.birthday}"><br/>
                 <input type="number" name="weight" min="0" max="300" step="0.1" value="${registrationUser.weight}"
                        placeholder="Вес(кг)">
                 <input type="number" name="height" min="0" max="250" step="0.1" value="${registrationUser.height}"
@@ -54,20 +53,19 @@
             </div>
             <br/>
 
-            <label>Укажите ваш пол:</label>
+            <label>Select your sex:</label>
             <select name="sex">
                 <c:forEach var="item" items="${sex}">
-                    <option value="${item.id}">
-                        <c:out value="${item.name}"></c:out>
+                    <option value="${item.id}" <c:if test="${registrationUser.sexId == item.id}">selected</c:if>>
+                        <c:out value="${item.name}"> </c:out>
                     </option>
                 </c:forEach>
             </select><br/>
 
-            <label>Укажите вашу активность:</label>
-
+            <label>Select your activity:</label>
             <select name="lifestyle">
                 <c:forEach var="item" items="${lifestyle}">
-                    <option value="${item.id}">
+                    <option value="${item.id}" <c:if test="${registrationUser.lifestyleId == item.id}">selected</c:if>>
                         <c:out value="${item.name}"></c:out>
                     </option>
                 </c:forEach>

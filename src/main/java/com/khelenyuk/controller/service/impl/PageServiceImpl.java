@@ -18,7 +18,7 @@ public class PageServiceImpl implements IPageService {
     private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
     private static PageServiceImpl instance = new PageServiceImpl();
 
-    private boolean isForwarded = false;
+    private boolean redirect = false;
 
     private IUserService userService = ServiceFactory.getUserService();
     private IProductService productService = ServiceFactory.getProductService();
@@ -74,14 +74,15 @@ public class PageServiceImpl implements IPageService {
 
 
     // Test 1
+
     @Override
-    public boolean toBeForwarded(){
-        return isForwarded;
+    public boolean isRedirect() {
+        return redirect;
     }
 
     @Override
-    public void setIsForwarded(boolean isForwarded) {
-        this.isForwarded = isForwarded;
+    public void setRedirect(boolean redirect) {
+        this.redirect = redirect;
     }
 
     @Override

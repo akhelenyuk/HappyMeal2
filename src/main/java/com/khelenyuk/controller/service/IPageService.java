@@ -3,11 +3,11 @@ package com.khelenyuk.controller.service;
 import javax.servlet.http.HttpSession;
 
 public interface IPageService {
-    boolean toBeForwarded();
+    boolean isRedirect();
 
     void updatePageData(HttpSession session, int userId);
 
-    void setIsForwarded(boolean isRedirected);
+    void setRedirect(boolean isRedirected);
 
     void toMainPageAttributesUpdate(HttpSession session);
 }
