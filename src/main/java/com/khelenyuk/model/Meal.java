@@ -10,7 +10,8 @@ public class Meal implements Serializable {
     private LocalDate date;
     private Integer productId;
     private Integer weight;
-    private MealType mealType;
+    private Integer mealTypeId;
+
 
 
     public Meal() {
@@ -21,7 +22,7 @@ public class Meal implements Serializable {
         this.date = date;
         this.productId = productId;
         this.weight = weight;
-        this.mealType = new MealType(mealTypeId);
+        this.mealTypeId = mealTypeId;
     }
 
     public Integer getUserId() {
@@ -36,12 +37,12 @@ public class Meal implements Serializable {
         return weight;
     }
 
-    public MealType getMealType() {
-        return mealType;
-    }
-
     public LocalDate getDate() {
         return date;
+    }
+
+    public Integer getMealTypeId() {
+        return mealTypeId;
     }
 
     @Override
@@ -54,13 +55,13 @@ public class Meal implements Serializable {
                 Objects.equals(date, meal.date) &&
                 Objects.equals(productId, meal.productId) &&
                 Objects.equals(weight, meal.weight) &&
-                Objects.equals(mealType, meal.mealType);
+                Objects.equals(mealTypeId, meal.mealTypeId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, userId, date, productId, weight, mealType);
+        return Objects.hash(id, userId, date, productId, weight, mealTypeId);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class Meal implements Serializable {
                 ", date=" + date +
                 ", productId=" + productId +
                 ", weight=" + weight +
-                ", mealType=" + mealType +
+                ", mealTypeId=" + mealTypeId +
                 '}';
     }
 }

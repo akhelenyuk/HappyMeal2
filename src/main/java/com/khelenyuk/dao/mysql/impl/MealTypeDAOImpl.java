@@ -26,7 +26,7 @@ public class MealTypeDAOImpl extends CrudDaoImpl<MealType> implements MealTypeDA
              PreparedStatement statement = connection.prepareStatement(selectAll);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 mealTypes.add(new MealType(
                         resultSet.getInt("id"),

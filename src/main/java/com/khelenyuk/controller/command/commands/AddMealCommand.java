@@ -23,7 +23,7 @@ public class AddMealCommand implements ActionCommand {
     private static final String SESSION_ATTR_NAME_DATE = UtilManager.getProperty("session.chosenDate");
     private static final String REQUEST_PARAM_PRODUCT_ID = "product_id";
     private static final String REQUEST_PARAM_WEIGHT = UtilManager.getProperty("request.weight");
-    private static final String REQUEST_PARAM_MEAL_TYPE = UtilManager.getProperty("request.mealNumber");
+    private static final String REQUEST_PARAM_MEAL_TYPE_ID = UtilManager.getProperty("request.mealTypeId");
 
     private IPageService pageService = ServiceFactory.getPageService();
     private IMenuService menuService = ServiceFactory.getMenuService();
@@ -36,22 +36,23 @@ public class AddMealCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page = ConfigurationManager.getProperty("path.page.main");
 
-        logger.info("Chosen date: '" + session.getAttribute(SESSION_ATTR_NAME_DATE) + "'");
+//        logger.info("Chosen date: '" + session.getAttribute(SESSION_ATTR_NAME_DATE) + "'");
+        logger.info("Chosen meal type: '" + request.getParameter(REQUEST_PARAM_MEAL_TYPE_ID) + "'");
 
 
-        Meal meal = new Meal(
+        Meal mealEntry = new Meal(
                 ((User) session.getAttribute(SESSION_ATTR_NAME_USER)).getId(),
                 (LocalDate) session.getAttribute(SESSION_ATTR_NAME_DATE),
                 Integer.valueOf(request.getParameter(REQUEST_PARAM_PRODUCT_ID)),
                 Integer.valueOf(request.getParameter(REQUEST_PARAM_WEIGHT)),
-                Integer.valueOf(request.getParameter(REQUEST_PARAM_MEAL_TYPE))
+                Integer.valueOf(request.getParameter(REQUEST_PARAM_MEAL_TYPE_ID))
         );
-        logger.info("Meal to add: " + meal);
+        logger.info("Meal entry to add: " + mealEntry);
 
 
-        if (menuService.addMeal(meal)) {
+        if (menuService.addMeal(mealEntry)) {
             logger.info("Meal successfully added!");
-            pageService.updatePageData(session, meal.getUserId());
+            pageService.updatePageData(session, mealEntry.getUserId());
         } else {
             logger.info("Meal adding error!");
             session.setAttribute("errorAddMealMessage", MessageManager.getProperty("message.addmealerror"));

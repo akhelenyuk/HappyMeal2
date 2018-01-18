@@ -3,9 +3,8 @@ package com.khelenyuk.controller.service.impl;
 
 import com.khelenyuk.dao.mysql.impl.MealDAOImpl;
 import com.khelenyuk.model.Meal;
-import com.khelenyuk.model.MealFull;
+import com.khelenyuk.model.MealToDisplay;
 import com.khelenyuk.controller.service.IMenuService;
-import com.khelenyuk.model.MealType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class MenuServiceImpl implements IMenuService {
-    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(MenuServiceImpl.class);
 
     //todo rewrite to Interface
     private static final MealDAOImpl MEAL_DAO_IMPL = new MealDAOImpl();
@@ -33,15 +32,15 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
-    public List<MealFull> getUserMenu(int id, LocalDate chosenDate) {
+    public List<MealToDisplay> getUserMenu(int id, LocalDate chosenDate) {
         return MEAL_DAO_IMPL.getMenu(id, chosenDate);
     }
 
     @Override
 
-    public int getTotalWeight(List<MealFull> menu) {
+    public int getTotalWeight(List<MealToDisplay> menu) {
         int total = 0;
-        for (MealFull meal : menu
+        for (MealToDisplay meal : menu
                 ) {
             total += meal.getWeight();
         }
@@ -50,9 +49,9 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
 
-    public String getTotalCalories(List<MealFull> menu) {
+    public String getTotalCalories(List<MealToDisplay> menu) {
         float total = 0.0f;
-        for (MealFull meal : menu
+        for (MealToDisplay meal : menu
                 ) {
             total += meal.getCalories();
         }
@@ -61,9 +60,9 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
 
-    public String getTotalProteins(List<MealFull> menu) {
+    public String getTotalProteins(List<MealToDisplay> menu) {
         float total = 0.0f;
-        for (MealFull meal : menu
+        for (MealToDisplay meal : menu
                 ) {
             total += meal.getProtein();
         }
@@ -72,9 +71,9 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
 
-    public String getTotalFat(List<MealFull> menu) {
+    public String getTotalFat(List<MealToDisplay> menu) {
         float total = 0.0f;
-        for (MealFull meal : menu
+        for (MealToDisplay meal : menu
                 ) {
             total += meal.getFat();
         }
@@ -83,9 +82,9 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
 
-    public String getTotalCarbs(List<MealFull> menu) {
+    public String getTotalCarbs(List<MealToDisplay> menu) {
         float total = 0.0f;
-        for (MealFull meal : menu
+        for (MealToDisplay meal : menu
                 ) {
             total += meal.getCarbs();
         }

@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
-    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     private static UserDAO userDAO = DAOFactory.getUserMethods();
     private static SexDAO sexDAO = DAOFactory.getSexMethods();

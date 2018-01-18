@@ -65,6 +65,14 @@
                     </tr>
                     </tbody>
                 </table>
+                <div>
+                    <form name="calendarForm" method="post" action="controller">
+                        <input type="hidden" name="command" value="Select_date">
+                        <input type="date" name="chosenDate" value="${chosenDateSession}"/>
+
+                        <input type="submit" class="button" value="Select Date">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -150,8 +158,8 @@
                 </div>
 <br>
                 <%-------------  SHOW FOOD DIARY  ------------%>
-                <%--menu--%>
-                <c:if test="${ empty menu}">
+                <%--meal--%>
+                <c:if test="${not empty meals}">
                     <jsp:include page="includeFoodTab.jsp"/>
                 </c:if>
             </div>

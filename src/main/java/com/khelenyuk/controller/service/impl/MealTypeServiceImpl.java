@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class MealTypeServiceImpl implements IMealTypeService {
-    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(MealTypeServiceImpl.class);
     private static MealTypeServiceImpl instance = new MealTypeServiceImpl();
 
     private static MealTypeDAO mealTypeDAO = DAOFactory.getMealTypeMethods();

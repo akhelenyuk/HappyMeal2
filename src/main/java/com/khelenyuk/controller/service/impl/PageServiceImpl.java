@@ -1,9 +1,7 @@
 package com.khelenyuk.controller.service.impl;
 
 
-import com.khelenyuk.dao.MealTypeDAO;
-import com.khelenyuk.dao.mysql.factory.DAOFactory;
-import com.khelenyuk.model.MealFull;
+import com.khelenyuk.model.MealToDisplay;
 import com.khelenyuk.controller.service.*;
 import com.khelenyuk.controller.service.factory.ServiceFactory;
 import com.khelenyuk.model.MealType;
@@ -12,13 +10,14 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*TODO check if I need this class to be singleton or just class with static methods
  */
 
 public class PageServiceImpl implements IPageService {
-    private static final Logger logger = LogManager.getLogger(LoginRegistrationServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(PageServiceImpl.class);
     private static PageServiceImpl instance = new PageServiceImpl();
 
     private boolean redirect = false;
@@ -53,7 +52,8 @@ public class PageServiceImpl implements IPageService {
         /**
          * gets list of current meal types from db and writes them into session
          */
-        session.setAttribute("mealTypes", mealTypeService.getAll());
+        List<MealType> mealTypes = mealTypeService.getAll();
+        session.setAttribute("mealTypes", mealTypes);
         logger.info("Attribute meal_types is set");
 
         /**
@@ -72,13 +72,18 @@ public class PageServiceImpl implements IPageService {
          * totals(menu weight, calories, proteins, fats, carbs)
          * into session
          */
-        List<MealFull> menu = menuService.getUserMenu(userId, chosenDate);
-        session.setAttribute("menu", menu);
-        session.setAttribute("userTotalWeight", menuService.getTotalWeight(menu));
-        session.setAttribute("userTotalCalories", menuService.getTotalCalories(menu));
-        session.setAttribute("userTotalProteins", menuService.getTotalProteins(menu));
-        session.setAttribute("userTotalFat", menuService.getTotalFat(menu));
-        session.setAttribute("userTotalCarbs", menuService.getTotalCarbs(menu));
+        List<MealToDisplay> userMealToDisplay = menuService.getUserMenu(userId, chosenDate);
+        Map<String, List<MealToDisplay>> mealsSplittedByType = makeMap(mealTypes, userMealToDisplay);
+
+
+
+//        session.setAttribute("meals", userMealToDisplay);
+        session.setAttribute("meals", mealsSplittedByType);
+        session.setAttribute("userTotalWeight", menuService.getTotalWeight(userMealToDisplay));
+        session.setAttribute("userTotalCalories", menuService.getTotalCalories(userMealToDisplay));
+        session.setAttribute("userTotalProteins", menuService.getTotalProteins(userMealToDisplay));
+        session.setAttribute("userTotalFat", menuService.getTotalFat(userMealToDisplay));
+        session.setAttribute("userTotalCarbs", menuService.getTotalCarbs(userMealToDisplay));
 
 
     }
@@ -94,6 +99,24 @@ public class PageServiceImpl implements IPageService {
     @Override
     public void setRedirect(boolean redirect) {
         this.redirect = redirect;
+    }
+
+    private Map<String, List<MealToDisplay>> makeMap(List<MealType> mealTypes, List<MealToDisplay> meals){
+        Map<String, List<MealToDisplay>> map = new LinkedHashMap<>();
+        List list = new ArrayList();
+        list.isEmpty();
+
+        for (MealType type: mealTypes
+             ) {
+            map.put(type.getName(), new ArrayList<>());
+        }
+
+        for (MealToDisplay meal: meals
+             ) {
+            map.get(meal.getMealType()).add(meal);
+        }
+
+        return map;
     }
 
 //    @Override
