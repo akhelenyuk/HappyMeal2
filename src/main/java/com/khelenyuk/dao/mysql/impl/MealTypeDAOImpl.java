@@ -16,7 +16,7 @@ import java.util.List;
 public class MealTypeDAOImpl extends CrudDaoImpl<MealType> implements MealTypeDAO {
     private static final Logger logger = LogManager.getLogger(MealTypeDAOImpl.class);
     private final String TABLE = "meal_type";
-    private String selectAll = "SELECT * FROM " + TABLE;
+    private String selectAll = "SELECT * FROM " + TABLE + " ORDER BY id ASC";
 
     @Override
     public List<MealType> getAll() {

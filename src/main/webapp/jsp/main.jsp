@@ -129,11 +129,11 @@
                             <div class="col">
                                 <div class="main-caption">SELECT MEAL</div>
 
-                                <%------------  Choose product ------------%>
-                                <select class="form-control" name="product_id">
-                                    <c:forEach var="product" items="${products}">
-                                        <option value="${product.id}">
-                                            <c:out value="${product.name}"/>
+                                <%------------  Choose meal type ------------%>
+                                <select class="form-control" name="meal_type_id">
+                                    <c:forEach var="meal_type" items="${mealTypes}">
+                                        <option value="${meal_type.id}">
+                                            <c:out value="${meal_type.name}"/>
                                         </option>
                                     </c:forEach>
                                 </select>
