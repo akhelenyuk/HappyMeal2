@@ -25,23 +25,36 @@
     </nav>
 </div>
 
-<h4>${registrationSuccessMessage}</h4>
+
 <div class="container">
-    <form class="text-center" method="get" action="/controller">
+    <form class="text-center" method="post" action="/controller">
+        <h4 class="alert-danger">${registrationSuccessMessage}</h4>
+        <h4 class="border-danger">${errorLoginPassMessage}</h4>
         <h2>Track meals. Stay committed.</h2>
         <br/>
         <div class="form-row align-items-center justify-content-center">
             <div class="col col-lg-3">
-                <input type="text" name="username" class="form-control " placeholder="login">
+                <input
+                        type="text"
+                        name="login"
+                        class="form-control <c:if test="${not empty errorLoginPassMessage}">alert-danger</c:if>"
+                        value="${login}"
+
+                        placeholder="login">
             </div>
             <div class="col col-lg-3">
-                <input type="text" class="form-control" name="password" placeholder="password">
+                <input
+                        type="password"
+                        class="form-control <c:if test="${not empty errorLoginPassMessage}">border-danger</c:if>"
+                        name="password"
+                        value="${password}"
+                        placeholder="password">
             </div>
         </div>
         <br>
         <div class="form-row align-items-center justify-content-center">
             <div class="col col-lg-3">
-                <button type="submit" name="command" value="TO_LOGIN_PAGE">Login</button>
+                <button type="submit" name="command" value="LOGIN">Login</button>
             </div>
         </div>
 

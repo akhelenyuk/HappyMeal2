@@ -45,8 +45,6 @@ public class RegisterNewUserCommand implements ActionCommand {
         User newUser = getUserFromRequest(request);
         logger.info("New user to be registered: " + newUser);
         request.setAttribute("registrationUser", newUser);
-        logger.info("Sex selected: " + ((User)request.getAttribute("registrationUser")).getSexId());
-        logger.info("Lifestyle selected: " + ((User)request.getAttribute("registrationUser")).getLifestyleId());
 
 
         String password_confirm = request.getParameter(PARAM_NAME_PASSWORD_CONFIRM);
