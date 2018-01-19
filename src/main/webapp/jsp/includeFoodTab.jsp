@@ -60,14 +60,14 @@
 <table class="table table-sm">
     <div class="col-12 bg-light food-row-meal-title"></div>
     <thead class="text-right food-row-thead">
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-    <th scope="col"></th>
+    <td class="food_table_first_col_width text-left"></td>
+    <th class="invisible"scope="col">WEIGHT</th>
+    <th class="invisible" scope="col">CALORIES</th>
+    <th class="invisible"scope="col">PROTEINS</th>
+    <th class="invisible" scope="col">FATS</th>
+    <th class="invisible" scope="col">CARBS</th>
+    <th class="invisible" scope="col"></th>
+    <th class="invisible"scope="col"></th>
     </thead>
 
     <tbody class="text-right">
@@ -79,8 +79,13 @@
         <th>100</th>
         <th>100</th>
         <th>256</th>
-        <th> </th>
-        <th> </th>
+        <%--TODO this is for table correct borders only. Buttons are invisible--%>
+        <td>
+            <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Edit</button>
+        </td>
+        <td>
+            <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Delete</button>
+        </td>
     </tr>
     </tbody>
 </table>
