@@ -79,11 +79,12 @@ public class PageServiceImpl implements IPageService {
 
 //        session.setAttribute("meals", userMealToDisplay);
         session.setAttribute("meals", mealsSplittedByType);
-        session.setAttribute("userTotalWeight", menuService.getTotalWeight(userMealToDisplay));
-        session.setAttribute("userTotalCalories", menuService.getTotalCalories(userMealToDisplay));
-        session.setAttribute("userTotalProteins", menuService.getTotalProteins(userMealToDisplay));
-        session.setAttribute("userTotalFat", menuService.getTotalFat(userMealToDisplay));
-        session.setAttribute("userTotalCarbs", menuService.getTotalCarbs(userMealToDisplay));
+        session.setAttribute("totalDayFoodWeight", menuService.getTotalWeight(userMealToDisplay));
+        logger.debug("------------- Total Food weight: " + menuService.getTotalWeight(userMealToDisplay));
+        session.setAttribute("totalDayCalories", menuService.getTotalCalories(userMealToDisplay));
+        session.setAttribute("totalDayProteins", menuService.getTotalProteins(userMealToDisplay));
+        session.setAttribute("totalDayFat", menuService.getTotalFat(userMealToDisplay));
+        session.setAttribute("totalDayCarbs", menuService.getTotalCarbs(userMealToDisplay));
 
 
     }

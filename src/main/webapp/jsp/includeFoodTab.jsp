@@ -74,11 +74,11 @@
 
     <tr class="food-row-tr-bottom-final">
         <th>Total for the day:</th>
-        <th>2345</th>
-        <th>3456</th>
-        <th>100</th>
-        <th>100</th>
-        <th>256</th>
+        <th>${totalDayFoodWeight}</th>
+        <th>${totalDayCalories}</th>
+        <th>${totalDayProteins}</th>
+        <th>${totalDayFat}</th>
+        <th>${totalDayCarbs}</th>
         <%--TODO this is for table correct borders only. Buttons are invisible--%>
         <td>
             <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Edit</button>
