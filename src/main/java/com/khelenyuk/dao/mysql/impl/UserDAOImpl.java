@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
-    private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
     private final String TABLE = "users";
     private String selectAll = "SELECT * FROM " + TABLE;
@@ -32,7 +32,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
              PreparedStatement statement = connection.prepareStatement(selectAll);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 users.add(new User(
                         resultSet.getInt("id"),
@@ -67,7 +67,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.debug("Query: " + statement.toString());
+                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     user = new User(
                             resultSet.getInt("id"),
@@ -103,7 +103,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setString(1, login);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.debug("Query: " + statement.toString());
+                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     user = new User(
                             resultSet.getInt("id"),
@@ -147,7 +147,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setInt(10, newEntity.getLifestyleId());
             statement.setInt(11, newEntity.getCalorieNorm());
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
             logger.info((resultInsert < 1) ? "User was not added." : resultInsert + " user was successfully added.");
 
@@ -175,7 +175,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setInt(10, newEntity.getLifestyleId());
             statement.setInt(11, oldId);
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();
             if (resultUpdate < 1) {
                 logger.info("User was not updated.");
@@ -194,7 +194,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
         ) {
             statement.setInt(1, id);
 
-            logger.debug("Query: " + statement.toString());
+            logger.info("Query: " + statement.toString());
             resultDelete = statement.executeUpdate();
             if (resultDelete < 1) {
                 logger.info("User was not deleted.");

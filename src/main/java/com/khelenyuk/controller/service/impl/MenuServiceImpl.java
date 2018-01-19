@@ -16,7 +16,7 @@ public class MenuServiceImpl implements IMenuService {
     private static final Logger logger = LogManager.getLogger(MenuServiceImpl.class);
 
     //todo rewrite to Interface
-    private static final MealDAOImpl MEAL_DAO_IMPL = new MealDAOImpl();
+    private static MealDAOImpl mealDAO = new MealDAOImpl();
     private static MenuServiceImpl instance = new MenuServiceImpl();
 
     private MenuServiceImpl() {
@@ -28,12 +28,12 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
     public boolean addMeal(Meal meal) {
-        return MEAL_DAO_IMPL.add(meal);
+        return mealDAO.add(meal);
     }
 
     @Override
     public List<MealToDisplay> getUserMenu(int id, LocalDate chosenDate) {
-        return MEAL_DAO_IMPL.getMenu(id, chosenDate);
+        return mealDAO.getMenu(id, chosenDate);
     }
 
     @Override
@@ -88,6 +88,12 @@ public class MenuServiceImpl implements IMenuService {
                 ) {
             total += meal.getCarbs();
         }
-        return new DecimalFormat(".##").format(total);
+        return new DecimalFormat(".#").format(total);
     }
+
+    @Override
+    public MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId) {
+        return mealDAO.getTotalsByMealType(userId, date, mealTypeId);
+    }
+
 }

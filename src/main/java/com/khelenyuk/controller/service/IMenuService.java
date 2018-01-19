@@ -7,17 +7,19 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IMenuService {
-     boolean addMeal(Meal meal);
+    boolean addMeal(Meal meal);
 
-     List<MealToDisplay> getUserMenu(int id, LocalDate chosenDate);
+    List<MealToDisplay> getUserMenu(int id, LocalDate chosenDate);
 
-     int getTotalWeight(List<MealToDisplay> menu);
+    int getTotalWeight(List<MealToDisplay> menu);
 
-     String getTotalCalories(List<MealToDisplay> menu);
+    String getTotalCalories(List<MealToDisplay> menu);
 
-     String getTotalProteins(List<MealToDisplay> menu);
+    String getTotalProteins(List<MealToDisplay> menu);
 
-     String getTotalFat(List<MealToDisplay> menu);
+    String getTotalFat(List<MealToDisplay> menu);
 
-     String getTotalCarbs(List<MealToDisplay> menu);
+    String getTotalCarbs(List<MealToDisplay> menu);
+
+    MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId);
 }

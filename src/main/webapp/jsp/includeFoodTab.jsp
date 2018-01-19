@@ -41,11 +41,11 @@
                 </c:forEach>
                 <tr class="food-row-tr-bottom">
                     <td>Total:</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>100</td>
+                    <td>${totalsByMealType[entry.key].weight}</td>
+                    <td>${totalsByMealType[entry.key].calories}</td>
+                    <td>${totalsByMealType[entry.key].protein}</td>
+                    <td>${totalsByMealType[entry.key].fat}</td>
+                    <td>${totalsByMealType[entry.key].carbs}</td>
                     <td></td>
                     <td></td>
                 </tr>

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,6 +19,9 @@ public class MealDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
     private static final Logger logger = LogManager.getLogger(MealDAOImpl.class);
 
     private final String TABLE = "meal_diary";
+
+    //TODO check which one is used
+    //TODO transfer to mySqlQuery.properties
     private final String selectByUserId = "SELECT " +
             "meal_type.name as meal, " +
             "products.name as prod, " +
@@ -31,6 +35,21 @@ public class MealDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
             "INNER JOIN happy_meal.meal_type ON happy_meal.meal_diary.meal_type_id = happy_meal.meal_type.id) " +
             "WHERE meal_diary.user_id=? AND meal_diary.date=? " +
             "ORDER BY meal_type.id;";
+    private final String selectDayTotal = "SELECT " +
+            "meal_type.name as meal, " +
+            "products.name as prod, " +
+            "weight, " +
+            "(SELECT products.calories*weight/100 FROM products WHERE products.id = product_id) as calories, " +
+            "(SELECT products.protein*weight/100 FROM products WHERE products.id = product_id) as protein, " +
+            "(SELECT products.fat*weight/100 FROM products WHERE products.id = product_id) as fat, " +
+            "(SELECT products.carbs*weight/100 FROM products WHERE products.id = product_id) as carbs " +
+            "FROM (" +
+            "(happy_meal.meal_diary INNER JOIN happy_meal.products ON happy_meal.meal_diary.product_id = happy_meal.products.id) " +
+            "INNER JOIN happy_meal.meal_type ON happy_meal.meal_diary.meal_type_id = happy_meal.meal_type.id) " +
+            "WHERE meal_diary.user_id=? AND meal_diary.date=? " +
+            "ORDER BY meal_type.id;";
+
+    private final String selectTotalsByMealType = QueryManager.getProperty("selectTotalsByMealType");
     private final String insert = "INSERT INTO " + TABLE + "(`user_id`, `product_id`, `weight`, `meal_type_id`, `date`) VALUES (?, ?, ?, ?, ?)";
 
 
@@ -85,4 +104,46 @@ public class MealDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
     }
 
 
+    @Override
+    public MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId) {
+//        List<MealToDisplay> totalsByMealType = new ArrayList<>();
+        MealToDisplay mealToDisplayTotals = null;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectTotalsByMealType)) {
+
+            statement.setInt(1, userId);
+            statement.setDate(2, Date.valueOf(date));
+            statement.setInt(3, mealTypeId);
+
+            logger.info("Executing statement: " + statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    mealToDisplayTotals = new MealToDisplay(
+                            null,
+                            null,
+                            resultSet.getInt("weight"),
+                            resultSet.getFloat("calories"),
+                            resultSet.getFloat("protein"),
+                            resultSet.getFloat("fat"),
+                            resultSet.getFloat("carbs")
+                    );
+                }
+//                while (resultSet.next()) {
+//                    totalsByMealType.add(new MealToDisplay(
+//                            null,
+//                            null,
+//                            resultSet.getInt("weight"),
+//                            resultSet.getFloat("calories"),
+//                            resultSet.getFloat("protein"),
+//                            resultSet.getFloat("fat"),
+//                            resultSet.getFloat("carbs")
+//                    ));
+//                }
+            }
+        } catch (SQLException e) {
+            logger.error("Error in getting 'total' value by 'meal type' from database", e.getCause());
+        }
+        return mealToDisplayTotals;
+    }
 }
