@@ -83,12 +83,11 @@
         <ul class="nav nav-tabs nav-justified">
             <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#food">Food</a>
             </li>
-            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#activity">Activity</a>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#activity">Activity</a>
             </li>
             <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
             </li>
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#weight_monitor">Weight
-                monitor</a>
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#bodyStats">Body stats</a>
             </li>
         </ul>
 
@@ -169,7 +168,7 @@
             </div>
 
             <%------------ activity ---------------%>
-            <div class="tab-pane active" id="activity" role="tabpanel">
+            <div class="tab-pane " id="activity" role="tabpanel">
                 <jsp:include page="includeAddActivityBlock.jsp"/>
                 <c:if test="${not empty activities}">
                     <jsp:include page="includeActivityTable.jsp"/>
@@ -180,7 +179,9 @@
             <div class="tab-pane" id="water" role="tabpanel">Water</div>
 
             <%------------- Weight monitor ------------%>
-            <div class="tab-pane" id="weight_monitor" role="tabpanel">Weight monitor</div>
+            <div class="tab-pane active" id="bodyStats" role="tabpanel">
+                <jsp:include page="includeAddBodyStatsBlock.jsp"/>
+            </div>
         </div>
 
     </div>

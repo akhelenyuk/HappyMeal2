@@ -15,10 +15,11 @@
             <c:if test="${not empty errorLoginExistMessage}"><h4
                     class="alert-danger">${errorLoginExistMessage}</h4></c:if>
             <h3>Sign Up</h3>
-            <h6>Already have a FitnessBuddy acount?
+            <h6>Already have a FitnessBuddy account?
                 <button type="submit" class="btn btn-link" name="command" value="TO_LOGIN_PAGE">Log in</button>
             </h6>
         </form>
+
         <form name="registrationForm" action="/controller" method="post">
             <input type="text"
                    required
@@ -46,14 +47,14 @@
             <div>
                 <label>Birthday:</label><input type="date" name="birthday"
                                                value="${registrationUser.birthday}"><br/>
-                <input type="number" name="weight" min="0" max="300" step="0.1" value="${registrationUser.weight}"
+                <input type="number" name="weight" min="1" max="300" step="0.1" value="${registrationUser.weight}"
                        placeholder="Вес(кг)">
-                <input type="number" name="height" min="0" max="250" step="0.1" value="${registrationUser.height}"
+                <input type="number" name="height" min="50" max="250" step="1" value="${registrationUser.height}"
                        placeholder="Рост(см)"><br/>
             </div>
             <br/>
 
-            <label>Select your sex:</label>
+            <label>Select your gender:</label>
             <select name="sex">
                 <c:forEach var="item" items="${sex}">
                     <option value="${item.id}" <c:if test="${registrationUser.sexId == item.id}">selected</c:if>>

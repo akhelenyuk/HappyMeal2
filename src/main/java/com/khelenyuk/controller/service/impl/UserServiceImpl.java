@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<Sex> getSex() {
+    public List<Sex> getGender() {
         return sexDAO.getAll();
     }
 

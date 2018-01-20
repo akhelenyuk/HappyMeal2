@@ -90,6 +90,12 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("totalDayCarbs", menuService.getTotalCarbs(userMealToDisplay));
 
 
+//        BODY STATS tab
+        session.setAttribute("gender",userService.getGender());
+        session.setAttribute("lifestyle",userService.getLifestyles());
+        session.setAttribute("currentDate",LocalDate.now());
+
+
     }
 
     private Map<String,MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {

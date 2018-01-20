@@ -19,7 +19,7 @@ public class ToRegistrationPageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.registration");
         HttpSession session = request.getSession();
-        List<Sex> sex = userService.getSex();
+        List<Sex> sex = userService.getGender();
         List<Lifestyle> lifestyles = userService.getLifestyles();
 
         session.setAttribute("sex",sex);
