@@ -50,12 +50,13 @@ public class MenuServiceImpl implements IMenuService {
     @Override
 
     public String getTotalCalories(List<MealToDisplay> menu) {
-        float total = 0.0f;
+        float total = 0f;
         for (MealToDisplay meal : menu
                 ) {
             total += meal.getCalories();
         }
-        return new DecimalFormat(".##").format(total);
+logger.debug("-------------------------->" + new DecimalFormat("###,###").format(total));
+        return new DecimalFormat("###,###").format(total);
     }
 
     @Override

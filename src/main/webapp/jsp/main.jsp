@@ -46,7 +46,7 @@
                     <tr class="your-daily-summary-numbers your-daily-summary-table">
                         <th class="">1,900</th>
                         <th>-</th>
-                        <th>900</th>
+                        <th>${totalDayCalories}</th>
                         <th>+</th>
                         <th>500</th>
                         <th>=</th>
