@@ -59,7 +59,7 @@
                         <td></td>
                         <td>FOOD</td>
                         <td></td>
-                        <td>EXERCISE</td>
+                        <td>ACTIVITY</td>
                         <td></td>
                         <td>REMAINING</td>
                     </tr>
@@ -81,13 +81,14 @@
     <div class="container table-bordered">
 
         <ul class="nav nav-tabs nav-justified">
-            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#food">Food</a>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#food">Food</a>
             </li>
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#exercise">Exercise</a>
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#activity">Activity</a>
             </li>
             <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
             </li>
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#weight_monitor">Weight monitor</a>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#weight_monitor">Weight
+                monitor</a>
             </li>
         </ul>
 
@@ -96,7 +97,7 @@
             <br/><br/>
 
             <%---------- FOOD -----------%>
-            <div class="tab-pane active" id="food" role="tabpanel">
+            <div class="tab-pane" id="food" role="tabpanel">
 
 
                 <%---------- FOOD -----------%>
@@ -122,7 +123,9 @@
                                 <%------------- Add New product ------------%>
                                 <div class="form-inline font12">
                                     <label>Can't find a product?</label>
-                                    <button type="submit" class="btn btn-link font12" name="command" value="TO_ADD_PRODUCT_PAGE">Add new</button>
+                                    <button type="submit" class="btn btn-link font12" name="command"
+                                            value="TO_ADD_PRODUCT_PAGE">Add new
+                                    </button>
                                 </div>
                             </div>
 
@@ -130,7 +133,8 @@
                             <div class="col">
                                 <%---------- Enter product amount --------------%>
                                 <div class="main-caption">ENTER QUANTITY (grams)</div>
-                                <input class="form-control" type="number" name="weight" step="1" min="1" max="999" value="100">
+                                <input class="form-control" type="number" name="weight" step="1" min="1" max="999"
+                                       value="100">
 
                             </div>
 
@@ -156,7 +160,7 @@
                         </div>
                     </form>
                 </div>
-<br>
+                <br>
                 <%-------------  SHOW FOOD DIARY  ------------%>
                 <%--meal--%>
                 <c:if test="${not empty meals}">
@@ -164,8 +168,13 @@
                 </c:if>
             </div>
 
-            <%------------ EXERCISE ---------------%>
-            <div class="tab-pane" id="exercise" role="tabpanel">Exercise me</div>
+            <%------------ activity ---------------%>
+            <div class="tab-pane active" id="activity" role="tabpanel">
+                <jsp:include page="includeAddActivityBlock.jsp"/>
+                <c:if test="${not empty activities}">
+                    <jsp:include page="includeActivityTable.jsp"/>
+                </c:if>
+            </div>
 
             <%------------- WATER ------------%>
             <div class="tab-pane" id="water" role="tabpanel">Water</div>

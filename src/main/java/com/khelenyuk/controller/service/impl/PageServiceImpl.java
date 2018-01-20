@@ -79,6 +79,9 @@ public class PageServiceImpl implements IPageService {
 
 
         session.setAttribute("meals", mealsSplittedByType);
+//        TODO implement correct value
+        session.setAttribute("activities", "test");
+
         session.setAttribute("totalsByMealType", totalsByMealTypeMap);
         session.setAttribute("totalDayFoodWeight", menuService.getTotalWeight(userMealToDisplay));
         session.setAttribute("totalDayCalories", menuService.getTotalCalories(userMealToDisplay));
