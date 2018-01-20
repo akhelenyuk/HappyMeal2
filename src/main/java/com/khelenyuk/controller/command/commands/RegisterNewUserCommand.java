@@ -27,7 +27,7 @@ public class RegisterNewUserCommand implements ActionCommand {
     private static final String PARAM_NAME_BIRTHDAY = "birthday";
     private static final String PARAM_NAME_WEIGHT = "weight";
     private static final String PARAM_NAME_HEIGHT = "height";
-    private static final String PARAM_NAME_SEX = "sex";
+    private static final String PARAM_NAME_GENDER = "gender";
     private static final String PARAM_NAME_LIFESTYLE = "lifestyle";
 
     private IUserService userService = ServiceFactory.getUserService();
@@ -77,7 +77,7 @@ public class RegisterNewUserCommand implements ActionCommand {
                 request.getParameter(PARAM_NAME_PASSWORD),
                 request.getParameter(PARAM_NAME_EMAIL),
                 Date.valueOf(request.getParameter(PARAM_NAME_BIRTHDAY)),
-                Integer.valueOf(request.getParameter(PARAM_NAME_SEX)),
+                Integer.valueOf(request.getParameter(PARAM_NAME_GENDER)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_WEIGHT)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_HEIGHT)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_LIFESTYLE))

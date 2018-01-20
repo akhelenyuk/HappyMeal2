@@ -55,9 +55,9 @@
             <br/>
 
             <label>Select your gender:</label>
-            <select name="sex">
-                <c:forEach var="item" items="${sex}">
-                    <option value="${item.id}" <c:if test="${registrationUser.sexId == item.id}">selected</c:if>>
+            <select name="gender">
+                <c:forEach var="item" items="${genders}">
+                    <option value="${item.id}" <c:if test="${registrationUser.genderId == item.id}">selected</c:if>>
                         <c:out value="${item.name}"> </c:out>
                     </option>
                 </c:forEach>

@@ -3,14 +3,14 @@ package com.khelenyuk.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Sex implements Serializable{
+public class Gender implements Serializable{
     private int id;
     private String name;
 
-    public Sex() {
+    public Gender() {
     }
 
-    public Sex(int id, String name) {
+    public Gender(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -35,9 +35,9 @@ public class Sex implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Sex sex = (Sex) o;
-        return id == sex.id &&
-                Objects.equals(name, sex.name);
+        Gender gender = (Gender) o;
+        return id == gender.id &&
+                Objects.equals(name, gender.name);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Sex implements Serializable{
 
     @Override
     public String toString() {
-        return "Sex{" +
+        return "Gender{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

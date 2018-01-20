@@ -1,7 +1,7 @@
 package com.khelenyuk.controller.service;
 
 import com.khelenyuk.model.Lifestyle;
-import com.khelenyuk.model.Sex;
+import com.khelenyuk.model.Gender;
 import com.khelenyuk.model.User;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface IUserService {
 
     List<User> getAll();
 
-    List<Sex> getGender();
+    List<Gender> getGender();
 
     List<Lifestyle> getLifestyles();
 

@@ -1,7 +1,5 @@
 package com.khelenyuk.controller.command.commands;
 
-import com.khelenyuk.model.Lifestyle;
-import com.khelenyuk.model.Sex;
 import com.khelenyuk.model.User;
 import com.khelenyuk.controller.service.IUserService;
 import com.khelenyuk.controller.command.ActionCommand;

@@ -1,16 +1,12 @@
 package com.khelenyuk.controller.service.impl;
 
 
-import com.khelenyuk.dao.CrudDAO;
 import com.khelenyuk.dao.LifestyleDAO;
-import com.khelenyuk.dao.SexDAO;
+import com.khelenyuk.dao.GenderDAO;
 import com.khelenyuk.dao.UserDAO;
 import com.khelenyuk.dao.mysql.factory.DAOFactory;
-import com.khelenyuk.dao.mysql.impl.LifestyleDAOImpl;
-import com.khelenyuk.dao.mysql.impl.SexDAOImpl;
-import com.khelenyuk.dao.mysql.impl.UserDAOImpl;
 import com.khelenyuk.model.Lifestyle;
-import com.khelenyuk.model.Sex;
+import com.khelenyuk.model.Gender;
 import com.khelenyuk.model.User;
 import com.khelenyuk.controller.service.IUserService;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +18,7 @@ public class UserServiceImpl implements IUserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     private static UserDAO userDAO = DAOFactory.getUserMethods();
-    private static SexDAO sexDAO = DAOFactory.getSexMethods();
+    private static GenderDAO genderDAO = DAOFactory.getGenderMethods();
     private static LifestyleDAO lifestyleDAO = DAOFactory.getLifestyleMethods();
 
     private static UserServiceImpl instance = new UserServiceImpl();
@@ -50,8 +46,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<Sex> getGender() {
-        return sexDAO.getAll();
+    public List<Gender> getGender() {
+        return genderDAO.getAll();
     }
 
     @Override

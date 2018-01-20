@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String password;
     private String email;
     private Date birthday;
-    private int sexId;
+    private int genderId;
     private int weight;
     private int height;
     // todo if change to Lifestyle class, change in registration.jsp - select option
@@ -40,20 +40,20 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, String login, String password, String email, Date birthday, int sexId, int weight, int height, int lifestyleId) {
+    public User(String firstName, String lastName, String login, String password, String email, Date birthday, int genderId, int weight, int height, int lifestyleId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.email = email;
         this.birthday = birthday;
-        this.sexId = sexId;
+        this.genderId = genderId;
         this.weight = weight;
         this.height = height;
         this.lifestyleId = lifestyleId;
     }
 
-    public User(int id, String login, String password, String first_name, String last_name, String email, Date birthday, int sex, int weight, int height, int lifestyleId, int calorie_norm, int roleId) {
+    public User(int id, String login, String password, String first_name, String last_name, String email, Date birthday, int gender, int weight, int height, int lifestyleId, int calorie_norm, int roleId) {
 
         this.id = id;
         this.login = login;
@@ -62,7 +62,7 @@ public class User implements Serializable {
         lastName = last_name;
         this.email = email;
         this.birthday = birthday;
-        this.sexId = sex;
+        this.genderId = gender;
         this.weight = weight;
         this.height = height;
         this.lifestyleId = lifestyleId;
@@ -94,8 +94,8 @@ public class User implements Serializable {
         return birthday;
     }
 
-    public int getSexId() {
-        return sexId;
+    public int getGenderId() {
+        return genderId;
     }
 
     public int getWeight() {
@@ -142,7 +142,7 @@ public class User implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
-                sexId == user.sexId &&
+                genderId == user.genderId &&
                 weight == user.weight &&
                 height == user.height &&
                 lifestyleId == user.lifestyleId &&
@@ -159,7 +159,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstName, lastName, login, password, email, birthday, sexId, weight, height, lifestyleId, calorieNorm, roleId);
+        return Objects.hash(id, firstName, lastName, login, password, email, birthday, genderId, weight, height, lifestyleId, calorieNorm, roleId);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", birthday=" + birthday +
-                ", sexId=" + sexId +
+                ", genderId=" + genderId +
                 ", weight=" + weight +
                 ", height=" + height +
                 ", lifestyleId=" + lifestyleId +

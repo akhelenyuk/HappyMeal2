@@ -19,8 +19,8 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private String selectAll = "SELECT * FROM " + TABLE;
     private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
     private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
-    private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `sex_id`, `weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private String updateById = "UPDATE " + TABLE + "" + " SET `login`, `password`, `first_name`=?, `last_name`=?, `email`=?, `birthday`=?, `sex_id`=?, `weight`=?, `height`=?, `lifestyle_id`=? WHERE id=?";
+    private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private String updateById = "UPDATE " + TABLE + "" + " SET `login`, `password`, `first_name`=?, `last_name`=?, `email`=?, `birthday`=?, `gender_id`=?, `weight`=?, `height`=?, `lifestyle_id`=? WHERE id=?";
     private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
 
 
@@ -42,7 +42,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                         resultSet.getString("last_name"),
                         resultSet.getString("email"),
                         resultSet.getDate("birthday"),
-                        resultSet.getInt("sex_id"),
+                        resultSet.getInt("gender_id"),
                         resultSet.getInt("weight"),
                         resultSet.getInt("height"),
                         resultSet.getInt("lifestyle_id"),
@@ -77,7 +77,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                             resultSet.getString("last_name"),
                             resultSet.getString("email"),
                             resultSet.getDate("birthday"),
-                            resultSet.getInt("sex_id"),
+                            resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
                             resultSet.getInt("height"),
                             resultSet.getInt("lifestyle_id"),
@@ -113,7 +113,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                             resultSet.getString("last_name"),
                             resultSet.getString("email"),
                             resultSet.getDate("birthday"),
-                            resultSet.getInt("sex_id"),
+                            resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
                             resultSet.getInt("height"),
                             resultSet.getInt("lifestyle_id"),
@@ -141,7 +141,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setString(4, newEntity.getLastName());
             statement.setString(5, newEntity.getEmail());
             statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
-            statement.setInt(7, newEntity.getSexId());
+            statement.setInt(7, newEntity.getGenderId());
             statement.setInt(8, newEntity.getWeight());
             statement.setInt(9, newEntity.getHeight());
             statement.setInt(10, newEntity.getLifestyleId());
@@ -169,7 +169,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setString(4, newEntity.getLastName());
             statement.setString(5, newEntity.getEmail());
             statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
-            statement.setInt(7, newEntity.getSexId());
+            statement.setInt(7, newEntity.getGenderId());
             statement.setInt(8, newEntity.getWeight());
             statement.setInt(9, newEntity.getHeight());
             statement.setInt(10, newEntity.getLifestyleId());

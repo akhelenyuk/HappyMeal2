@@ -89,17 +89,25 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("totalDayFat", menuService.getTotalFat(userMealToDisplay));
         session.setAttribute("totalDayCarbs", menuService.getTotalCarbs(userMealToDisplay));
 
+// Activity Tab
+        /**
+         * gets list of current activity types from db and writes them into session
+         */
+//        List<Activity> mealTypes = mealTypeService.getAll();
+//        session.setAttribute("mealTypes", mealTypes);
+//        logger.info("Attribute meal_types is set");
+
 
 //        BODY STATS tab
-        session.setAttribute("gender",userService.getGender());
-        session.setAttribute("lifestyle",userService.getLifestyles());
-        session.setAttribute("currentDate",LocalDate.now());
+        session.setAttribute("gender", userService.getGender());
+        session.setAttribute("lifestyle", userService.getLifestyles());
+        session.setAttribute("currentDate", LocalDate.now());
 
 
     }
 
-    private Map<String,MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
-        Map<String,MealToDisplay> map = new HashMap<>();
+    private Map<String, MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
+        Map<String, MealToDisplay> map = new HashMap<>();
         for (MealType type : mealTypes) {
             map.put(type.getName(), menuService.getTotalsByMealType(userId, chosenDate, type.getId()));
         }
@@ -122,8 +130,9 @@ public class PageServiceImpl implements IPageService {
     /**
      * Makes map with key = MealType, value = list of meals within MealType
      * to be displayed on jsp page.
+     *
      * @param mealTypes
-     * @param meals - list of all meals of certain user on certain date
+     * @param meals     - list of all meals of certain user on certain date
      * @return
      */
     private Map<String, List<MealToDisplay>> makeMap(List<MealType> mealTypes, List<MealToDisplay> meals) {

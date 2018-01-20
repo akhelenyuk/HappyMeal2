@@ -12,12 +12,6 @@ public class Product implements Serializable {
     private Float fat;
     private Float carbs;
 
-    // TODO ---------------------------Test methods -- to delete---------------------------
-    public List<Product> getProducts() {
-        return new com.khelenyuk.dao.mysql.impl.ProductDAOImpl().getAll();
-    }
-    // ---------------------------------------------------------
-
     public Product() {
     }
 
