@@ -2,6 +2,7 @@ package com.khelenyuk.controller.service;
 
 import com.khelenyuk.model.MealType;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -12,6 +13,6 @@ public interface IPageService {
 
     void setRedirect(boolean isRedirected);
 
-//    void toMainPageAttributesUpdate(HttpSession session);
+    void updateRegistrationPageData(HttpServletRequest request);
 }
 

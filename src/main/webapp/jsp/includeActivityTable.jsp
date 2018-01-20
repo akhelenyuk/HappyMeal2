@@ -1,13 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="">
+    <nav class="admin navbar justify-content-center">
+        <span class="navbar-brand">Activity Diary</span>
+    </nav>
+    <br/>
     <c:forEach var="entry" items="${meals}">
         <c:if test="${not empty entry.value}">
-
-            <nav class="admin navbar justify-content-center">
-                <span class="navbar-brand">Activity Diary</span>
-            </nav>
-            <br/>
 
             <table class="table table-sm">
                 <div class="col-12 bg-light food-row-meal-title">${entry.key}</div>

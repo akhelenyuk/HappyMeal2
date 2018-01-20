@@ -23,7 +23,12 @@ public class ServiceFactory {
     public static ILoginRegistrationService getLoginRegistrationService() {
         return LoginRegistrationServiceImpl.getInstance();
     }
+
     public static IMealTypeService getMealTypeService() {
         return MealTypeServiceImpl.getInstance();
+    }
+
+    public static IActivityService getActivityService() {
+        return ActivityServiceImpl.getInstance();
     }
 }

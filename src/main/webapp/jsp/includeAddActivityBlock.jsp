@@ -5,15 +5,14 @@
         <form action="/controller" method="post">
 
 
-            <%---------------   select activity  ---------------%>
+            <%---------------   activity  ---------------%>
             <div class="row ">
-                <%----------------   SELECT activity   -----------------%>
                 <div class="col">
                     <div class="main-caption">SELECT TYPE OF ACTIVITY</div>
 
                     <%------------  Choose activity ------------%>
-                    <select class="form-control" name="activity_id">
-                        <c:forEach var="activity" items="${products}">
+                    <select class="form-control" name="activityId">
+                        <c:forEach var="activity" items="${activities}">
                             <option value="${activity.id}">
                                 <c:out value="${activity.name}"/>
                             </option>
@@ -34,7 +33,7 @@
                     <%---------- Enter activity time --------------%>
                     <div class="main-caption">ENTER DURATION (minutes)</div>
                     <input class="form-control" type="number" name="weight" step="1" min="1" max="999"
-                           value="0">
+                           value="30">
                 </div>
             </div>
 

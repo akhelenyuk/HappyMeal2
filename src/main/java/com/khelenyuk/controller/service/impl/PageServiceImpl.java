@@ -1,13 +1,13 @@
 package com.khelenyuk.controller.service.impl;
 
 
-import com.khelenyuk.model.MealToDisplay;
+import com.khelenyuk.model.*;
 import com.khelenyuk.controller.service.*;
 import com.khelenyuk.controller.service.factory.ServiceFactory;
-import com.khelenyuk.model.MealType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.*;
@@ -18,6 +18,7 @@ import java.util.*;
 public class PageServiceImpl implements IPageService {
     private static final Logger logger = LogManager.getLogger(PageServiceImpl.class);
     private static PageServiceImpl instance = new PageServiceImpl();
+    private HttpSession session = null;
 
     private boolean redirect = false;
 
@@ -25,6 +26,7 @@ public class PageServiceImpl implements IPageService {
     private IProductService productService = ServiceFactory.getProductService();
     private IMenuService menuService = ServiceFactory.getMenuService();
     private IMealTypeService mealTypeService = ServiceFactory.getMealTypeService();
+    private IActivityService activityService = ServiceFactory.getActivityService();
 
 
     private PageServiceImpl() {
@@ -33,6 +35,7 @@ public class PageServiceImpl implements IPageService {
     public static PageServiceImpl getInstance() {
         return instance;
     }
+
 
     @Override
     public void updatePageData(HttpSession session, int userId) {
@@ -89,13 +92,13 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("totalDayFat", menuService.getTotalFat(userMealToDisplay));
         session.setAttribute("totalDayCarbs", menuService.getTotalCarbs(userMealToDisplay));
 
-// Activity Tab
+//        ACTIVITY Tab
         /**
          * gets list of current activity types from db and writes them into session
          */
-//        List<Activity> mealTypes = mealTypeService.getAll();
-//        session.setAttribute("mealTypes", mealTypes);
-//        logger.info("Attribute meal_types is set");
+        List<Activity> activities = activityService.getAll();
+        session.setAttribute("activities", activities);
+        logger.info("Attribute 'activities' is set");
 
 
 //        BODY STATS tab
@@ -106,17 +109,6 @@ public class PageServiceImpl implements IPageService {
 
     }
 
-    private Map<String, MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
-        Map<String, MealToDisplay> map = new HashMap<>();
-        for (MealType type : mealTypes) {
-            map.put(type.getName(), menuService.getTotalsByMealType(userId, chosenDate, type.getId()));
-        }
-        return map;
-    }
-
-
-    // Test 1
-
     @Override
     public boolean isRedirect() {
         return redirect;
@@ -126,6 +118,16 @@ public class PageServiceImpl implements IPageService {
     public void setRedirect(boolean redirect) {
         this.redirect = redirect;
     }
+
+    @Override
+    public void updateRegistrationPageData(HttpServletRequest request) {
+        this.session = request.getSession();
+
+        session.setAttribute("genders", userService.getGender());
+        session.setAttribute("lifestyle",userService.getLifestyles());
+    }
+
+
 
     /**
      * Makes map with key = MealType, value = list of meals within MealType
@@ -150,15 +152,16 @@ public class PageServiceImpl implements IPageService {
         return map;
     }
 
+    private Map<String, MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
+        Map<String, MealToDisplay> map = new HashMap<>();
+        for (MealType type : mealTypes) {
+            map.put(type.getName(), menuService.getTotalsByMealType(userId, chosenDate, type.getId()));
+        }
+        return map;
+    }
+
 }
-//    @Override
-//    public void toMainPageAttributesUpdate(HttpSession session) {
-//        session.setAttribute("products", productService.getAllProducts());
-//        logger.info("Attribute 'products' is added to session");
-//
-//        session.setAttribute("mealTypes", menuService.getMealTypes());
-//        logger.info("Attribute mealTypes is set");
-//    }
+
 
 
 

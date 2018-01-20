@@ -16,14 +16,19 @@ public class DAOFactory {
         return new ProductDAOImpl();
     }
 
-    public static MealDAO getMealMethods(){
+    public static MealDAO getMealMethods() {
         return new MealDAOImpl();
     }
 
-    public static GenderDAO getGenderMethods(){
+    public static GenderDAO getGenderMethods() {
         return new GenderDAOImpl();
     }
-    public static MealTypeDAO getMealTypeMethods(){
+
+    public static MealTypeDAO getMealTypeMethods() {
         return new MealTypeDAOImpl();
+    }
+
+    public static ActivityDAO getActivityMethods() {
+        return new ActivityDAOImpl();
     }
 }
