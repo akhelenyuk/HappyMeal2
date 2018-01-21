@@ -31,4 +31,8 @@ public class ServiceFactory {
     public static IActivityService getActivityService() {
         return ActivityServiceImpl.getInstance();
     }
+
+    public static IActivityDiaryService getActivityDiaryService() {
+        return ActivityDiaryServiceImpl.getInstance();
+    }
 }

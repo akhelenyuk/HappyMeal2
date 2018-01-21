@@ -48,7 +48,7 @@
                         <th>-</th>
                         <th>${totalDayCalories}</th>
                         <th>+</th>
-                        <th>500</th>
+                        <th>${activitiesListTotals.calories}</th>
                         <th>=</th>
                         <th class="remaining">1,400</th>
                     </tr>
@@ -170,7 +170,7 @@
             <%------------ activity ---------------%>
             <div class="tab-pane active" id="activity" role="tabpanel">
                 <jsp:include page="includeAddActivityBlock.jsp"/>
-                <c:if test="${not empty activities}">
+                <c:if test="${not empty activitiesList}">
                     <jsp:include page="includeActivityTable.jsp"/>
                 </c:if>
             </div>

@@ -27,6 +27,7 @@ public class PageServiceImpl implements IPageService {
     private IMenuService menuService = ServiceFactory.getMenuService();
     private IMealTypeService mealTypeService = ServiceFactory.getMealTypeService();
     private IActivityService activityService = ServiceFactory.getActivityService();
+    private IActivityDiaryService activityDiaryService = ServiceFactory.getActivityDiaryService();
 
 
     private PageServiceImpl() {
@@ -100,6 +101,11 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("activities", activities);
         logger.info("Attribute 'activities' is set");
 
+        session.setAttribute("activitiesList", activityDiaryService.getUserActivityDiary(userId, chosenDate));
+        session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
+
+
+
 
 //        BODY STATS tab
         session.setAttribute("gender", userService.getGender());
@@ -126,6 +132,10 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("genders", userService.getGender());
         session.setAttribute("lifestyle",userService.getLifestyles());
     }
+
+//    private void updateActivityDiaryData(Integer userId){
+//        List<ActivityDiaryToDisplay> list = activityDiaryService.getUserActivityDiary(userId, chosenDate);
+//    }
 
 
 

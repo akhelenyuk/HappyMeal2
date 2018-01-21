@@ -32,7 +32,7 @@
                 <div class="col">
                     <%---------- Enter activity time --------------%>
                     <div class="main-caption">ENTER DURATION (minutes)</div>
-                    <input class="form-control" type="number" name="weight" step="1" min="1" max="999"
+                    <input class="form-control" type="number" name="timeSpent" step="1" min="1" max="999"
                            value="30">
                 </div>
             </div>

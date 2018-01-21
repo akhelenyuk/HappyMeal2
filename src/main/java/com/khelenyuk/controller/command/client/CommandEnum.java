@@ -59,6 +59,11 @@ public enum CommandEnum {
             this.command = new AddMealCommand();
         }
     },
+    ADD_ACTIVITY{
+        {
+            this.command = new AddToActivityDiaryCommand();
+        }
+    },
     SELECT_DATE{
         {
             this.command = new SelectDateCommand();

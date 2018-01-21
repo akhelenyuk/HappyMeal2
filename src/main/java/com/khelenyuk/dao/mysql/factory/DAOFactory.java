@@ -31,4 +31,8 @@ public class DAOFactory {
     public static ActivityDAO getActivityMethods() {
         return new ActivityDAOImpl();
     }
+
+    public static ActivityDiaryDAO getActivityDiaryMethods() {
+        return new ActivityDiaryDAOImpl();
+    }
 }

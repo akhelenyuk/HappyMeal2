@@ -9,7 +9,6 @@ public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.login");
-//        request.getSession().setAttribute("title", ConfigurationManager.getProperty(page));
         request.getSession().invalidate();
         return page;
     }

@@ -36,7 +36,6 @@ public class AddMealCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page = ConfigurationManager.getProperty("path.page.main");
 
-//        logger.info("Chosen date: '" + session.getAttribute(SESSION_ATTR_NAME_DATE) + "'");
         logger.info("Chosen meal type: '" + request.getParameter(REQUEST_PARAM_MEAL_TYPE_ID) + "'");
 
 

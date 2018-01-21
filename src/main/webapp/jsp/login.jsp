@@ -54,7 +54,7 @@
         <br>
         <div class="form-row align-items-center justify-content-center">
             <div class="col col-lg-3">
-                <button type="submit" name="command" value="LOGIN">Login</button>
+                <button type="submit"  name="command" value="LOGIN">Login</button>
             </div>
         </div>
 
