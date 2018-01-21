@@ -7,11 +7,15 @@ import com.khelenyuk.controller.service.factory.ServiceFactory;
 import com.khelenyuk.controller.service.IUserService;
 import com.khelenyuk.utils.MessageManager;
 import com.khelenyuk.utils.ConfigurationManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements ActionCommand {
+    private static final Logger logger = LogManager.getLogger(LoginCommand.class);
+
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
 
@@ -34,7 +38,8 @@ public class LoginCommand implements ActionCommand {
 
 
         if (loginRegistrationService.checkLogin(login, password)) {
-            pageService.updatePageData(session, userService.getUser(login).getId());
+            logger.info("Login/password check is OK!");
+            pageService.updateMainPageData(session, userService.getUser(login).getId());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));

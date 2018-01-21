@@ -51,7 +51,7 @@ public class AddMealCommand implements ActionCommand {
 
         if (menuService.addMeal(mealEntry)) {
             logger.info("Meal successfully added!");
-            pageService.updatePageData(session, mealEntry.getUserId());
+            pageService.updateMainPageData(session, mealEntry.getUserId());
         } else {
             logger.info("Meal adding error!");
             session.setAttribute("errorAddMealMessage", MessageManager.getProperty("message.addmealerror"));

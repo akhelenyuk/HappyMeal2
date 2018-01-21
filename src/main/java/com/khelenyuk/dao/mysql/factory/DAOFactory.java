@@ -17,7 +17,7 @@ public class DAOFactory {
     }
 
     public static MealDAO getMealMethods() {
-        return new MealDAOImpl();
+        return new MealDiaryDAOImpl();
     }
 
     public static GenderDAO getGenderMethods() {

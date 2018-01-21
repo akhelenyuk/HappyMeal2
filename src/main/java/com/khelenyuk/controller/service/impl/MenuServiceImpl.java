@@ -1,7 +1,7 @@
 package com.khelenyuk.controller.service.impl;
 
 
-import com.khelenyuk.dao.mysql.impl.MealDAOImpl;
+import com.khelenyuk.dao.mysql.impl.MealDiaryDAOImpl;
 import com.khelenyuk.model.Meal;
 import com.khelenyuk.model.MealToDisplay;
 import com.khelenyuk.controller.service.IMenuService;
@@ -16,7 +16,7 @@ public class MenuServiceImpl implements IMenuService {
     private static final Logger logger = LogManager.getLogger(MenuServiceImpl.class);
 
     //todo rewrite to Interface
-    private static MealDAOImpl mealDAO = new MealDAOImpl();
+    private static MealDiaryDAOImpl mealDiaryDAO = new MealDiaryDAOImpl();
     private static MenuServiceImpl instance = new MenuServiceImpl();
 
     private MenuServiceImpl() {
@@ -28,12 +28,12 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
     public boolean addMeal(Meal meal) {
-        return mealDAO.add(meal);
+        return mealDiaryDAO.add(meal);
     }
 
     @Override
     public List<MealToDisplay> getUserMenu(int id, LocalDate chosenDate) {
-        return mealDAO.getMenu(id, chosenDate);
+        return mealDiaryDAO.getMenu(id, chosenDate);
     }
 
     @Override
@@ -94,7 +94,12 @@ logger.debug("-------------------------->" + new DecimalFormat("###,###").format
 
     @Override
     public MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId) {
-        return mealDAO.getTotalsByMealType(userId, date, mealTypeId);
+        return mealDiaryDAO.getTotalsByMealType(userId, date, mealTypeId);
+    }
+
+    @Override
+    public MealToDisplay getUserFoodTotal(Integer userId, LocalDate date) {
+        return mealDiaryDAO.getTotals(userId, date);
     }
 
 }

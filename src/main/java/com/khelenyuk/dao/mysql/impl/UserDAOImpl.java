@@ -19,7 +19,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private String selectAll = "SELECT * FROM " + TABLE;
     private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
     private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
-    private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `goal_weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private String updateById = "UPDATE " + TABLE + "" + " SET `login`, `password`, `first_name`=?, `last_name`=?, `email`=?, `birthday`=?, `gender_id`=?, `weight`=?, `height`=?, `lifestyle_id`=? WHERE id=?";
     private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
 
@@ -44,11 +44,13 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                         resultSet.getDate("birthday"),
                         resultSet.getInt("gender_id"),
                         resultSet.getInt("weight"),
+                        resultSet.getInt("goal_weight"),
                         resultSet.getInt("height"),
                         resultSet.getInt("lifestyle_id"),
                         resultSet.getInt("calorie_norm"),
-                        resultSet.getInt("role_id")
-                ));
+                        resultSet.getInt("role_id"),
+                        resultSet.getInt("status_id"))
+                );
             }
         } catch (SQLException e) {
             logger.error("Error in obtaining 'all users'" + e.getCause());
@@ -79,10 +81,12 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                             resultSet.getDate("birthday"),
                             resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
+                            resultSet.getInt("goal_weight"),
                             resultSet.getInt("height"),
                             resultSet.getInt("lifestyle_id"),
                             resultSet.getInt("calorie_norm"),
-                            resultSet.getInt("role_id"));
+                            resultSet.getInt("role_id"),
+                            resultSet.getInt("status_id"));
                 } else {
                     logger.info("No user with id=" + id + " found");
                 }
@@ -115,10 +119,12 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
                             resultSet.getDate("birthday"),
                             resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
+                            resultSet.getInt("goal_weight"),
                             resultSet.getInt("height"),
                             resultSet.getInt("lifestyle_id"),
                             resultSet.getInt("calorie_norm"),
-                            resultSet.getInt("role_id"));
+                            resultSet.getInt("role_id"),
+                            resultSet.getInt("status_id"));
                 } else {
                     logger.info("No user with login=" + login + " found");
                 }
@@ -143,9 +149,10 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
             statement.setInt(7, newEntity.getGenderId());
             statement.setInt(8, newEntity.getWeight());
-            statement.setInt(9, newEntity.getHeight());
-            statement.setInt(10, newEntity.getLifestyleId());
-            statement.setInt(11, newEntity.getCalorieNorm());
+            statement.setInt(9, newEntity.getGoalWeight());
+            statement.setInt(10, newEntity.getHeight());
+            statement.setInt(11, newEntity.getLifestyleId());
+            statement.setInt(12, newEntity.getCalorieNorm());
 
             logger.info("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();

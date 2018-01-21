@@ -30,7 +30,7 @@ public class SelectDateCommand implements ActionCommand {
         session.setAttribute("chosenDateSession", LocalDate.parse(
                 request.getParameter(PARAM_NAME_SELECTED_DATE).toString()));
 
-        pageService.updatePageData(session, ((User)session.getAttribute("user")).getId());
+        pageService.updateMainPageData(session, ((User)session.getAttribute("user")).getId());
 
         return page;
     }

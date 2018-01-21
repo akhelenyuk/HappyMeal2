@@ -27,7 +27,7 @@ public class ToMainPageCommand implements ActionCommand {
         User user = (User)session.getAttribute("user");
 
         if (user != null) {
-            pageService.updatePageData(session, user.getId());
+            pageService.updateMainPageData(session, user.getId());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));

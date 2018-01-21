@@ -9,7 +9,7 @@ import java.util.List;
 public interface IPageService {
     boolean isRedirect();
 
-    void updatePageData(HttpSession session, int userId);
+    void updateMainPageData(HttpSession session, int userId);
 
     void setRedirect(boolean isRedirected);
 

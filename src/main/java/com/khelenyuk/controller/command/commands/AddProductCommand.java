@@ -49,7 +49,7 @@ public class AddProductCommand implements ActionCommand {
 
         if (productService.addProduct(product)) {
             session.setAttribute("successAddProductMessage", MessageManager.getProperty("message.addproductsuccess"));
-            pageService.updatePageData(session, ((User)session.getAttribute("user")).getId());
+            pageService.updateMainPageData(session, ((User)session.getAttribute("user")).getId());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             session.setAttribute("errorAddProductMessage", MessageManager.getProperty("message.addproducterror"));

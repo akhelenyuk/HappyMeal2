@@ -13,8 +13,8 @@ public class MealToDisplay implements Serializable {
     private Integer id;
     private String mealType;
     private String product;
-    private Integer weight;
-    private Float calories;
+    private Float weight;
+    private Integer calories;
     private Float protein;
     private Float fat;
     private Float carbs;
@@ -23,7 +23,7 @@ public class MealToDisplay implements Serializable {
     }
 
     // constructor for displaying totals
-    public MealToDisplay(Integer weight, Float calories, Float protein, Float fat, Float carbs) {
+    public MealToDisplay(Float weight, Integer calories, Float protein, Float fat, Float carbs) {
         this.weight = weight;
         this.calories = calories;
         this.protein = protein;
@@ -31,7 +31,7 @@ public class MealToDisplay implements Serializable {
         this.carbs = carbs;
     }
 
-    public MealToDisplay(String mealNumber, String product, Integer weight, Float calories, Float protein, Float fat, Float carbs) {
+    public MealToDisplay(String mealNumber, String product, Float weight, Integer calories, Float protein, Float fat, Float carbs) {
         this.mealType = mealNumber;
         this.product = product;
         this.weight = weight;
@@ -49,11 +49,11 @@ public class MealToDisplay implements Serializable {
         return product;
     }
 
-    public Integer getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
-    public Float getCalories() {
+    public Integer getCalories() {
         return calories;
     }
 
@@ -73,15 +73,15 @@ public class MealToDisplay implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MealToDisplay mealToDisplay = (MealToDisplay) o;
-        return Objects.equals(id, mealToDisplay.id) &&
-                Objects.equals(mealType, mealToDisplay.mealType) &&
-                Objects.equals(product, mealToDisplay.product) &&
-                Objects.equals(weight, mealToDisplay.weight) &&
-                Objects.equals(calories, mealToDisplay.calories) &&
-                Objects.equals(protein, mealToDisplay.protein) &&
-                Objects.equals(fat, mealToDisplay.fat) &&
-                Objects.equals(carbs, mealToDisplay.carbs);
+        MealToDisplay that = (MealToDisplay) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(mealType, that.mealType) &&
+                Objects.equals(product, that.product) &&
+                Objects.equals(weight, that.weight) &&
+                Objects.equals(calories, that.calories) &&
+                Objects.equals(protein, that.protein) &&
+                Objects.equals(fat, that.fat) &&
+                Objects.equals(carbs, that.carbs);
     }
 
     @Override

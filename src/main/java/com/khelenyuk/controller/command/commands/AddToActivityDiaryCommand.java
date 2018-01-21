@@ -2,7 +2,6 @@ package com.khelenyuk.controller.command.commands;
 
 import com.khelenyuk.controller.command.ActionCommand;
 import com.khelenyuk.controller.service.IActivityDiaryService;
-import com.khelenyuk.controller.service.IMenuService;
 import com.khelenyuk.controller.service.IPageService;
 import com.khelenyuk.controller.service.factory.ServiceFactory;
 import com.khelenyuk.model.ActivityDiary;
@@ -44,7 +43,7 @@ public class AddToActivityDiaryCommand implements ActionCommand {
 
         if (activityDiaryService.addActivityToDiary(activityEntry)) {
             logger.info("Activity successfully added to diary!");
-            pageService.updatePageData(session, ((User)session.getAttribute("user")).getId());
+            pageService.updateMainPageData(session, ((User)session.getAttribute("user")).getId());
         } else {
             logger.info("Activity adding error!");
             session.setAttribute("errorAddActivityToDiaryMessage", MessageManager.getProperty("message.addactivityerror"));

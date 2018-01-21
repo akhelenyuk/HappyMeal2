@@ -28,6 +28,7 @@ public class LoginRegistrationServiceImpl implements ILoginRegistrationService {
     public boolean checkLogin(String login, String pass) {
         logger.info("Get user with login=" + login);
         User user = userDAO.get(login);
+        logger.debug("---------------- User:" +user);
         if (user == null) {
             logger.info("User was not found");
             return false;

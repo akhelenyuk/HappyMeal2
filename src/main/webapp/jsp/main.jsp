@@ -32,11 +32,31 @@
         <div class="row">
             <div class="col-4 jumbotron jumbotron1">
                 <div class="hello">Hello, ${user.firstName}!</div>
-                <div class="on_track">You are on track today!</div>
-                <div class="still_to_go_text"><span class="still_to_go_number">15 kg </span>to your goal weight</div>
-                <div class="still_to_go_text"><span class="still_to_go_number">500 calories </span>left to spend today
+                <div class="on_track">
+                    ${remaining > 0 ? 'You are on track today!' : ''}</div>
+                <div class="still_to_go_text">
+                    <c:choose>
+                        <c:when test="${kgToGoal > 0}">
+                            <span class="still-to-go-number">${kgToGoal} kg </span>to your goal weight
+                        </c:when>
+                        <c:otherwise>
+                            <span class="still-to-go-number">Well done! You have reached your weight goal!</span>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-                <div class="still_to_go_text"><span class="still_to_go_number">4 glasses </span> of water left to drink
+
+
+                <div class="still_to_go_text">
+                    <c:choose>
+                        <c:when test="${remaining > 0}">
+                            <span class="still-to-go-number">${remaining} calories </span>left to spend today
+                        </c:when>
+                        <c:otherwise>
+                            <span class="still-to-go-number-minus">You are exceeding calories consumption by ${remaining} calories. Do more activities!</span>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="still_to_go_text"><span class="still-to-go-number">4 glasses </span> of water left to drink
                 </div>
             </div>
             <div class="col jumbotron jumbotron2 text-center">
@@ -44,13 +64,15 @@
                 <table class="table text-center borderless">
                     <thead>
                     <tr class="your-daily-summary-numbers your-daily-summary-table">
-                        <th class="">1,900</th>
+                        <th class="">${user.calorieNorm}</th>
                         <th>-</th>
                         <th>${totalDayCalories}</th>
                         <th>+</th>
                         <th>${activitiesListTotals.calories}</th>
                         <th>=</th>
-                        <th class="remaining">1,400</th>
+                        <th class="${remaining < 0 ? 'remaining-minus' : 'remaining'}">
+                            ${remaining}
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,7 +83,9 @@
                         <td></td>
                         <td>ACTIVITY</td>
                         <td></td>
-                        <td>REMAINING</td>
+                        <td>
+                            ${remaining < 0 ? 'EXCEEDING' : 'REMAINING'}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -87,7 +111,8 @@
             </li>
             <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
             </li>
-            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#bodyStats">Body stats</a>
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#bodyStats">Body
+                stats</a>
             </li>
         </ul>
 

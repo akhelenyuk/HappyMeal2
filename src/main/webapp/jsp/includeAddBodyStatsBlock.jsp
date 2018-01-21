@@ -74,8 +74,7 @@
                 <%--GOAL WEIGHT--%>
                 <div class="main-caption">ENTER GOAL WEIGHT</div>
                 <input class="form-control" type="number" name="goalWeight" min="1" max="250" step="0.1"
-                <%--TODO put 'user.goalWeight' here after such field will be added to user class--%>
-                       value="${user.weight}"
+                       value="${user.goalWeight}"
                        placeholder="Enter goal weight">
 
 

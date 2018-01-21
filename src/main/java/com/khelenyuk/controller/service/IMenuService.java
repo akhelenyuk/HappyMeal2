@@ -22,4 +22,6 @@ public interface IMenuService {
     String getTotalCarbs(List<MealToDisplay> menu);
 
     MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId);
+
+    MealToDisplay getUserFoodTotal(Integer userId, LocalDate date);
 }

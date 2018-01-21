@@ -70,11 +70,17 @@ body {
     color: #4d4d4d;
 }
 
-.still_to_go_number {
+.still-to-go-number {
     font-size: 18px;
     font-weight: normal;
     color: #19A9A9;
 }
+.still-to-go-number-minus {
+    font-size: 18px;
+    font-weight: normal;
+    color: #a90411;
+}
+
 
 .your-daily-summary {
     font-family: HelveticaNeue-Medium;
@@ -91,6 +97,9 @@ body {
 
 .remaining {
     color: #19a9a9;
+}
+.remaining-minus {
+    color: #a90411;
 }
 
 .main-caption {

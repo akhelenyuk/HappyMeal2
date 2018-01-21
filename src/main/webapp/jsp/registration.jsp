@@ -39,39 +39,49 @@
                    placeholder="Login">
 
             <input type="email" value="${registrationUser.email}" name="email" placeholder="e-mail"><br/>
-            <input type="password" required name="password" placeholder="Пароль">
-            <input type="password" required name="password_confirmation" placeholder="Подтвердите пароль">
+            <input type="password" required name="password" placeholder="Password">
+            <input type="password" required name="password_confirmation" placeholder="Confirm password">
             <label class="alert-danger">${errorPassConfirmMessage}</label>
             <div><br/><br/></div>
 
+
             <div>
                 <label>Birthday:</label><input type="date" name="birthday"
-                                               value="${registrationUser.birthday}"><br/>
-                <input type="number" name="weight" min="1" max="300" step="0.1" value="${registrationUser.weight}"
-                       placeholder="Вес(кг)">
-                <input type="number" name="height" min="50" max="250" step="1" value="${registrationUser.height}"
-                       placeholder="Рост(см)"><br/>
+                                               value="${registrationUser.birthday}">
+                <br/><br/>
+                <label>Height</label>
+                <input type="number" name="height" min="50" max="250" step="1" value="${registrationUser.height}">
+                <label>santimeters</label><br/>
+                <br/>
+                <label>Weight</label>
+                <input type="number" name="weight" min="1" max="300" step="0.1" value="${registrationUser.weight}">
+                <label>kilos</label>
+                <br>
+                <label>Goal weight</label>
+                <input type="number" name="goalWeight" min="1" max="300" step="0.1"
+                       value="${registrationUser.goalWeight}"> <label>kilos</label>
+                <br/><br/>
+
+                <label>Select your gender:</label>
+                <select name="gender">
+                    <c:forEach var="item" items="${genders}">
+                        <option value="${item.id}" <c:if test="${registrationUser.genderId == item.id}">selected</c:if>>
+                            <c:out value="${item.name}"> </c:out>
+                        </option>
+                    </c:forEach>
+                </select><br/>
+
+                <label>Select your activity:</label>
+                <select name="lifestyle">
+                    <c:forEach var="item" items="${lifestyles}">
+                        <option value="${item.id}"
+                                <c:if test="${registrationUser.lifestyleId == item.id}">selected</c:if>>
+                            <c:out value="${item.name}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
             </div>
-            <br/>
-
-            <label>Select your gender:</label>
-            <select name="gender">
-                <c:forEach var="item" items="${genders}">
-                    <option value="${item.id}" <c:if test="${registrationUser.genderId == item.id}">selected</c:if>>
-                        <c:out value="${item.name}"> </c:out>
-                    </option>
-                </c:forEach>
-            </select><br/>
-
-            <label>Select your activity:</label>
-            <select name="lifestyle">
-                <c:forEach var="item" items="${lifestyles}">
-                    <option value="${item.id}" <c:if test="${registrationUser.lifestyleId == item.id}">selected</c:if>>
-                        <c:out value="${item.name}"></c:out>
-                    </option>
-                </c:forEach>
-            </select>
-            <div><br/><br/></div>
+            <br/><br/>
 
             <button type="submit" name="command" class="btn" value="REGISTER_NEW_USER">Register</button>
             <%--TODO implement "to previous page" functionality --%>

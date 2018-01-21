@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -39,7 +40,7 @@ public class PageServiceImpl implements IPageService {
 
 
     @Override
-    public void updatePageData(HttpSession session, int userId) {
+    public void updateMainPageData(HttpSession session, int userId) {
         /**
          * writes updated user(with updated info) into session
          */
@@ -70,6 +71,8 @@ public class PageServiceImpl implements IPageService {
             logger.info("Setting chosenDate to session: " + session.getAttribute("chosenDateSession"));
         }
 
+
+        // FOOD Tab
         /**
          * writes updated menu,
          * totals(menu weight, calories, proteins, fats, carbs)
@@ -83,8 +86,6 @@ public class PageServiceImpl implements IPageService {
 
 
         session.setAttribute("meals", mealsSplittedByType);
-//        TODO implement correct value
-        session.setAttribute("activities", "test");
 
         session.setAttribute("totalsByMealType", totalsByMealTypeMap);
         session.setAttribute("totalDayFoodWeight", menuService.getTotalWeight(userMealToDisplay));
@@ -97,9 +98,7 @@ public class PageServiceImpl implements IPageService {
         /**
          * gets list of current activity types from db and writes them into session
          */
-        List<Activity> activities = activityService.getAll();
-        session.setAttribute("activities", activities);
-        logger.info("Attribute 'activities' is set");
+        session.setAttribute("activities", activityService.getAll());
 
         session.setAttribute("activitiesList", activityDiaryService.getUserActivityDiary(userId, chosenDate));
         session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
@@ -107,13 +106,27 @@ public class PageServiceImpl implements IPageService {
 
 //        BODY STATS tab
         session.setAttribute("genders", userService.getGenders());
-        logger.debug("---------------Genders: " + userService.getGenders());
         session.setAttribute("lifestyles", userService.getLifestyles());
-        logger.debug("---------------Lifestyles: " + userService.getLifestyles());
-        session.setAttribute("currentDate", LocalDate.now());
+//        session.setAttribute("currentDate", LocalDate.now());
 
+        User user = userService.getUser(userId);
+        // FORMULA
+        Integer remaining = user.getCalorieNorm() - menuService.getUserFoodTotal(userId, chosenDate).getCalories() + activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate).getCalories();
+        session.setAttribute("remaining", remaining);
+
+//        GOALS
+        session.setAttribute("kgToGoal", user.getGoalWeight() - user.getWeight());
 
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean isRedirect() {

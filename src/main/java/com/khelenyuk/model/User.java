@@ -8,66 +8,62 @@ import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
-    private int id;
-    private String firstName;
-    private String lastName;
+    private Integer id;
     private String login;
     private String password;
+    private String firstName;
+    private String lastName;
     private String email;
     private Date birthday;
-    private int genderId;
-    private int weight;
-    private int height;
+    private Integer genderId;
+    private Integer weight;
+    private Integer goalWeight;
+    private Integer height;
     // todo if change to Lifestyle class, change in registration.jsp - select option
-    private int lifestyleId;
+    private Integer lifestyleId;
 
 //    TODO need method to calculate this value
-    private int calorieNorm = 2345;
+    private Integer calorieNorm = 2345;
     // TODO Переписать под class Role
-    private int roleId;
-
-    // TODO ---------------------------Test methods -- to delete---------------------------
-    public User getUser() {
-        return new com.khelenyuk.dao.mysql.impl.UserDAOImpl().get(9);
-    }
-
-    public List<User> getUsers() {
-        return new com.khelenyuk.dao.mysql.impl.UserDAOImpl().getAll();
-    }
-    // ---------------------------------------------------------
+    private Integer roleId;
+    private Integer statusId;
 
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String login, String password, String email, Date birthday, int genderId, int weight, int height, int lifestyleId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    // constructor for inserting new User to database
+    public User(String login, String password, String firstName, String lastName, String email, Date birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId) {
         this.login = login;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.birthday = birthday;
         this.genderId = genderId;
         this.weight = weight;
+        this.goalWeight = goalWeight;
         this.height = height;
         this.lifestyleId = lifestyleId;
     }
 
-    public User(int id, String login, String password, String first_name, String last_name, String email, Date birthday, int gender, int weight, int height, int lifestyleId, int calorie_norm, int roleId) {
-
+    // constructor for getting User from database
+    public User(Integer id, String login, String password, String firstName, String lastName, String email, Date birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId, Integer calorieNorm, Integer roleId, Integer statusId) {
         this.id = id;
         this.login = login;
         this.password = password;
-        firstName = first_name;
-        lastName = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.birthday = birthday;
-        this.genderId = gender;
+        this.genderId = genderId;
         this.weight = weight;
+        this.goalWeight = goalWeight;
         this.height = height;
         this.lifestyleId = lifestyleId;
-        calorieNorm = calorie_norm;
+        this.calorieNorm = calorieNorm;
         this.roleId = roleId;
+        this.statusId = statusId;
     }
 
     public String getLogin() {
@@ -94,32 +90,36 @@ public class User implements Serializable {
         return birthday;
     }
 
-    public int getGenderId() {
+    public Integer getGenderId() {
         return genderId;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public int getLifestyleId() {
+    public Integer getLifestyleId() {
         return lifestyleId;
     }
 
-    public int getCalorieNorm() {
+    public Integer getCalorieNorm() {
         return calorieNorm;
     }
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Integer getGoalWeight() {
+        return goalWeight;
     }
 
     // Переписать под class Role
@@ -128,7 +128,7 @@ public class User implements Serializable {
     }
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -136,48 +136,53 @@ public class User implements Serializable {
         this.calorieNorm = calorieNorm;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                genderId == user.genderId &&
-                weight == user.weight &&
-                height == user.height &&
-                lifestyleId == user.lifestyleId &&
-                calorieNorm == user.calorieNorm &&
-                roleId == user.roleId &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(login, user.login) &&
                 Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
                 Objects.equals(email, user.email) &&
-                Objects.equals(birthday, user.birthday);
+                Objects.equals(birthday, user.birthday) &&
+                Objects.equals(genderId, user.genderId) &&
+                Objects.equals(weight, user.weight) &&
+                Objects.equals(goalWeight, user.goalWeight) &&
+                Objects.equals(height, user.height) &&
+                Objects.equals(lifestyleId, user.lifestyleId) &&
+                Objects.equals(calorieNorm, user.calorieNorm) &&
+                Objects.equals(roleId, user.roleId) &&
+                Objects.equals(statusId, user.statusId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstName, lastName, login, password, email, birthday, genderId, weight, height, lifestyleId, calorieNorm, roleId);
+        return Objects.hash(id, login, password, firstName, lastName, email, birthday, genderId, weight, goalWeight, height, lifestyleId, calorieNorm, roleId, statusId);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", birthday=" + birthday +
                 ", genderId=" + genderId +
                 ", weight=" + weight +
+                ", goalWeight=" + goalWeight +
                 ", height=" + height +
                 ", lifestyleId=" + lifestyleId +
                 ", calorieNorm=" + calorieNorm +
                 ", roleId=" + roleId +
+                ", statusId=" + statusId +
                 '}';
     }
 }
