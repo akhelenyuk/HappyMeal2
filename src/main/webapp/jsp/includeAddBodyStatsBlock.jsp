@@ -18,10 +18,10 @@
 
                 <%--GENDER--%>
                 <div class="main-caption">GENDER</div>
-                <select class="form-control" name="activityId">
-                    <c:forEach var="activity" items="${products}">
-                        <option value="${activity.id}">
-                            <c:out value="${activity.name}"/>
+                <select class="form-control" name="genderId">
+                    <c:forEach var="item" items="${genders}">
+                        <option value="${item.id}" <c:if test="${user.genderId == item.id}">selected</c:if>>
+                            <c:out value="${item.name}"/>
                         </option>
                     </c:forEach>
                 </select>
@@ -30,10 +30,10 @@
 
                 <%--ACTIVITY--%>
                 <div class="main-caption">ACTIVITY</div>
-                <select class="form-control" name="genderId">
-                    <c:forEach var="gender" items="${products}">
-                        <option value="${gender.id}">
-                            <c:out value="${gender.name}"/>
+                <select class="form-control" name="lifestyleId">
+                    <c:forEach var="item" items="${lifestyles}">
+                        <option value="${item.id}" <c:if test="${user.lifestyleId == item.id}">selected</c:if>>
+                            <c:out value="${item.name}"/>
                         </option>
                     </c:forEach>
                 </select>

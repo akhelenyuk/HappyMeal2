@@ -105,11 +105,11 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
 
 
-
-
 //        BODY STATS tab
-        session.setAttribute("gender", userService.getGender());
-        session.setAttribute("lifestyle", userService.getLifestyles());
+        session.setAttribute("genders", userService.getGenders());
+        logger.debug("---------------Genders: " + userService.getGenders());
+        session.setAttribute("lifestyles", userService.getLifestyles());
+        logger.debug("---------------Lifestyles: " + userService.getLifestyles());
         session.setAttribute("currentDate", LocalDate.now());
 
 
@@ -129,14 +129,13 @@ public class PageServiceImpl implements IPageService {
     public void updateRegistrationPageData(HttpServletRequest request) {
         this.session = request.getSession();
 
-        session.setAttribute("genders", userService.getGender());
-        session.setAttribute("lifestyle",userService.getLifestyles());
+        session.setAttribute("genders", userService.getGenders());
+        session.setAttribute("lifestyles", userService.getLifestyles());
     }
 
 //    private void updateActivityDiaryData(Integer userId){
 //        List<ActivityDiaryToDisplay> list = activityDiaryService.getUserActivityDiary(userId, chosenDate);
 //    }
-
 
 
     /**

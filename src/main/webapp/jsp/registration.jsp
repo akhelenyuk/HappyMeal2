@@ -65,7 +65,7 @@
 
             <label>Select your activity:</label>
             <select name="lifestyle">
-                <c:forEach var="item" items="${lifestyle}">
+                <c:forEach var="item" items="${lifestyles}">
                     <option value="${item.id}" <c:if test="${registrationUser.lifestyleId == item.id}">selected</c:if>>
                         <c:out value="${item.name}"></c:out>
                     </option>

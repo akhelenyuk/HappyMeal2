@@ -13,7 +13,7 @@ public interface IUserService {
 
     List<User> getAll();
 
-    List<Gender> getGender();
+    List<Gender> getGenders();
 
     List<Lifestyle> getLifestyles();
 
