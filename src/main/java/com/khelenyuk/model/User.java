@@ -122,6 +122,30 @@ public class User implements Serializable {
         return goalWeight;
     }
 
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setGenderId(Integer genderId) {
+        this.genderId = genderId;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public void setGoalWeight(Integer goalWeight) {
+        this.goalWeight = goalWeight;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public void setLifestyleId(Integer lifestyleId) {
+        this.lifestyleId = lifestyleId;
+    }
+
     // Переписать под class Role
     public boolean isAdmin() {
         return UtilManager.getProperty("role.admin").equalsIgnoreCase(String.valueOf(roleId));

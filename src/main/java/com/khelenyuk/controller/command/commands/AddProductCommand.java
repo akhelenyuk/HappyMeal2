@@ -22,7 +22,6 @@ public class AddProductCommand implements ActionCommand {
     private static final String PARAM_NAME_PROTEIN = "protein";
     private static final String PARAM_NAME_FAT = "fat";
     private static final String PARAM_NAME_CARBS = "carbs";
-    private static final String PARAM_NAME_BUTTON = "button";
 
     private IPageService pageService = ServiceFactory.getPageService();
     private IProductService productService = ServiceFactory.getProductService();
@@ -30,26 +29,21 @@ public class AddProductCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String page = null;
+        String page = ConfigurationManager.getProperty("path.page.addProduct");
 
-        if(request.getParameter(PARAM_NAME_BUTTON).equals("Отменить")){
-            page = ConfigurationManager.getProperty("path.page.main");
+        Product newProduct = getProductFromRequest(request);
+        request.setAttribute("newProduct", newProduct);
+
+
+        if (productService.checkProductExist(newProduct.getName())) {
+            logger.info("Such product already exists!");
+            request.setAttribute("errorProductExistMessage", MessageManager.getProperty("message.productexist"));
             return page;
         }
 
-        Product product = new Product(
-                request.getParameter(PARAM_NAME_NAME),
-                Float.valueOf(request.getParameter(PARAM_NAME_CALORIES)),
-                Float.valueOf(request.getParameter(PARAM_NAME_PROTEIN)),
-                Float.valueOf(request.getParameter(PARAM_NAME_FAT)),
-                Float.valueOf(request.getParameter(PARAM_NAME_CARBS))
-        );
-
-
-
-        if (productService.addProduct(product)) {
+        if (productService.addProduct(newProduct)) {
             session.setAttribute("successAddProductMessage", MessageManager.getProperty("message.addproductsuccess"));
-            pageService.updateMainPageData(session, ((User)session.getAttribute("user")).getId());
+            pageService.updateMainPageData(session, ((User) session.getAttribute("user")).getId());
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             session.setAttribute("errorAddProductMessage", MessageManager.getProperty("message.addproducterror"));
@@ -58,5 +52,16 @@ public class AddProductCommand implements ActionCommand {
 
 
         return page;
+    }
+
+    private Product getProductFromRequest(HttpServletRequest request) {
+        Product product = new Product(
+                request.getParameter(PARAM_NAME_NAME),
+                Float.valueOf(request.getParameter(PARAM_NAME_CALORIES)),
+                Float.valueOf(request.getParameter(PARAM_NAME_PROTEIN)),
+                Float.valueOf(request.getParameter(PARAM_NAME_FAT)),
+                Float.valueOf(request.getParameter(PARAM_NAME_CARBS))
+        );
+        return product;
     }
 }

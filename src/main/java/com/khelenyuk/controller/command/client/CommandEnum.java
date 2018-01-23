@@ -69,6 +69,16 @@ public enum CommandEnum {
             this.command = new SelectDateCommand();
         }
     },
+    UPDATE_USER_INFO{
+        {
+            this.command = new UpdateUserInfoCommand();
+        }
+    },
+    CANCEL{
+        {
+            this.command = new CancelCommand();
+        }
+    },
 
     LOGOUT {
         {

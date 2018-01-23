@@ -4,6 +4,7 @@ import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.CrudDAO;
 import com.khelenyuk.dao.UserDAO;
 import com.khelenyuk.model.User;
+import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +21,7 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
     private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
     private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `goal_weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private String updateById = "UPDATE " + TABLE + "" + " SET `login`, `password`, `first_name`=?, `last_name`=?, `email`=?, `birthday`=?, `gender_id`=?, `weight`=?, `height`=?, `lifestyle_id`=? WHERE id=?";
+    private String updateById = QueryManager.getProperty("updateUser");
     private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
 
 
@@ -165,22 +166,18 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     }
 
     @Override
-    public boolean update(int oldId, User newEntity) {
+    public boolean update(int userId, User user) {
         int resultUpdate = 0;
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateById)
         ) {
-            statement.setString(1, newEntity.getLogin());
-            statement.setString(2, newEntity.getPassword());
-            statement.setString(3, newEntity.getFirstName());
-            statement.setString(4, newEntity.getLastName());
-            statement.setString(5, newEntity.getEmail());
-            statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
-            statement.setInt(7, newEntity.getGenderId());
-            statement.setInt(8, newEntity.getWeight());
-            statement.setInt(9, newEntity.getHeight());
-            statement.setInt(10, newEntity.getLifestyleId());
-            statement.setInt(11, oldId);
+            statement.setDate(1, new Date(user.getBirthday().getTime()));
+            statement.setInt(2, user.getGenderId());
+            statement.setInt(3, user.getWeight());
+            statement.setInt(4, user.getGoalWeight());
+            statement.setInt(5, user.getHeight());
+            statement.setInt(6, user.getLifestyleId());
+            statement.setInt(7, userId);
 
             logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();

@@ -18,4 +18,6 @@ public interface IUserService {
     List<Lifestyle> getLifestyles();
 
     boolean addUser(User user);
+
+    boolean updateUser(User newUser);
 }

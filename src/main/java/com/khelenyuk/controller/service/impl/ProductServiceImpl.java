@@ -2,6 +2,7 @@ package com.khelenyuk.controller.service.impl;
 
 
 import com.khelenyuk.dao.CrudDAO;
+import com.khelenyuk.dao.ProductDAO;
 import com.khelenyuk.dao.mysql.impl.ProductDAOImpl;
 import com.khelenyuk.model.Product;
 import com.khelenyuk.controller.service.IProductService;
@@ -13,7 +14,7 @@ import java.util.List;
 public class ProductServiceImpl implements IProductService{
     private static final Logger logger = LogManager.getLogger(ProductServiceImpl.class);
 
-    private static CrudDAO<Product> productDAO = new ProductDAOImpl();
+    private static ProductDAO productDAO = new ProductDAOImpl();
     private static ProductServiceImpl instance = new ProductServiceImpl();
 
     private ProductServiceImpl() {
@@ -31,5 +32,11 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public List<Product> getAllProducts() {
         return productDAO.getAll();
+    }
+
+    @Override
+    public boolean checkProductExist(String name) {
+        logger.info("Check if product with such name already exists");
+        return productDAO.get(name) != null;
     }
 }

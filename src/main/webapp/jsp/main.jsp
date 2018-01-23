@@ -11,16 +11,6 @@
 
 
 <body class="bg">
-<%--<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>--%>
-<%--<jsp:useBean id="productBean" class="com.khelenyuk.model.Product"></jsp:useBean>--%>
-<%--<jsp:useBean id="menuBean" class="com.khelenyuk.model.Meal"></jsp:useBean>--%>
-<%--<jsp:useBean id="localDate" class="java.time.LocalDate"></jsp:useBean>--%>
-
-<%--<c:set var="user" value="${userBean.user}"/>--%>
-<%--<c:set var="products" value="${productBean.products}"/>--%>
-<%--<c:set var="menu" value="${menuBean.menu}"/>--%>
-<%--<c:set var="chosenDateSession" value="${menu.date}"/>--%>
-
 
 <div class="container bg-container">
     <jsp:include page="headerNavbar.jsp"></jsp:include>
@@ -56,8 +46,7 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="still_to_go_text"><span class="still-to-go-number">4 glasses </span> of water left to drink
-                </div>
+                <%--<div class="still_to_go_text"><span class="still-to-go-number">4 glasses </span> of water left to drink</div>--%>
             </div>
             <div class="col jumbotron jumbotron2 text-center">
                 <div class="your-daily-summary">Your Daily Summary</div>
@@ -105,13 +94,13 @@
     <div class="container table-bordered">
 
         <ul class="nav nav-tabs nav-justified">
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#food">Food</a>
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#food">Food</a>
             </li>
             <li class="nav-item"><a class="nav-link " role="tab" data-toggle="tab" href="#activity">Activity</a>
             </li>
-            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>
-            </li>
-            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#bodyStats">Body
+            <%--<li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#water">Water</a>--%>
+            <%--</li>--%>
+            <li class="nav-item"><a class="nav-link " role="tab" data-toggle="tab" href="#bodyStats">Body
                 stats</a>
             </li>
         </ul>
@@ -121,7 +110,7 @@
             <br/><br/>
 
             <%---------- FOOD -----------%>
-            <div class="tab-pane" id="food" role="tabpanel">
+            <div class="tab-pane active" id="food" role="tabpanel">
 
 
                 <%---------- FOOD -----------%>
@@ -200,11 +189,11 @@
                 </c:if>
             </div>
 
-            <%------------- WATER ------------%>
-            <div class="tab-pane" id="water" role="tabpanel">Water</div>
+            <%--&lt;%&ndash;----------- WATER ----------&ndash;%&gt;--%>
+            <%--<div class="tab-pane" id="water" role="tabpanel">Water</div>--%>
 
             <%------------- Weight monitor ------------%>
-            <div class="tab-pane active" id="bodyStats" role="tabpanel">
+            <div class="tab-pane " id="bodyStats" role="tabpanel">
                 <jsp:include page="includeAddBodyStatsBlock.jsp"/>
             </div>
         </div>

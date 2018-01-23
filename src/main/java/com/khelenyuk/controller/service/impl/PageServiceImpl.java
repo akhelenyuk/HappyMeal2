@@ -41,10 +41,12 @@ public class PageServiceImpl implements IPageService {
 
     @Override
     public void updateMainPageData(HttpSession session, int userId) {
+        User user = userService.getUser(userId);
+
         /**
          * writes updated user(with updated info) into session
          */
-        session.setAttribute("user", userService.getUser(userId));
+        session.setAttribute("user", user);
         logger.info("Attribute user is set");
 
         /**
@@ -79,6 +81,7 @@ public class PageServiceImpl implements IPageService {
          * into session
          */
         List<MealToDisplay> userMealToDisplay = menuService.getUserMenu(userId, chosenDate);
+        logger.debug("++++++++++++++ USerMealToDisplay:" + userMealToDisplay);
 
         Map<String, MealToDisplay> totalsByMealTypeMap = makeMap2(userId, chosenDate, mealTypes);
 
@@ -86,6 +89,7 @@ public class PageServiceImpl implements IPageService {
 
 
         session.setAttribute("meals", mealsSplittedByType);
+        logger.debug("Meals: --------------------" + session.getAttribute("meals"));
 
         session.setAttribute("totalsByMealType", totalsByMealTypeMap);
         session.setAttribute("totalDayFoodWeight", menuService.getTotalWeight(userMealToDisplay));
@@ -101,31 +105,25 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("activities", activityService.getAll());
 
         session.setAttribute("activitiesList", activityDiaryService.getUserActivityDiary(userId, chosenDate));
+        logger.debug("Activities: -------------------" + session.getAttribute("activitiesList"));
         session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
 
 
 //        BODY STATS tab
         session.setAttribute("genders", userService.getGenders());
         session.setAttribute("lifestyles", userService.getLifestyles());
-//        session.setAttribute("currentDate", LocalDate.now());
+        // is needed to check that birthday was not in future
+        session.setAttribute("currentDate", LocalDate.now());
 
-        User user = userService.getUser(userId);
         // FORMULA
         Integer remaining = user.getCalorieNorm() - menuService.getUserFoodTotal(userId, chosenDate).getCalories() + activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate).getCalories();
         session.setAttribute("remaining", remaining);
 
 //        GOALS
-        session.setAttribute("kgToGoal", user.getGoalWeight() - user.getWeight());
+        session.setAttribute("kgToGoal", user.getWeight() - user.getGoalWeight());
+        logger.debug("-+-=-==-=-=-=-= krToGoal=" + user.getGoalWeight() + " - " + user.getWeight() + " = " + session.getAttribute("kgToGoal"));
 
     }
-
-
-
-
-
-
-
-
 
 
     @Override

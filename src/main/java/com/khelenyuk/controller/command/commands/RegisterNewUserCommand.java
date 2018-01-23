@@ -32,7 +32,6 @@ public class RegisterNewUserCommand implements ActionCommand {
     private static final String PARAM_NAME_LIFESTYLE = "lifestyle";
 
     private IUserService userService = ServiceFactory.getUserService();
-    private IPageService pageService = ServiceFactory.getPageService();
     private ILoginRegistrationService loginRegistrationService = ServiceFactory.getLoginRegistrationService();
 
 

@@ -59,4 +59,9 @@ public class UserServiceImpl implements IUserService {
     public boolean addUser(User user) {
         return userDAO.add(user);
     }
+
+    @Override
+    public boolean updateUser(User newUser) {
+        return userDAO.update(newUser.getId(), newUser);
+    }
 }

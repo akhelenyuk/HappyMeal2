@@ -8,5 +8,6 @@ public interface CrudDAO<T> {
     boolean add(T newEntity);
     boolean update(int oldId, T newEntity);
     boolean delete(int id);
+
 }
 
