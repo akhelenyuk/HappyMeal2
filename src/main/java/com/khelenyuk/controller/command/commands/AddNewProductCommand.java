@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class AddProductCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(AddProductCommand.class);
+public class AddNewProductCommand implements ActionCommand {
+    private static final Logger logger = LogManager.getLogger(AddNewProductCommand.class);
 
     private static final String PARAM_NAME_NAME = "name";
     private static final String PARAM_NAME_CALORIES = "calories";

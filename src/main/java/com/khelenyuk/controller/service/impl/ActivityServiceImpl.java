@@ -29,4 +29,15 @@ public class ActivityServiceImpl implements IActivityService {
     public List<Activity> getAll() {
         return activityDAO.getAll();
     }
+
+    @Override
+    public boolean checkActivityExist(String name) {
+        logger.info("Check if activity with such name already exists");
+        return activityDAO.get(name) != null;
+    }
+
+    @Override
+    public boolean addActivity(Activity newActivity) {
+        return activityDAO.add(newActivity);
+    }
 }

@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IActivityService {
     List<Activity> getAll();
+
+    boolean checkActivityExist(String name);
+
+    boolean addActivity(Activity newActivity);
 }

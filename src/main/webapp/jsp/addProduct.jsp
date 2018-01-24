@@ -13,8 +13,9 @@
     <div class="row justify-content-center">
         <div class="col col-4">
             <div class="panel panel-default">
-                <c:if test="${not empty errorProductExistMessage}"><h4
-                        class="alert-danger">${errorProductExistMessage}</h4></c:if>
+                <c:if test="${not empty errorProductExistMessage}"><h6
+                        class="alert-danger">${errorProductExistMessage}</h6
+></c:if>
                 <div class="panel-heading">
                     <h3 class="panel-title">Add product</h3>
                 </div>
@@ -34,8 +35,7 @@
                                     <input type="text"
                                            required
                                            name="name"
-                                           <%--class="form-control input-sm"--%>
-                                           <c:if test="${not empty errorProductExistMessage}">class="border-danger"</c:if>
+                                           class="form-control input-sm <c:if test="${not empty errorProductExistMessage}">border-danger</c:if>"
                                            value="${newProduct.name}"
                                            placeholder="Название">
                                 </div>
@@ -133,7 +133,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <button type="submit" name="command" value="Add_product"
+                                    <button type="submit" name="command" value="ADD_NEW_PRODUCT"
                                             class="btn btn-success btn-block">Add product</button>
 
                                 </div>

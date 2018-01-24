@@ -11,10 +11,6 @@
 </head>
 <body>
 
-<%--<jsp:useBean id="userBean" class="com.khelenyuk.model.User"></jsp:useBean>--%>
-<%--<c:set var="userList" value="${userBean.users}"/>--%>
-<%--<c:set var="user1" value="${userBean.user}"/>--%>
-
 <jsp:include page="../headerNavbar.jsp"/>
 <br/>
 <div class="container">

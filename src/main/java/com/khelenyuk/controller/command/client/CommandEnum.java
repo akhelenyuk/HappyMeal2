@@ -34,6 +34,11 @@ public enum CommandEnum {
             this.command = new ToAddProductPageCommand();
         }
     },
+    TO_ADD_ACTIVITY_PAGE{
+        {
+            this.command = new ToAddActivityPageCommand();
+        }
+    },
     TO_PREVIOUS_PAGE{
         {
             this.command = new ToPreviousPageCommand();
@@ -49,9 +54,14 @@ public enum CommandEnum {
             this.command = new SetLocaleCommand();
         }
     },
-    ADD_PRODUCT{
+    ADD_NEW_PRODUCT{
         {
-            this.command = new AddProductCommand();
+            this.command = new AddNewProductCommand();
+        }
+    },
+    ADD_NEW_ACTIVITY{
+        {
+            this.command = new AddNewActivityCommand();
         }
     },
     ADD_MEAL{
@@ -77,6 +87,11 @@ public enum CommandEnum {
     CANCEL{
         {
             this.command = new CancelCommand();
+        }
+    },
+    BLOCK_UNBLOCK_USER{
+        {
+            this.command = new BlockUnblockUserCommand();
         }
     },
 
