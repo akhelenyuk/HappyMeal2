@@ -22,6 +22,8 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
     private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `goal_weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private String updateById = QueryManager.getProperty("updateUser");
+    private String updateStatusIdById = QueryManager.getProperty("updateUserStatusId");
+
     private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
 
 
@@ -186,6 +188,27 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             }
         } catch (SQLException e) {
             logger.error("Error in updating user", e.getCause());
+        }
+        return resultUpdate > 0;
+    }
+
+    @Override
+    public boolean updateStatus(User user) {
+        int resultUpdate = 0;
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(updateStatusIdById)
+        ) {
+            statement.setInt(1, user.getStatusId());
+            statement.setInt(2, user.getId());
+
+
+            logger.info("Query: " + statement.toString());
+            resultUpdate = statement.executeUpdate();
+            if (resultUpdate < 1) {
+                logger.info("User statusId was not updated.");
+            }
+        } catch (SQLException e) {
+            logger.error("Error in updating user statusId", e.getCause());
         }
         return resultUpdate > 0;
     }

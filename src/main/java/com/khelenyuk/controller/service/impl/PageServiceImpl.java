@@ -144,6 +144,11 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("lifestyles", userService.getLifestyles());
     }
 
+    @Override
+    public void updateAdminPageData(HttpSession session) {
+        session.setAttribute("users", userService.getAll());
+    }
+
 //    private void updateActivityDiaryData(Integer userId){
 //        List<ActivityDiaryToDisplay> list = activityDiaryService.getUserActivityDiary(userId, chosenDate);
 //    }

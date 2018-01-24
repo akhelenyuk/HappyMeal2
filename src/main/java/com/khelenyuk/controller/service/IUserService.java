@@ -20,4 +20,6 @@ public interface IUserService {
     boolean addUser(User user);
 
     boolean updateUser(User newUser);
+
+    boolean blockUnblockUser(User user);
 }

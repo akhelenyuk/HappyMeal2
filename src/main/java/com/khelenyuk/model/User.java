@@ -134,6 +134,7 @@ public class User implements Serializable {
         this.weight = weight;
     }
 
+
     public void setGoalWeight(Integer goalWeight) {
         this.goalWeight = goalWeight;
     }
@@ -144,6 +145,14 @@ public class User implements Serializable {
 
     public void setLifestyleId(Integer lifestyleId) {
         this.lifestyleId = lifestyleId;
+    }
+
+    public Integer getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
     }
 
     // Переписать под class Role

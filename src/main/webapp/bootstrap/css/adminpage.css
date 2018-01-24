@@ -51,3 +51,7 @@ border-color: #e30e17;
     background-color: transparent;
     border-color: #19a9a9;
 }
+.error{
+    color: #e30e17;
+    font-size: 18px;
+}

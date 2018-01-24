@@ -14,5 +14,7 @@ public interface IPageService {
     void setRedirect(boolean isRedirected);
 
     void updateRegistrationPageData(HttpServletRequest request);
+
+    void updateAdminPageData(HttpSession session);
 }
 

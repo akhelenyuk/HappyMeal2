@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserDAO extends CrudDAO<User> {
     User get(String login);
+
+    boolean updateStatus(User user);
 }

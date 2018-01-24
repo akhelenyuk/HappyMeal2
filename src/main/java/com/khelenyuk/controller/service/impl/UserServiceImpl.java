@@ -64,4 +64,9 @@ public class UserServiceImpl implements IUserService {
     public boolean updateUser(User newUser) {
         return userDAO.update(newUser.getId(), newUser);
     }
+
+    @Override
+    public boolean blockUnblockUser(User user) {
+        return userDAO.updateStatus(user);
+    }
 }

@@ -14,11 +14,12 @@
 <jsp:include page="../headerNavbar.jsp"/>
 <br/>
 <div class="container">
+    <div class="error text-center" >${errorBlockUnblockUserMessage}</div>
 
     <table class="table table-striped table-bordered table-sm">
         <nav class="admin navbar justify-content-center">Admin Page</nav>
 
-        <thead >
+        <thead>
         <th scope="col"><input type="checkbox" id="checkall"/></th>
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
@@ -30,29 +31,37 @@
 
         <tbody>
         <c:forEach var="user" items="${users}">
-            <tr>
-                <th scope="row"><input type="checkbox" class="checkthis"/></th>
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
-                <td>${user.login}</td>
-                <td>${user.roleId}</td>
-                <td>${user.email}</td>
-                <td class="align-right">
-                    <button class="btn btn-outline-info btn-block" type="submit" name="command" value="block_unblock_user"> Unblocked</button>
-                </td>
-            </tr>
+            <form method="post" action="/controller">
+                <input type="hidden" name="userId" value="${user.id}">
+                <tr>
+                    <th scope="row"><input type="checkbox" class="checkthis"/></th>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.login}</td>
+                    <td>${user.roleId}</td>
+                    <td>${user.statusId}</td>
+                    <td class="align-right">
+                        <c:choose>
+                            <c:when test="${user.statusId == 1}">
+                                <button class="btn btn-outline-info btn-block"
+                                        type="submit"
+                                        name="command"
+                                        value="block_unblock_user"> Unblocked
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button class="btn btn-danger btn-block"
+                                        type="submit"
+                                        name="command"
+                                        value="block_unblock_user"> Blocked
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </td>
+                </tr>
+            </form>
         </c:forEach>
-        <tr>
-            <th scope="row"><input type="checkbox" class="checkthis"/></th>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.login}</td>
-            <td>${user.roleId}</td>
-            <td>${user.email}</td>
-            <td class="align-right">
-                <button class="btn btn-danger btn-block" type="submit">Blocked</button>
-            </td>
-        </tr>
         </tbody>
     </table>
 
@@ -67,5 +76,6 @@
     </nav>
 
 </div>
+
 </body>
 </html>
