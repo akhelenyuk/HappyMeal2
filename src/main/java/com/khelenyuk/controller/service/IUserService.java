@@ -22,4 +22,8 @@ public interface IUserService {
     boolean updateUser(User newUser);
 
     boolean blockUnblockUser(User user);
+
+    List<User> getUsers(int limit, int offset);
+
+    int getUsersCount();
 }

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -20,6 +21,8 @@ public class PageServiceImpl implements IPageService {
     private static final Logger logger = LogManager.getLogger(PageServiceImpl.class);
     private static PageServiceImpl instance = new PageServiceImpl();
     private HttpSession session = null;
+    private static final String PARAM_NAME_LOGIN = "pageNumber";
+
 
     private boolean redirect = false;
 
@@ -145,13 +148,38 @@ public class PageServiceImpl implements IPageService {
     }
 
     @Override
-    public void updateAdminPageData(HttpSession session) {
-        session.setAttribute("users", userService.getAll());
-    }
+    public void updateAdminPageData(HttpServletRequest request) {
+        int size = userService.getUsersCount();
+        int offset = 0;
+        int limit = 5;
+        int pages = 1;
 
-//    private void updateActivityDiaryData(Integer userId){
-//        List<ActivityDiaryToDisplay> list = activityDiaryService.getUserActivityDiary(userId, chosenDate);
-//    }
+        logger.debug("requested page number: " + request.getParameter(PARAM_NAME_LOGIN));
+        if(request.getParameter(PARAM_NAME_LOGIN) != null){
+            int requestedPage = Integer.valueOf(request.getParameter(PARAM_NAME_LOGIN));
+            offset = (requestedPage - 1) * limit;
+        }
+
+        List<User> users1 = userService.getUsers(limit, offset);
+        request.setAttribute("users", users1);
+
+        /**
+         * finding out how many pagination buttons (pages) shall be shown based on number of users (size) and
+         * number of entries to be shown on one page (limit).
+         */
+        if(size > limit){
+            pages = size / limit;
+            if(size%limit > 0){
+                pages++;
+            }
+        }
+        logger.debug("Total number of pages: " + pages);
+        request.setAttribute("pages", pages);
+
+        int currentPage = offset/limit+1;
+        logger.debug("Current page number: " + currentPage);
+        request.setAttribute("currentPage", currentPage);
+    }
 
 
     /**

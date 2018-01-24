@@ -15,6 +15,6 @@ public interface IPageService {
 
     void updateRegistrationPageData(HttpServletRequest request);
 
-    void updateAdminPageData(HttpSession session);
+    void updateAdminPageData(HttpServletRequest request);
 }
 

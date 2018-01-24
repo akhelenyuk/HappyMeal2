@@ -14,7 +14,7 @@
 <jsp:include page="../headerNavbar.jsp"/>
 <br/>
 <div class="container">
-    <div class="error text-center" >${errorBlockUnblockUserMessage}</div>
+    <div class="error text-center">${errorBlockUnblockUserMessage}</div>
 
     <table class="table table-striped table-bordered table-sm">
         <nav class="admin navbar justify-content-center">Admin Page</nav>
@@ -66,12 +66,19 @@
     </table>
 
     <nav>
-        <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <ul class="pagination pagination-sm justify-content-center">
+            <%--<li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+            <c:forEach begin="1" end="${pages}" step="1" var="page">
+                <form action="/controller" method="post">
+                    <input type="hidden" name="pageNumber" value="${page}">
+                    <li
+                            class="page-item
+<c:if test="${page == currentPage}">active disabled</c:if>">
+                        <button type="submit" class="page-link" name="command" value="TO_N_PAGE">${page}</button>
+                    </li>
+                </form>
+            </c:forEach>
+            <%--<li class="page-item"><a class="page-link" href="#">Next</a></li>--%>
         </ul>
     </nav>
 

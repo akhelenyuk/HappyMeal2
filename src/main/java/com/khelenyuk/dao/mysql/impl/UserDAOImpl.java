@@ -18,11 +18,13 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
 
     private final String TABLE = "users";
     private String selectAll = "SELECT * FROM " + TABLE;
+    private String selectAllLimitOffset = QueryManager.getProperty("selectAllUsersLimitOffset");
     private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
     private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
     private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `goal_weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private String updateById = QueryManager.getProperty("updateUser");
     private String updateStatusIdById = QueryManager.getProperty("updateUserStatusId");
+    private String selectCount = QueryManager.getProperty("selectUsersCount");
 
     private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
 
@@ -211,6 +213,63 @@ public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
             logger.error("Error in updating user statusId", e.getCause());
         }
         return resultUpdate > 0;
+    }
+
+    @Override
+    public List<User> getAll(int limit, int offset) {
+        List<User> users = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectAllLimitOffset);
+        ) {
+            statement.setInt(1, limit);
+            statement.setInt(2, offset);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                logger.info("Query: " + statement.toString());
+                while (resultSet.next()) {
+                    users.add(new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name"),
+                            resultSet.getString("email"),
+                            resultSet.getDate("birthday"),
+                            resultSet.getInt("gender_id"),
+                            resultSet.getInt("weight"),
+                            resultSet.getInt("goal_weight"),
+                            resultSet.getInt("height"),
+                            resultSet.getInt("lifestyle_id"),
+                            resultSet.getInt("calorie_norm"),
+                            resultSet.getInt("role_id"),
+                            resultSet.getInt("status_id"))
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Error in obtaining 'users' limit:" + limit + " offsetting:" + offset + " \ncause: " + e.getCause());
+        }
+
+        return users;
+    }
+
+    @Override
+    public int getUsersCount() {
+        int result = 0;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectCount);
+             ResultSet resultSet = statement.executeQuery()
+        ) {
+            logger.info("Query: " + statement.toString());
+            if (resultSet.next()) {
+                result = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            logger.error("Error in obtaining 'number of users'" + e.getCause());
+        }
+        logger.info("Number of users is :" + result);
+        return result;
     }
 
     @Override

@@ -69,4 +69,14 @@ public class UserServiceImpl implements IUserService {
     public boolean blockUnblockUser(User user) {
         return userDAO.updateStatus(user);
     }
+
+    @Override
+    public List<User> getUsers(int limit, int offset) {
+        return userDAO.getAll(limit, offset);
+    }
+
+    @Override
+    public int getUsersCount() {
+        return userDAO.getUsersCount();
+    }
 }

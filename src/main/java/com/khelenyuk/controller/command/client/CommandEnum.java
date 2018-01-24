@@ -94,6 +94,11 @@ public enum CommandEnum {
             this.command = new BlockUnblockUserCommand();
         }
     },
+    TO_N_PAGE{
+        {
+            this.command = new ToNPageCommand();
+        }
+    },
 
     LOGOUT {
         {

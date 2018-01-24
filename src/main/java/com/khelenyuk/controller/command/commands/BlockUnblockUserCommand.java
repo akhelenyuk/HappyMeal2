@@ -29,8 +29,6 @@ public class BlockUnblockUserCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.admin");
-        session = request.getSession();
-
 
         int userId = Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID));
         logger.debug("User id=" + userId);
@@ -44,7 +42,7 @@ public class BlockUnblockUserCommand implements ActionCommand {
 
 
         if (userService.blockUnblockUser(userBlocked)) {
-            pageService.updateAdminPageData(session);
+            pageService.updateAdminPageData(request);
         } else {
             request.setAttribute("errorBlockUnblockUserMessage", MessageManager.getProperty("message.userblockerror"));
         }

@@ -51,6 +51,17 @@ border-color: #e30e17;
     background-color: transparent;
     border-color: #19a9a9;
 }
+.page-link:active{
+    color: white;
+    background-color: #19a9a9;
+    border-color: #19a9a9;
+}
+.page-item.active .page-link {
+    color: white;
+    background-color: #19a9a9;
+    border-color: #19a9a9;
+}
+
 .error{
     color: #e30e17;
     font-size: 18px;
