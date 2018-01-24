@@ -44,10 +44,9 @@ public class BlockUnblockUserCommand implements ActionCommand {
 
 
         if (userService.blockUnblockUser(userBlocked)) {
-            request.setAttribute("errorBlockUnblockUserMessage", MessageManager.getProperty("message.userblockerror"));
-
             pageService.updateAdminPageData(session);
         } else {
+            request.setAttribute("errorBlockUnblockUserMessage", MessageManager.getProperty("message.userblockerror"));
         }
 
         return page;

@@ -30,6 +30,7 @@
     <form class="text-center" method="post" action="/controller">
         <h4 class="alert-danger">${registrationSuccessMessage}</h4>
         <h4 class="border-danger">${errorLoginPassMessage}</h4>
+        <h4 class="border-danger">${userBlockMessage}</h4>
         <h2>Track meals. Stay committed.</h2>
         <br/>
         <div class="form-row align-items-center justify-content-center">
