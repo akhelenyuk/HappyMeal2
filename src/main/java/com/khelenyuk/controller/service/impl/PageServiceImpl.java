@@ -4,6 +4,7 @@ package com.khelenyuk.controller.service.impl;
 import com.khelenyuk.model.*;
 import com.khelenyuk.controller.service.*;
 import com.khelenyuk.controller.service.factory.ServiceFactory;
+import com.khelenyuk.utils.UtilManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,6 +46,8 @@ public class PageServiceImpl implements IPageService {
     @Override
     public void updateMainPageData(HttpSession session, int userId) {
         User user = userService.getUser(userId);
+        logger.debug("##############"+UtilManager.getProperty("role.admin"));
+        logger.debug(user.getRoleId());
 
         /**
          * writes updated user(with updated info) into session
@@ -84,7 +87,6 @@ public class PageServiceImpl implements IPageService {
          * into session
          */
         List<MealToDisplay> userMealToDisplay = menuService.getUserMenu(userId, chosenDate);
-        logger.debug("++++++++++++++ USerMealToDisplay:" + userMealToDisplay);
 
         Map<String, MealToDisplay> totalsByMealTypeMap = makeMap2(userId, chosenDate, mealTypes);
 
@@ -92,7 +94,6 @@ public class PageServiceImpl implements IPageService {
 
 
         session.setAttribute("meals", mealsSplittedByType);
-        logger.debug("Meals: --------------------" + session.getAttribute("meals"));
 
         session.setAttribute("totalsByMealType", totalsByMealTypeMap);
         session.setAttribute("totalDayFoodWeight", menuService.getTotalWeight(userMealToDisplay));
@@ -108,14 +109,13 @@ public class PageServiceImpl implements IPageService {
         session.setAttribute("activities", activityService.getAll());
 
         session.setAttribute("activitiesList", activityDiaryService.getUserActivityDiary(userId, chosenDate));
-        logger.debug("Activities: -------------------" + session.getAttribute("activitiesList"));
         session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
 
 
 //        BODY STATS tab
         session.setAttribute("genders", userService.getGenders());
         session.setAttribute("lifestyles", userService.getLifestyles());
-        // is needed to check that birthday was not in future
+        // will be used in jsp to check that birthday is not in future
         session.setAttribute("currentDate", LocalDate.now());
 
         // FORMULA
@@ -124,8 +124,6 @@ public class PageServiceImpl implements IPageService {
 
 //        GOALS
         session.setAttribute("kgToGoal", user.getWeight() - user.getGoalWeight());
-        logger.debug("-+-=-==-=-=-=-= krToGoal=" + user.getGoalWeight() + " - " + user.getWeight() + " = " + session.getAttribute("kgToGoal"));
-
     }
 
 

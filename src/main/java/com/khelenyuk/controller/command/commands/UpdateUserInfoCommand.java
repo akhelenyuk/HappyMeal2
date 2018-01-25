@@ -28,7 +28,6 @@ public class UpdateUserInfoCommand implements ActionCommand {
 
     private IUserService userService = ServiceFactory.getUserService();
     private IPageService pageService = ServiceFactory.getPageService();
-    private ILoginRegistrationService loginRegistrationService = ServiceFactory.getLoginRegistrationService();
 
     private HttpSession session;
 
@@ -38,13 +37,13 @@ public class UpdateUserInfoCommand implements ActionCommand {
         session = request.getSession();
 
 
-        User newUser = updateUser(request, (User)session.getAttribute("user"));
+        User newUser = updateUser(request, (User) session.getAttribute("user"));
         logger.info("User to be updated: " + newUser);
 
 
         if (userService.updateUser(newUser)) {
             request.setAttribute("updateUserSuccessMessage", MessageManager.getProperty("message.updateuserconfirm"));
-            session.setAttribute("user", userService.getUser(newUser.getId()));
+            pageService.updateMainPageData(session, newUser.getId());
         } else {
             request.setAttribute("updateUserErrorMessage", MessageManager.getProperty("message.updateusererror"));
         }

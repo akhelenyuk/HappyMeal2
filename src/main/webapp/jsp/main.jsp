@@ -7,12 +7,24 @@
     <jsp:include page="header.jsp"/>
     <link rel="stylesheet" href="/bootstrap/css/main.css">
     <link rel="stylesheet" href="/bootstrap/css/adminpage.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('#mainTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>
 </head>
 
 
 <body class="bg">
 
 <div class="container bg-container">
+    <%--------- HEADER ---------%>
     <div class="row">
         <nav class="navbar container-fluid navbar-header">
             <form class="form-no-margin-bottom" action="/controller" method="post">
@@ -33,8 +45,8 @@
         </nav>
     </div>
     <br/>
-    <%----------- JUMBOTRONs ------------%>
 
+    <%----------- JUMBOTRONs ------------%>
     <div class="container container-fluid table-bordered">
         <div class="row">
             <div class="col-4 jumbotron jumbotron1">
@@ -98,8 +110,9 @@
                 <div>
                     <form name="calendarForm" method="post" action="controller">
                         <input type="hidden" name="command" value="Select_date">
-                        <input type="date" name="chosenDate" value="${chosenDateSession}"/>
+                        <input required type="date" name="chosenDate" value="${chosenDateSession}" min="1900"/>
 
+                        <%--<button type="submit" class="btn" name="command" value="Select_date">Select date</button>--%>
                         <input type="submit" class="button" value="Select Date">
                     </form>
                 </div>
@@ -110,7 +123,7 @@
 
     <div class="container table-bordered">
 
-        <ul class="nav nav-tabs nav-justified">
+        <ul class="nav nav-tabs nav-justified" id="mainTab">
             <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#food">Food</a>
             </li>
             <li class="nav-item"><a class="nav-link " role="tab" data-toggle="tab" href="#activity">Activity</a>
@@ -128,88 +141,28 @@
 
             <%---------- FOOD -----------%>
             <div class="tab-pane active" id="food" role="tabpanel">
+                <jsp:include page="includeAddFoodBlock.jsp"/>
 
-
-                <%---------- FOOD -----------%>
-                <div class="container container-fluid table-bordered">
-                    <form action="/controller" method="post">
-
-
-                        <%---------------   select product  ---------------%>
-                        <div class="row ">
-                            <%----------------   SELECT PRODUCT   -----------------%>
-                            <div class="col">
-                                <div class="main-caption">SELECT PRODUCT</div>
-
-                                <%------------  Choose product ------------%>
-                                <select class="form-control" name="product_id">
-                                    <c:forEach var="product" items="${products}">
-                                        <option value="${product.id}">
-                                            <c:out value="${product.name}"/>
-                                        </option>
-                                    </c:forEach>
-                                </select>
-
-                                <%------------- Add New product ------------%>
-                                <div class="form-inline font12">
-                                    <label>Can't find a product?</label>
-                                    <button type="submit" class="btn btn-link font12" name="command"
-                                            value="TO_ADD_PRODUCT_PAGE">Add new
-                                    </button>
-                                </div>
-                            </div>
-
-                            <%-----------------   ENTER QUANTITY CONSUMED   ------------------%>
-                            <div class="col">
-                                <%---------- Enter product amount --------------%>
-                                <div class="main-caption">ENTER QUANTITY (grams)</div>
-                                <input class="form-control" type="number" name="weight" step="1" min="1" max="999"
-                                       value="100">
-
-                            </div>
-
-                            <div class="col">
-                                <div class="main-caption">SELECT MEAL</div>
-
-                                <%------------  Choose meal type ------------%>
-                                <select class="form-control" name="meal_type_id">
-                                    <c:forEach var="meal_type" items="${mealTypes}">
-                                        <option value="${meal_type.id}">
-                                            <c:out value="${meal_type.name}"/>
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-
-                        <%------------  BUTTON: add to diary  ---------%>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success" name="command" value="ADD_MEAL">Add to Food
-                                Diary
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <br>
                 <%-------------  SHOW FOOD DIARY  ------------%>
-                <%--meal--%>
                 <c:if test="${not empty meals}">
                     <jsp:include page="includeFoodTab.jsp"/>
                 </c:if>
             </div>
 
-            <%------------ activity ---------------%>
+            <%------------ ACTIVITY ---------------%>
             <div class="tab-pane " id="activity" role="tabpanel">
                 <jsp:include page="includeAddActivityBlock.jsp"/>
+
+                <%-------------  SHOW ACTIVITY DIARY  ------------%>
                 <c:if test="${not empty activitiesList}">
                     <jsp:include page="includeActivityTable.jsp"/>
                 </c:if>
             </div>
 
-            <%--&lt;%&ndash;----------- WATER ----------&ndash;%&gt;--%>
+            <%------------- WATER ------------%>
             <%--<div class="tab-pane" id="water" role="tabpanel">Water</div>--%>
 
-            <%------------- Weight monitor ------------%>
+            <%------------- BODY STATS ------------%>
             <div class="tab-pane " id="bodyStats" role="tabpanel">
                 <jsp:include page="includeAddBodyStatsBlock.jsp"/>
             </div>

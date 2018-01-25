@@ -3,6 +3,7 @@ package com.khelenyuk.dao.mysql.impl;
 import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.ProductDAO;
 import com.khelenyuk.model.Product;
+import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,13 +15,11 @@ import java.util.List;
 public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
     private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
 
-    private final String TABLE = "products";
-    private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
-    private String selectByName = "SELECT * FROM " + TABLE + " WHERE name=?";
-    private String selectAll = "SELECT * FROM " + TABLE + " ORDER BY name ASC";
-    private String updateById = "UPDATE " + TABLE + "" + " SET" + " name=?," + " calories=?," + " protein=?," + " fat=?," + " carbs=?" + " WHERE id=?";
-    private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
-    private String insert = "INSERT INTO " + TABLE + "(`name`, `calories`, `protein`, `fat`, `carbs`) VALUES (?, ?, ?, ?, ?)";
+    private String selectById = QueryManager.getProperty("productSelectById");
+    private String selectByName = QueryManager.getProperty("productSelectByName");
+    private String selectAll = QueryManager.getProperty("productSelectAll");
+    private String deleteById = QueryManager.getProperty("productDeleteById");
+    private String insert = QueryManager.getProperty("productInsert");
 
 
     @Override
@@ -128,30 +127,6 @@ public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
             logger.error("Error in adding product", e.getCause());
         }
         return resultInsert > 0;
-    }
-
-    @Override
-    public boolean update(int productOldId, Product newEntity) {
-        int resultUpdate = 0;
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateById)
-        ) {
-            statement.setString(1, newEntity.getName());
-            statement.setFloat(2, newEntity.getCalories());
-            statement.setFloat(3, newEntity.getProtein());
-            statement.setFloat(4, newEntity.getFat());
-            statement.setFloat(5, newEntity.getCarbs());
-            statement.setInt(6, productOldId);
-
-            logger.info("Query: " + statement.toString());
-            resultUpdate = statement.executeUpdate();
-            if (resultUpdate < 1) {
-                logger.info("Product was not updated.");
-            }
-        } catch (SQLException e) {
-            logger.error("Error in updating product", e.getCause());
-        }
-        return resultUpdate > 0;
     }
 
     @Override

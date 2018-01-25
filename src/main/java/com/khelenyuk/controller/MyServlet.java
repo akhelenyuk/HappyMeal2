@@ -50,6 +50,9 @@ public class MyServlet extends HttpServlet {
                 response.sendRedirect(page);
             } else {
                 logger.info("Request will be forwarded to " + page);
+                logger.debug("Request URL:" + request.getRequestURI());
+                logger.debug("Request URL:" + request.getContextPath());
+                logger.debug("Request URL:" + request.getAttribute("javax.servlet.forward.request_uri"));
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(request, response);
             }

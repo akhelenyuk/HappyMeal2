@@ -18,42 +18,12 @@ import org.apache.logging.log4j.Logger;
 public class MealDiaryDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
     private static final Logger logger = LogManager.getLogger(MealDiaryDAOImpl.class);
 
-    private final String TABLE = "meal_diary";
+    private final String selectByUserId = QueryManager.getProperty("mealDiarySelectByUserId");
+    private final String selectTotals = QueryManager.getProperty("mealDiarySelectDayTotals");
+    private final String selectTotalsByMealType = QueryManager.getProperty("mealDiarySelectTotalsByMealType");
+    private final String insert = QueryManager.getProperty("mealDiaryInsert");
 
-    //TODO check which one is used
-    //TODO transfer to mySqlQuery.properties
-    private final String selectByUserId = "SELECT " +
-            "meal_type.name as meal, " +
-            "products.name as prod, " +
-            "weight, " +
-            "(SELECT products.calories*weight/100 FROM products WHERE products.id = product_id) as calories, " +
-            "(SELECT products.protein*weight/100 FROM products WHERE products.id = product_id) as protein, " +
-            "(SELECT products.fat*weight/100 FROM products WHERE products.id = product_id) as fat, " +
-            "(SELECT products.carbs*weight/100 FROM products WHERE products.id = product_id) as carbs " +
-            "FROM (" +
-            "(happy_meal.meal_diary INNER JOIN happy_meal.products ON happy_meal.meal_diary.product_id = happy_meal.products.id) " +
-            "INNER JOIN happy_meal.meal_type ON happy_meal.meal_diary.meal_type_id = happy_meal.meal_type.id) " +
-            "WHERE meal_diary.user_id=? AND meal_diary.date=? " +
-            "ORDER BY meal_type.id;";
-//    private final String selectDayTotal = "SELECT " +
-//            "meal_type.name as meal, " +
-//            "products.name as prod, " +
-//            "weight, " +
-//            "(SELECT products.calories*weight/100 FROM products WHERE products.id = product_id) as calories, " +
-//            "(SELECT products.protein*weight/100 FROM products WHERE products.id = product_id) as protein, " +
-//            "(SELECT products.fat*weight/100 FROM products WHERE products.id = product_id) as fat, " +
-//            "(SELECT products.carbs*weight/100 FROM products WHERE products.id = product_id) as carbs " +
-//            "FROM (" +
-//            "(happy_meal.meal_diary INNER JOIN happy_meal.products ON happy_meal.meal_diary.product_id = happy_meal.products.id) " +
-//            "INNER JOIN happy_meal.meal_type ON happy_meal.meal_diary.meal_type_id = happy_meal.meal_type.id) " +
-//            "WHERE meal_diary.user_id=? AND meal_diary.date=? " +
-//            "ORDER BY meal_type.id;";
-    private final String selectTotals = QueryManager.getProperty("selectMealDiaryDayTotals");
-
-    private final String selectTotalsByMealType = QueryManager.getProperty("selectTotalsByMealType");
-    private final String insert = "INSERT INTO " + TABLE + "(`user_id`, `product_id`, `weight`, `meal_type_id`, `date`) VALUES (?, ?, ?, ?, ?)";
-
-
+    @Override
     public List<MealToDisplay> getMenu(int userId, LocalDate chosenDate) {
         List<MealToDisplay> menu = new ArrayList<>();
 
@@ -103,7 +73,6 @@ public class MealDiaryDAOImpl extends CrudDaoImpl<Meal> implements MealDAO {
         }
         return resultInsert > 0;
     }
-
 
     @Override
     public MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId) {

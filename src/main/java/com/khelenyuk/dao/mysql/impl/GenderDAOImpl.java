@@ -15,7 +15,7 @@ import java.util.List;
 public class GenderDAOImpl extends CrudDaoImpl<Gender> implements GenderDAO {
     private static final Logger logger = LogManager.getLogger(GenderDAOImpl.class);
 
-    private String selectAll = QueryManager.getProperty("selectAllGenders");
+    private String selectAll = QueryManager.getProperty("genderSelectAll");
 
 
     @Override

@@ -3,6 +3,7 @@ package com.khelenyuk.dao.mysql.impl;
 import com.khelenyuk.connection.ConnectionPool;
 import com.khelenyuk.dao.MealTypeDAO;
 import com.khelenyuk.model.MealType;
+import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class MealTypeDAOImpl extends CrudDaoImpl<MealType> implements MealTypeDAO {
     private static final Logger logger = LogManager.getLogger(MealTypeDAOImpl.class);
-    private final String TABLE = "meal_type";
-    private String selectAll = "SELECT * FROM " + TABLE + " ORDER BY id ASC";
+
+    private String selectAll = QueryManager.getProperty("mealTypesSelectAll");
 
     @Override
     public List<MealType> getAll() {

@@ -16,17 +16,16 @@ import java.util.List;
 public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
     private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
 
-    private final String TABLE = "users";
-    private String selectAll = "SELECT * FROM " + TABLE;
-    private String selectAllLimitOffset = QueryManager.getProperty("selectAllUsersLimitOffset");
-    private String selectById = "SELECT * FROM " + TABLE + " WHERE id=?";
-    private String selectByLogin = "SELECT * FROM " + TABLE + " WHERE login=?";
-    private String insert = "INSERT INTO " + TABLE + "(`login`, `password`, `first_name`, `last_name`, `email`, `birthday`, `gender_id`, `weight`, `goal_weight`, `height`, `lifestyle_id`,  `calorie_norm`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private String updateById = QueryManager.getProperty("updateUser");
-    private String updateStatusIdById = QueryManager.getProperty("updateUserStatusId");
-    private String selectCount = QueryManager.getProperty("selectUsersCount");
 
-    private String deleteById = "DELETE FROM " + TABLE + " WHERE id=?";
+    private String selectAll = QueryManager.getProperty("userSelectAll");
+    private String selectAllLimitOffset = QueryManager.getProperty("userSelectAllLimitOffset");
+    private String selectById = QueryManager.getProperty("userSelectById");
+    private String selectByLogin = QueryManager.getProperty("userSelectByLogin");
+    private String insert = QueryManager.getProperty("userInsert");
+    private String updateById = QueryManager.getProperty("userUpdate");
+    private String updateStatusIdById = QueryManager.getProperty("userUpdateStatusId");
+    private String selectCount = QueryManager.getProperty("userSelectCount");
+    private String deleteById = QueryManager.getProperty("userDeleteById");
 
 
     @Override

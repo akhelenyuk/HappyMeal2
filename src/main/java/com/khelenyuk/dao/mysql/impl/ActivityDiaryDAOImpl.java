@@ -17,9 +17,9 @@ import java.util.List;
 public class ActivityDiaryDAOImpl extends CrudDaoImpl<ActivityDiary> implements ActivityDiaryDAO {
     private static final Logger logger = LogManager.getLogger(ActivityDiaryDAOImpl.class);
 
-    private final String INSERT = QueryManager.getProperty("insertToActivityDiary");
-    private final String SELECT_ALL_BY_ID = QueryManager.getProperty("selectAllById");
-    private final String SELECT_TOTALS = QueryManager.getProperty("selectTotals");
+    private final String INSERT = QueryManager.getProperty("activityDiaryInsert");
+    private final String SELECT_ALL_BY_ID = QueryManager.getProperty("activityDiarySelectAllById");
+    private final String SELECT_TOTALS = QueryManager.getProperty("activityDiarySelectTotals");
 
     @Override
     public boolean add(ActivityDiary activityDiaryEntry) {

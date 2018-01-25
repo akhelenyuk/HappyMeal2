@@ -17,12 +17,9 @@ import java.util.List;
 public class ActivityDAOImpl extends CrudDaoImpl<Activity> implements ActivityDAO {
     private static final Logger logger = LogManager.getLogger(ActivityDAOImpl.class);
 
-//    private final String TABLE = "activity";
-//    private String selectAll = "SELECT * FROM " + TABLE + " ORDER BY id ASC";
-    private String selectAll = QueryManager.getProperty("selectAllActivities");
-    private String selectByName = QueryManager.getProperty("selectActivityByName");
-    private String insert = QueryManager.getProperty("insertIntoActivity");
-
+    private String selectAll = QueryManager.getProperty("activitySelectAll");
+    private String selectByName = QueryManager.getProperty("activitySelectByName");
+    private String insert = QueryManager.getProperty("activityInsert");
 
     @Override
     public List<Activity> getAll() {
@@ -45,7 +42,6 @@ public class ActivityDAOImpl extends CrudDaoImpl<Activity> implements ActivityDA
         return activities;
     }
 
-
     @Override
     public Activity get(String name) {
         Activity activity = null;
@@ -62,7 +58,7 @@ public class ActivityDAOImpl extends CrudDaoImpl<Activity> implements ActivityDA
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getInt("calories")
-                          );
+                    );
                 } else {
                     logger.info("No activity with name='" + name + "' found");
                 }
