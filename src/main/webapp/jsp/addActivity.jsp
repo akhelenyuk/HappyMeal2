@@ -18,7 +18,7 @@
                         class="alert-danger">${errorActivityExistMessage}</h6
                 ></c:if>
                 <div class="panel-heading text-center">
-                    <h3 class="panel-title">Add activity2</h3>
+                    <h3 class="panel-title">Add activity</h3>
                 </div>
                 <div class="panel-body">
 
