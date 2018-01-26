@@ -21,7 +21,7 @@ public class AddMealCommand implements ActionCommand {
 
     private static final String SESSION_ATTR_NAME_USER = UtilManager.getProperty("session.user");
     private static final String SESSION_ATTR_NAME_DATE = UtilManager.getProperty("session.chosenDate");
-    private static final String REQUEST_PARAM_PRODUCT_ID = "product_id";
+    private static final String REQUEST_PARAM_PRODUCT_ID = UtilManager.getProperty("request.productId");
     private static final String REQUEST_PARAM_WEIGHT = UtilManager.getProperty("request.weight");
     private static final String REQUEST_PARAM_MEAL_TYPE_ID = UtilManager.getProperty("request.mealTypeId");
 

@@ -104,6 +104,16 @@ public enum CommandEnum {
         {
             this.command = new LogoutCommand();
         }
+    },
+    DELETE_ENTRY_FROM_FOOD_DIARY{
+        {
+            this.command = new DeleteEntryFromFoodDiaryCommand();
+        }
+    },
+    DELETE_ENTRY_FROM_ACTIVITY_DIARY{
+        {
+            this.command = new DeleteEntryFromActivityDiaryCommand();
+        }
     };
 
     ActionCommand command;

@@ -13,7 +13,8 @@ public class ActivityDiaryToDisplay implements Serializable {
     public ActivityDiaryToDisplay() {
     }
 
-    public ActivityDiaryToDisplay(String activity, Integer timeSpent, Integer calories) {
+    public ActivityDiaryToDisplay(Integer id, String activity, Integer timeSpent, Integer calories) {
+        this.id = id;
         this.activity = activity;
         this.timeSpent = timeSpent;
         this.calories = calories;
@@ -29,6 +30,10 @@ public class ActivityDiaryToDisplay implements Serializable {
 
     public Integer getCalories() {
         return calories;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

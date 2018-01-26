@@ -42,4 +42,9 @@ public class ActivityDiaryServiceImpl implements IActivityDiaryService {
     public ActivityDiaryToDisplay getUserActivityDiaryTotals(Integer userId, LocalDate chosenDate) {
         return activityDiaryDao.getTotals(userId, chosenDate);
     }
+
+    @Override
+    public boolean deleteFromActivityDiary(int id) {
+        return activityDiaryDao.delete(id);
+    }
 }

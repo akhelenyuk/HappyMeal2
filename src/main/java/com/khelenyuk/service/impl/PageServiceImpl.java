@@ -46,7 +46,7 @@ public class PageServiceImpl implements IPageService {
     @Override
     public void updateMainPageData(HttpSession session, int userId) {
         User user = userService.getUser(userId);
-        logger.debug("##############"+UtilManager.getProperty("role.admin"));
+        logger.debug("##############" + UtilManager.getProperty("role.admin"));
         logger.debug(user.getRoleId());
 
         /**
@@ -86,7 +86,11 @@ public class PageServiceImpl implements IPageService {
          * totals(menu weight, calories, proteins, fats, carbs)
          * into session
          */
+        logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$ 1");
         List<MealToDisplay> userMealToDisplay = menuService.getUserMenu(userId, chosenDate);
+        for (MealToDisplay m : userMealToDisplay) {
+            logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$ 2" + m);
+        }
 
         Map<String, MealToDisplay> totalsByMealTypeMap = makeMap2(userId, chosenDate, mealTypes);
 
@@ -107,7 +111,6 @@ public class PageServiceImpl implements IPageService {
          * gets list of current activity types from db and writes them into session
          */
         session.setAttribute("activities", activityService.getAll());
-
         session.setAttribute("activitiesList", activityDiaryService.getUserActivityDiary(userId, chosenDate));
         session.setAttribute("activitiesListTotals", activityDiaryService.getUserActivityDiaryTotals(userId, chosenDate));
 
@@ -153,7 +156,7 @@ public class PageServiceImpl implements IPageService {
         int pages = 1;
 
         logger.debug("requested page number: " + request.getParameter(PARAM_NAME_LOGIN));
-        if(request.getParameter(PARAM_NAME_LOGIN) != null){
+        if (request.getParameter(PARAM_NAME_LOGIN) != null) {
             int requestedPage = Integer.valueOf(request.getParameter(PARAM_NAME_LOGIN));
             offset = (requestedPage - 1) * limit;
         }
@@ -165,16 +168,16 @@ public class PageServiceImpl implements IPageService {
          * finding out how many pagination buttons (pages) shall be shown based on number of users (size) and
          * number of entries to be shown on one page (limit).
          */
-        if(size > limit){
+        if (size > limit) {
             pages = size / limit;
-            if(size%limit > 0){
+            if (size % limit > 0) {
                 pages++;
             }
         }
         logger.debug("Total number of pages: " + pages);
         request.setAttribute("pages", pages);
 
-        int currentPage = offset/limit+1;
+        int currentPage = offset / limit + 1;
         logger.debug("Current page number: " + currentPage);
         request.setAttribute("currentPage", currentPage);
     }

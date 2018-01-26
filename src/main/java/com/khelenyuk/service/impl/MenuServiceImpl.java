@@ -102,4 +102,9 @@ logger.debug("-------------------------->" + new DecimalFormat("###,###").format
         return mealDiaryDAO.getTotals(userId, date);
     }
 
+    @Override
+    public boolean deleteFromFoodDiary(int id) {
+        return mealDiaryDAO.delete(id);
+    }
+
 }

@@ -12,4 +12,6 @@ public interface IActivityDiaryService {
     List<ActivityDiaryToDisplay> getUserActivityDiary(Integer userId, LocalDate chosenDate);
 
     ActivityDiaryToDisplay  getUserActivityDiaryTotals(Integer userId, LocalDate chosenDate);
+
+    boolean deleteFromActivityDiary(int id);
 }

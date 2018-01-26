@@ -24,4 +24,6 @@ public interface IMenuService {
     MealToDisplay getTotalsByMealType(Integer userId, LocalDate date, Integer mealTypeId);
 
     MealToDisplay getUserFoodTotal(Integer userId, LocalDate date);
+
+    boolean deleteFromFoodDiary(int id);
 }

@@ -18,17 +18,19 @@ import org.apache.logging.log4j.Logger;
 public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
     private static final Logger logger = LogManager.getLogger(MealDiaryDaoImpl.class);
 
-    private final String selectByUserId = QueryManager.getProperty("mealDiarySelectByUserId");
-    private final String selectTotals = QueryManager.getProperty("mealDiarySelectDayTotals");
-    private final String selectTotalsByMealType = QueryManager.getProperty("mealDiarySelectTotalsByMealType");
-    private final String insert = QueryManager.getProperty("mealDiaryInsert");
+    private static final String SELECT_BY_USER_ID = QueryManager.getProperty("mealDiarySelectByUserId");
+    private static final String SELECT_DAY_TOTALS = QueryManager.getProperty("mealDiarySelectDayTotals");
+    private static final String SELECT_TOTALS_BY_MEAL_TYPE = QueryManager.getProperty("mealDiarySelectTotalsByMealType");
+    private static final String INSERT = QueryManager.getProperty("mealDiaryInsert");
+    private static final String DELETE = QueryManager.getProperty("mealDiaryDelete");
+
 
     @Override
     public List<MealToDisplay> getMenu(int userId, LocalDate chosenDate) {
         List<MealToDisplay> menu = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectByUserId)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_USER_ID)) {
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(chosenDate));
 
@@ -37,6 +39,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     menu.add(new MealToDisplay(
+                            resultSet.getInt("id"),
                             resultSet.getString("meal"),
                             resultSet.getString("prod"),
                             resultSet.getFloat("weight"),
@@ -57,7 +60,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
     public boolean add(Meal newMeal) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insert)
+             PreparedStatement statement = connection.prepareStatement(INSERT)
         ) {
             statement.setInt(1, newMeal.getUserId());
             statement.setInt(2, newMeal.getProductId());
@@ -79,7 +82,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
         MealToDisplay mealToDisplayTotals = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectTotalsByMealType)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_TOTALS_BY_MEAL_TYPE)) {
 
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(date));
@@ -89,8 +92,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     mealToDisplayTotals = new MealToDisplay(
-                            null,
-                            null,
                             resultSet.getFloat("weight"),
                             resultSet.getInt("calories"),
                             resultSet.getFloat("protein"),
@@ -121,7 +122,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
         MealToDisplay mealToDisplayTotals = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectTotals)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_DAY_TOTALS)) {
 
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(date));
@@ -130,8 +131,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     mealToDisplayTotals = new MealToDisplay(
-                            null,
-                            null,
                             resultSet.getFloat("weight"),
                             resultSet.getInt("calories"),
                             resultSet.getFloat("protein"),
@@ -155,5 +154,22 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             logger.error("Error in getting 'Day totals' values from database", e.getCause());
         }
         return mealToDisplayTotals;
+    }
+
+    @Override
+    public boolean delete(int id){
+        int resultDelete = 0;
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE)
+        ) {
+            statement.setInt(1, id);
+
+            logger.info("Executing request: " + statement.toString());
+            resultDelete = statement.executeUpdate();
+            logger.info("Result set of adding = " + resultDelete);
+        } catch (SQLException e) {
+            logger.error("Error in deleting 'MealDiary entry' from DB", e.getCause());
+        }
+        return resultDelete > 0;
     }
 }

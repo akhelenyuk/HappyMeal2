@@ -1,7 +1,7 @@
-package com.khelenyuk.dao.mysql.impl;
+package com.khelenyuk.dao.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.GenderDAO;
+import com.khelenyuk.dao.GenderDao;
 import com.khelenyuk.model.Gender;
 import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GenderDAOImpl extends CrudDaoImpl<Gender> implements GenderDAO {
-    private static final Logger logger = LogManager.getLogger(GenderDAOImpl.class);
+public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
+    private static final Logger logger = LogManager.getLogger(GenderDaoImpl.class);
 
     private String selectAll = QueryManager.getProperty("genderSelectAll");
 

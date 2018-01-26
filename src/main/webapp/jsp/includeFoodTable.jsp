@@ -18,27 +18,33 @@
                 <th scope="col">PROTEINS</th>
                 <th scope="col">FATS</th>
                 <th scope="col">CARBS</th>
-                <th scope="col"></th>
+                    <%--<th scope="col"></th>--%>
                 <th scope="col"></th>
                 </thead>
 
                 <tbody class="text-right">
                     <%--Meals--%>
                 <c:forEach var="mealEntry" items="${entry.value}">
-                    <tr class="food-row-tr">
-                        <td class="food_table_first_col_width text-left">${mealEntry.product}</td>
-                        <td>${mealEntry.weight}</td>
-                        <td>${mealEntry.calories}</td>
-                        <td>${mealEntry.protein}</td>
-                        <td>${mealEntry.fat}</td>
-                        <td>${mealEntry.carbs}</td>
-                        <td class="align-right">
-                            <button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit">Edit</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit">Delete</button>
-                        </td>
-                    </tr>
+                    <form action="/controller" method="post">
+                        <input type="hidden" name="meal_id" value="${mealEntry.id}">
+                        <tr class="food-row-tr">
+                            <td class="food_table_first_col_width text-left">${mealEntry.product}</td>
+                            <td>${mealEntry.weight}</td>
+                            <td>${mealEntry.calories}</td>
+                            <td>${mealEntry.protein}</td>
+                            <td>${mealEntry.fat}</td>
+                            <td>${mealEntry.carbs}</td>
+                                <%--<td class="align-right">--%>
+                                <%--<button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit">Edit</button>--%>
+                                <%--</td>--%>
+                            <td>
+                                <button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit"
+                                        name="command"
+                                        value="DELETE_ENTRY_FROM_FOOD_DIARY">Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </form>
                 </c:forEach>
 
                     <%--Meal totals--%>
@@ -49,7 +55,7 @@
                     <td>${totalsByMealType[entry.key].protein}</td>
                     <td>${totalsByMealType[entry.key].fat}</td>
                     <td>${totalsByMealType[entry.key].carbs}</td>
-                    <td></td>
+                        <%--<td></td>--%>
                     <td></td>
                 </tr>
                 </tbody>
@@ -68,7 +74,7 @@
         <th class="invisible" scope="col">PROTEINS</th>
         <th class="invisible" scope="col">FATS</th>
         <th class="invisible" scope="col">CARBS</th>
-        <th class="invisible" scope="col"></th>
+        <%--<th class="invisible" scope="col"></th>--%>
         <th class="invisible" scope="col"></th>
         </thead>
 
@@ -82,10 +88,10 @@
             <th>${totalDayFat}</th>
             <th>${totalDayCarbs}</th>
             <%--TODO this is for table correct borders only. Buttons are invisible--%>
-            <td>
-                <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Edit
-                </button>
-            </td>
+            <%--<td>--%>
+            <%--<button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Edit--%>
+            <%--</button>--%>
+            <%--</td>--%>
             <td>
                 <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Delete
                 </button>

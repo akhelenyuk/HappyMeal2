@@ -31,7 +31,8 @@ public class MealToDisplay implements Serializable {
         this.carbs = carbs;
     }
 
-    public MealToDisplay(String mealNumber, String product, Float weight, Integer calories, Float protein, Float fat, Float carbs) {
+    public MealToDisplay(Integer id, String mealNumber, String product, Float weight, Integer calories, Float protein, Float fat, Float carbs) {
+        this.id = id;
         this.mealType = mealNumber;
         this.product = product;
         this.weight = weight;
@@ -67,6 +68,10 @@ public class MealToDisplay implements Serializable {
 
     public Float getCarbs() {
         return carbs;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

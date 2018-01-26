@@ -20,6 +20,7 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
     private final String INSERT = QueryManager.getProperty("activityDiaryInsert");
     private final String SELECT_ALL_BY_ID = QueryManager.getProperty("activityDiarySelectAllById");
     private final String SELECT_TOTALS = QueryManager.getProperty("activityDiarySelectTotals");
+    private final String DELETE = QueryManager.getProperty("activityDiaryDelete");
 
     @Override
     public boolean add(ActivityDiary activityDiaryEntry) {
@@ -56,11 +57,18 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     listOfActivities.add(new ActivityDiaryToDisplay(
+                            resultSet.getInt("id"),
                             resultSet.getString("activity"),
                             resultSet.getInt("time_spent"),
                             resultSet.getInt("calories")
                     ));
                 }
+            }
+            logger.debug("@@@@@@@@@@@@@@@@@@" + listOfActivities);
+
+            for (ActivityDiaryToDisplay a: listOfActivities
+                 ) {
+                logger.debug("@@@@@@@@@@@@@@@@@@" + a);
             }
         } catch (SQLException e) {
             logger.error("Error in getting 'list of activities' from database", e.getCause());
@@ -83,6 +91,7 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
                 if (resultSet.next()) {
                     totals = new ActivityDiaryToDisplay(
                             null,
+                            null,
                             resultSet.getInt("time_spent"),
                             resultSet.getInt("calories")
                     );
@@ -92,5 +101,22 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
             logger.error("Error in getting 'totals of activities' from database", e.getCause());
         }
         return totals;
+    }
+
+    @Override
+    public boolean delete(int id){
+        int resultDelete = 0;
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE)
+        ) {
+            statement.setInt(1, id);
+
+            logger.info("Executing request: " + statement.toString());
+            resultDelete = statement.executeUpdate();
+            logger.info("Result set of adding = " + resultDelete);
+        } catch (SQLException e) {
+            logger.error("Error in deleting 'ActivityDiary entry' from DB", e.getCause());
+        }
+        return resultDelete > 0;
     }
 }

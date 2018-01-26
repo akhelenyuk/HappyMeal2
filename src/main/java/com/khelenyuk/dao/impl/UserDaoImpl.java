@@ -1,8 +1,7 @@
-package com.khelenyuk.dao.mysql.impl;
+package com.khelenyuk.dao.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.CrudDAO;
-import com.khelenyuk.dao.UserDAO;
+import com.khelenyuk.dao.UserDao;
 import com.khelenyuk.model.User;
 import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserDAOImpl extends CrudDaoImpl<User> implements UserDAO {
-    private static final Logger logger = LogManager.getLogger(UserDAOImpl.class);
+public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
+    private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
 
     private String selectAll = QueryManager.getProperty("userSelectAll");

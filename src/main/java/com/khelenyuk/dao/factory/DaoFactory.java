@@ -2,8 +2,6 @@ package com.khelenyuk.dao.factory;
 
 import com.khelenyuk.dao.*;
 import com.khelenyuk.dao.impl.*;
-import com.khelenyuk.dao.impl.ProductDaoImpl;
-import com.khelenyuk.dao.impl.UserDaoImpl;
 
 public class DaoFactory {
     public static LifestyleDao getLifestyleMethods() {

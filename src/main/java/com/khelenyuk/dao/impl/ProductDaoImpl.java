@@ -1,7 +1,7 @@
-package com.khelenyuk.dao.mysql.impl;
+package com.khelenyuk.dao.impl;
 
 import com.khelenyuk.connection.ConnectionPool;
-import com.khelenyuk.dao.ProductDAO;
+import com.khelenyuk.dao.ProductDao;
 import com.khelenyuk.model.Product;
 import com.khelenyuk.utils.QueryManager;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductDAOImpl extends CrudDaoImpl<Product> implements ProductDAO {
-    private static final Logger logger = LogManager.getLogger(ProductDAOImpl.class);
+public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
+    private static final Logger logger = LogManager.getLogger(ProductDaoImpl.class);
 
     private String selectById = QueryManager.getProperty("productSelectById");
     private String selectByName = QueryManager.getProperty("productSelectByName");
