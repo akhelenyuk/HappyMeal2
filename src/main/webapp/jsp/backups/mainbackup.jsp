@@ -45,7 +45,7 @@
     </div>
 
     <%--&lt;%&ndash;Button: add product&ndash;%&gt;--%>
-    <%--<form action="controller" method="post">--%>
+    <%--<form action="servlet" method="post">--%>
     <%--<input type="hidden" name="command" value="to_add_product_page">--%>
     <%--<input type="submit" value="Добавить продукт">--%>
     <%--</form>--%>

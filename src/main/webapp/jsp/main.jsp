@@ -145,7 +145,7 @@
 
                 <%-------------  SHOW FOOD DIARY  ------------%>
                 <c:if test="${not empty meals}">
-                    <jsp:include page="includeFoodTab.jsp"/>
+                    <jsp:include page="includeFoodTable.jsp"/>
                 </c:if>
             </div>
 
