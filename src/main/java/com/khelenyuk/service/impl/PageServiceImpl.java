@@ -46,8 +46,6 @@ public class PageServiceImpl implements IPageService {
     @Override
     public void updateMainPageData(HttpSession session, int userId) {
         User user = userService.getUser(userId);
-        logger.debug("##############" + UtilManager.getProperty("role.admin"));
-        logger.debug(user.getRoleId());
 
         /**
          * writes updated user(with updated info) into session
@@ -86,10 +84,8 @@ public class PageServiceImpl implements IPageService {
          * totals(menu weight, calories, proteins, fats, carbs)
          * into session
          */
-        logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$ 1");
         List<MealToDisplay> userMealToDisplay = menuService.getUserMenu(userId, chosenDate);
         for (MealToDisplay m : userMealToDisplay) {
-            logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$ 2" + m);
         }
 
         Map<String, MealToDisplay> totalsByMealTypeMap = makeMap2(userId, chosenDate, mealTypes);
@@ -180,6 +176,11 @@ public class PageServiceImpl implements IPageService {
         int currentPage = offset / limit + 1;
         logger.debug("Current page number: " + currentPage);
         request.setAttribute("currentPage", currentPage);
+    }
+
+    @Override
+    public void updateUser(HttpServletRequest request, User user) {
+        request.getSession().setAttribute("user", userService.getUser(user.getId()));
     }
 
 

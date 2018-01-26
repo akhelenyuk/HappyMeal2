@@ -89,7 +89,7 @@
 
                 <div>
                     <h6>Can't find a product?
-                        <a href="../addProduct.jsp">Add new</a></h6>
+                        <a href="../pages/addProduct.jsp">Add new</a></h6>
                 </div>
 
                 <%--choose meal--%>

@@ -6,7 +6,7 @@
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
     <servlet>
         <servlet-name>MyServlet</servlet-name>
@@ -20,22 +20,26 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <!--<error-page>-->
-        <!--<error-code>404</error-code>-->
-        <!--<location>/jsp/error/error.jsp</location>-->
-    <!--</error-page>-->
-    <!--<error-page>-->
-        <!--<exception-type>java.lang.RuntimeException</exception-type>-->
-        <!--<location>/jsp/error/error.jsp</location>-->
-    <!--</error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/pages/error/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.RuntimeException</exception-type>
+        <location>/jsp/pages/error/error.jsp</location>
+    </error-page>
 
-    <!--<filter>-->
-        <!--<filter-name>BlockUserFilter</filter-name>-->
-        <!--<filter-class>com.khelenyuk.service.filter.BlockUserFilter</filter-class>-->
-    <!--</filter>-->
+    <filter>
+        <filter-name>BlockUserFilter</filter-name>
+        <filter-class>com.khelenyuk.service.filter.BlockUserFilter</filter-class>
+    </filter>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>com.khelenyuk.service.filter.AuthFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.khelenyuk.service.filter.LoginFilter</filter-class>
     </filter>
     <filter>
         <filter-name>EncodingFilter</filter-name>
@@ -45,26 +49,35 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
     <filter>
         <filter-name>CacheControlFilter</filter-name>
         <filter-class>com.khelenyuk.service.filter.CacheControlFilter</filter-class>
     </filter>
+
+
+    <filter-mapping>
+        <filter-name>BlockUserFilter</filter-name>
+        <url-pattern>/jsp/pages/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>CacheControlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/jsp/admin/*</url-pattern>
     </filter-mapping>
-    <!--<filter-mapping>-->
-        <!--<filter-name>BlockUserFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/jsp/pages/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>

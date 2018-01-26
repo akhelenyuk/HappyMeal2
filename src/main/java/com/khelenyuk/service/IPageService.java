@@ -1,6 +1,7 @@
 package com.khelenyuk.service;
 
 import com.khelenyuk.model.MealType;
+import com.khelenyuk.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,5 +17,7 @@ public interface IPageService {
     void updateRegistrationPageData(HttpServletRequest request);
 
     void updateAdminPageData(HttpServletRequest request);
+
+    void updateUser(HttpServletRequest request, User user);
 }
 

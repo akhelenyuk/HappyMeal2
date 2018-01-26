@@ -3,6 +3,7 @@ package com.khelenyuk.service.filter;
 import com.khelenyuk.model.User;
 import com.khelenyuk.utils.ConfigurationManager;
 import com.khelenyuk.utils.MessageManager;
+import com.khelenyuk.utils.UtilManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,32 +25,24 @@ public class BlockUserFilter implements Filter {
         // getting user from session
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+
+        User user = (User) request.getSession().getAttribute("user");
         logger.debug("User: " + user);
         if (user != null) {
             logger.debug("User status id: " + user.getStatusId());
         }
 
+        logger.debug("********************" + UtilManager.getProperty("status.unblocked").equalsIgnoreCase(user.getStatusId().toString()));
         // if user is blocked - redirect to login.jsp
-
-        if (user == null) {
-            user = new User();
-            user.setStatusId(1);
-            session.setAttribute("user", user);
-        }
-        logger.debug("*******************"+request.getRequestURL());
-        logger.debug("^^^^^^^^^^^^^^^^^^^"+request.getRequestURI());
-
-        if (user.getStatusId() == 2 && !request.getRequestURI().equals(ConfigurationManager.getProperty("path.page.login"))) {
-            session.setAttribute("userBlockMessage", MessageManager.getProperty("message.userblocked"));
-            response.sendRedirect(ConfigurationManager.getProperty("path.page.login"));
-
-        } else {
+        if (user != null && UtilManager.getProperty("status.unblocked").equalsIgnoreCase(user.getStatusId().toString())) {
             filterChain.doFilter(servletRequest, servletResponse);
-
+        } else {
+            logger.info("User tried to reach " + request.getRequestURI() + " having status 'blocked'! Redirected to login page!");
+            request.setAttribute("userBlockMessage", MessageManager.getProperty("message.userblocked"));
+            RequestDispatcher dispatcher = request.getRequestDispatcher(ConfigurationManager.getProperty("path.page.login"));
+            dispatcher.forward(request, response);
+//            response.sendRedirect(ConfigurationManager.getProperty("path.page.login"));
         }
-
     }
 
     @Override

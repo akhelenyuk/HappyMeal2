@@ -40,6 +40,7 @@ public class LoginCommand implements ActionCommand {
         if (loginRegistrationService.checkLogin(login, password)) {
             logger.info("Login/password check is OK!");
             pageService.updateMainPageData(session, userService.getUser(login).getId());
+//            pageService.setRedirect(true);
             page = ConfigurationManager.getProperty("path.page.main");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));

@@ -18,7 +18,6 @@
                 <th scope="col">PROTEINS</th>
                 <th scope="col">FATS</th>
                 <th scope="col">CARBS</th>
-                    <%--<th scope="col"></th>--%>
                 <th scope="col"></th>
                 </thead>
 
@@ -34,9 +33,6 @@
                             <td>${mealEntry.protein}</td>
                             <td>${mealEntry.fat}</td>
                             <td>${mealEntry.carbs}</td>
-                                <%--<td class="align-right">--%>
-                                <%--<button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit">Edit</button>--%>
-                                <%--</td>--%>
                             <td>
                                 <button class="btn btn-link btn-block food-row-tr-btn btn-sm" type="submit"
                                         name="command"
@@ -55,7 +51,6 @@
                     <td>${totalsByMealType[entry.key].protein}</td>
                     <td>${totalsByMealType[entry.key].fat}</td>
                     <td>${totalsByMealType[entry.key].carbs}</td>
-                        <%--<td></td>--%>
                     <td></td>
                 </tr>
                 </tbody>
@@ -74,7 +69,6 @@
         <th class="invisible" scope="col">PROTEINS</th>
         <th class="invisible" scope="col">FATS</th>
         <th class="invisible" scope="col">CARBS</th>
-        <%--<th class="invisible" scope="col"></th>--%>
         <th class="invisible" scope="col"></th>
         </thead>
 
@@ -88,10 +82,6 @@
             <th>${totalDayFat}</th>
             <th>${totalDayCarbs}</th>
             <%--TODO this is for table correct borders only. Buttons are invisible--%>
-            <%--<td>--%>
-            <%--<button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Edit--%>
-            <%--</button>--%>
-            <%--</td>--%>
             <td>
                 <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Delete
                 </button>

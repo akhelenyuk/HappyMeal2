@@ -13,8 +13,8 @@ import java.io.IOException;
 
 import static org.apache.logging.log4j.web.WebLoggerContextUtils.getServletContext;
 
-public class AuthFilter implements Filter {
-    private static final Logger logger = LogManager.getLogger(AuthFilter.class);
+public class LoginFilter implements Filter {
+    private static final Logger logger = LogManager.getLogger(LoginFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -27,18 +27,14 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         User user = (User) request.getSession().getAttribute("user");
-
-
-        // if user is not logged in or has no admin rights - redirect to error page
-        if (user != null && UtilManager.getProperty("role.admin").equalsIgnoreCase(user.getRoleId().toString())) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            logger.info("User tried to reach " + request.getRequestURI() + " without being logged in as administrator! Redirected to error page!");
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ConfigurationManager.getProperty("path.page.error"));
+        if (user == null) {
+            logger.info("User tried to reach " + request.getRequestURI() + " without being logged in! Redirected to login page!");
+//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ConfigurationManager.getProperty("path.page.login"));
 //            dispatcher.forward(request, response);
-            response.sendRedirect(ConfigurationManager.getProperty("path.page.error"));
+            response.sendRedirect(ConfigurationManager.getProperty("path.page.login"));
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-
     }
 
     @Override
