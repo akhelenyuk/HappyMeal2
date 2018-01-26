@@ -3,8 +3,7 @@ package com.khelenyuk.model;
 import com.khelenyuk.utils.UtilManager;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -14,17 +13,15 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private Date birthday;
+    private LocalDate birthday;
     private Integer genderId;
     private Integer weight;
     private Integer goalWeight;
     private Integer height;
-    // todo if change to Lifestyle class, change in registration.jsp - select option
     private Integer lifestyleId;
 
-//    TODO need method to calculate this value
+    //    TODO need method to calculate this value
     private Integer calorieNorm = 2345;
-    // TODO Переписать под class Role
     private Integer roleId;
     private Integer statusId;
 
@@ -33,7 +30,7 @@ public class User implements Serializable {
     }
 
     // constructor for inserting new User to database
-    public User(String login, String password, String firstName, String lastName, String email, Date birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId) {
+    public User(String login, String password, String firstName, String lastName, String email, LocalDate birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -48,7 +45,7 @@ public class User implements Serializable {
     }
 
     // constructor for getting User from database
-    public User(Integer id, String login, String password, String firstName, String lastName, String email, Date birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId, Integer calorieNorm, Integer roleId, Integer statusId) {
+    public User(Integer id, String login, String password, String firstName, String lastName, String email, LocalDate birthday, Integer genderId, Integer weight, Integer goalWeight, Integer height, Integer lifestyleId, Integer calorieNorm, Integer roleId, Integer statusId) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -86,7 +83,7 @@ public class User implements Serializable {
         return email;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
@@ -122,7 +119,7 @@ public class User implements Serializable {
         return goalWeight;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -133,7 +130,6 @@ public class User implements Serializable {
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
-
 
     public void setGoalWeight(Integer goalWeight) {
         this.goalWeight = goalWeight;
@@ -155,7 +151,6 @@ public class User implements Serializable {
         this.statusId = statusId;
     }
 
-    // Переписать под class Role
     public boolean isAdmin() {
         return UtilManager.getProperty("role.admin").equalsIgnoreCase(String.valueOf(roleId));
     }

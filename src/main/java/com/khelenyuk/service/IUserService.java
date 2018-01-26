@@ -26,4 +26,8 @@ public interface IUserService {
     List<User> getUsers(int limit, int offset);
 
     int getUsersCount();
+
+    Gender getGender(Integer genderId);
+
+    Lifestyle getLifestyle(Integer lifestyleId);
 }

@@ -15,7 +15,8 @@ import java.util.List;
 public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
     private static final Logger logger = LogManager.getLogger(GenderDaoImpl.class);
 
-    private String selectAll = QueryManager.getProperty("genderSelectAll");
+    private static final String SELECT_ALL = QueryManager.getProperty("genderSelectAll");
+    private static final String SELECT = QueryManager.getProperty("genderSelect");
 
 
     @Override
@@ -23,7 +24,7 @@ public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
         List<Gender> genders = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAll);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
             logger.info("Query: " + statement.toString());
@@ -38,5 +39,30 @@ public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
         return genders;
     }
 
+    @Override
+    public Gender get(int id) {
+        Gender gender = null;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT);
+        ) {
+            statement.setInt(1, id);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                logger.info("Query: " + statement.toString());
+                if (resultSet.next()) {
+                    gender = new Gender(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"));
+                }else {
+                    logger.info("No gender with id=" + id + " found");
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Error in 'get Gender' method", e.getCause());
+        }
+        return gender;
+    }
 
 }

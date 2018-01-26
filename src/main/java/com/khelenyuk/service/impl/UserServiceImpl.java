@@ -9,9 +9,13 @@ import com.khelenyuk.model.Lifestyle;
 import com.khelenyuk.model.Gender;
 import com.khelenyuk.model.User;
 import com.khelenyuk.service.IUserService;
+import com.khelenyuk.utils.UtilManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
@@ -36,7 +40,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userDAO.getAll();
     }
 
@@ -51,18 +55,30 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public Gender getGender(Integer genderId) {
+        return genderDAO.get(genderId);
+    }
+
+    @Override
+    public Lifestyle getLifestyle(Integer lifestyleId) {
+        return lifestyleDAO.get(lifestyleId);
+    }
+
+    @Override
     public List<Lifestyle> getLifestyles() {
         return lifestyleDAO.getAll();
     }
 
     @Override
     public boolean addUser(User user) {
+        user.setCalorieNorm(this.calculateCalorieNorm(user));
         return userDAO.add(user);
     }
 
     @Override
     public boolean updateUser(User newUser) {
-        return userDAO.update(newUser.getId(), newUser);
+        newUser.setCalorieNorm(calculateCalorieNorm(newUser));
+        return userDAO.update(newUser);
     }
 
     @Override
@@ -78,5 +94,51 @@ public class UserServiceImpl implements IUserService {
     @Override
     public int getUsersCount() {
         return userDAO.getUsersCount();
+    }
+
+
+    private int calculateCalorieNorm(User user) {
+        if (user == null) {
+            return 0;
+        }
+        int calorieNorm = 0;
+        Gender gender = this.getGender(user.getGenderId());
+        Lifestyle lifestyle = this.getLifestyle(user.getLifestyleId());
+
+        int age = Period.between(user.getBirthday(), LocalDate.now()).getYears();
+
+        switch (gender.getName()) {
+            case "male": {
+                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age + 5;
+                break;
+            }
+            case "female": {
+                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age - 161;
+                break;
+            }
+            default: {
+                logger.error("No gender found.");
+            }
+        }
+
+        switch (lifestyle.getName()){
+            case "active": {
+                calorieNorm = (int) (calorieNorm * 1.4625d);
+                break;
+            }
+            case "average": {
+                calorieNorm = (int) (calorieNorm * 1.375d);
+                break;
+            }
+            case "lazy": {
+                calorieNorm = (int) (calorieNorm * 1.2d);
+                break;
+            }
+            default: {
+                logger.error("No lifestyle found.");
+            }
+        }
+        return calorieNorm;
+
     }
 }

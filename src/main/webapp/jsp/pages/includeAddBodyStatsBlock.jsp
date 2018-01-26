@@ -3,11 +3,6 @@
 <%---------- Body stats -----------%>
 <div class="container container-fluid table-bordered">
     <form action="/controller" method="post">
-        <div class="text-center color-success">
-            <c:if test="${not empty updateUserSuccessMessage}">${updateUserSuccessMessage}</c:if>
-            <c:if test="${not empty updateUserErrorMessage}">${updateUserErrorMessage}</c:if>
-        </div>
-
         <h5 class="text-center">You can update your body stats here</h5>
         <br/>
 
@@ -54,7 +49,8 @@
 
                 <%--BIRTHDAY--%>
                 <div class="main-caption">BIRTHDAY</div>
-                <input required class="form-control" type="date" name="birthday" value="${user.birthday}" max="${currentDate}">
+                <input required class="form-control" type="date" name="birthday" value="${user.birthday}"
+                       max="${currentDate}">
             </div>
 
             <%--COLUMN 3--%>
@@ -82,11 +78,17 @@
         </div>
 
         <br/><br/>
-        <h6 class="text-center">Your daily calorie requirement is <span class="color-success">${user.calorieNorm} calories.</span></h6>
+        <h6 class="text-center">Your daily calorie requirement is <span class="color-success">${user.calorieNorm} calories.</span>
+        </h6>
         <%--<h6 class="text-center">To reach your goal, we suggest you to consume a maximum amount of 1700 calories, 112 g--%>
-            <%--proteins, 88 g fats, and--%>
-            <%--174 g carbs per day.</h6>--%>
-        <br/><br/>
+        <%--proteins, 88 g fats, and--%>
+        <%--174 g carbs per day.</h6>--%>
+        <br/>
+        <div class="text-center color-success">
+            <c:if test="${not empty updateUserSuccessMessage}">${updateUserSuccessMessage}</c:if>
+            <c:if test="${not empty updateUserErrorMessage}">${updateUserErrorMessage}</c:if>
+        </div>
+        <br/>
         <%------------  BUTTON: add to diary  ---------%>
         <div class="text-center">
             <button type="submit" class="btn btn-success" name="command" value="UPDATE_USER_INFO">Save changes

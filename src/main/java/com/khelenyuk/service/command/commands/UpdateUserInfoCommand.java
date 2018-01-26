@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class UpdateUserInfoCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(UpdateUserInfoCommand.class);
@@ -43,7 +44,7 @@ public class UpdateUserInfoCommand implements ActionCommand {
 
         if (userService.updateUser(newUser)) {
             request.setAttribute("updateUserSuccessMessage", MessageManager.getProperty("message.updateuserconfirm"));
-            pageService.updateMainPageData(session, newUser.getId());
+            pageService.updateUser(request, newUser);
         } else {
             request.setAttribute("updateUserErrorMessage", MessageManager.getProperty("message.updateusererror"));
         }
@@ -52,7 +53,7 @@ public class UpdateUserInfoCommand implements ActionCommand {
     }
 
     private User updateUser(HttpServletRequest request, User user) {
-        user.setBirthday(Date.valueOf(request.getParameter(PARAM_NAME_BIRTHDAY)));
+        user.setBirthday(LocalDate.parse(request.getParameter(PARAM_NAME_BIRTHDAY)));
         user.setGenderId(Integer.valueOf(request.getParameter(PARAM_NAME_GENDER)));
         user.setWeight(Integer.valueOf(request.getParameter(PARAM_NAME_WEIGHT)));
         user.setGoalWeight(Integer.valueOf(request.getParameter(PARAM_NAME_GOAL_WEIGHT)));

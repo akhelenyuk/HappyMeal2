@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class RegisterNewUserCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(SelectDateCommand.class);
@@ -43,7 +44,6 @@ public class RegisterNewUserCommand implements ActionCommand {
         session = request.getSession();
 
         User newUser = getUserFromRequest(request);
-        logger.info("New user to be registered: " + newUser);
         request.setAttribute("registrationUser", newUser);
 
 
@@ -76,7 +76,7 @@ public class RegisterNewUserCommand implements ActionCommand {
                 request.getParameter(PARAM_NAME_LOGIN),
                 request.getParameter(PARAM_NAME_PASSWORD),
                 request.getParameter(PARAM_NAME_EMAIL),
-                Date.valueOf(request.getParameter(PARAM_NAME_BIRTHDAY)),
+                LocalDate.parse(request.getParameter(PARAM_NAME_BIRTHDAY)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_GENDER)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_WEIGHT)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_GOAL_WEIGHT)),

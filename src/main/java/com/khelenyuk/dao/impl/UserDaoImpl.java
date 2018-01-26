@@ -16,15 +16,15 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
 
-    private String selectAll = QueryManager.getProperty("userSelectAll");
-    private String selectAllLimitOffset = QueryManager.getProperty("userSelectAllLimitOffset");
-    private String selectById = QueryManager.getProperty("userSelectById");
-    private String selectByLogin = QueryManager.getProperty("userSelectByLogin");
-    private String insert = QueryManager.getProperty("userInsert");
-    private String updateById = QueryManager.getProperty("userUpdate");
-    private String updateStatusIdById = QueryManager.getProperty("userUpdateStatusId");
-    private String selectCount = QueryManager.getProperty("userSelectCount");
-    private String deleteById = QueryManager.getProperty("userDeleteById");
+    private static final String SELECT_ALL = QueryManager.getProperty("userSelectAll");
+    private static final String SELECT_ALL_LIMIT_OFFSET = QueryManager.getProperty("userSelectAllLimitOffset");
+    private static final String SELECT_BY_ID = QueryManager.getProperty("userSelectById");
+    private static final String SELECT_BY_LOGIN = QueryManager.getProperty("userSelectByLogin");
+    private static final String INSERT = QueryManager.getProperty("userInsert");
+    private static final String UPDATE = QueryManager.getProperty("userUpdate");
+    private static final String UPDATE_STATUS_ID = QueryManager.getProperty("userUpdateStatusId");
+    private static final String SELECT_COUNT = QueryManager.getProperty("userSelectCount");
+    private static final String DELETE = QueryManager.getProperty("userDeleteById");
 
 
     @Override
@@ -32,7 +32,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         List<User> users = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAll);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
             logger.info("Query: " + statement.toString());
@@ -44,7 +44,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("email"),
-                        resultSet.getDate("birthday"),
+                        resultSet.getDate("birthday").toLocalDate(),
                         resultSet.getInt("gender_id"),
                         resultSet.getInt("weight"),
                         resultSet.getInt("goal_weight"),
@@ -67,7 +67,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         User user = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectById)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID)) {
 
             statement.setInt(1, id);
 
@@ -81,7 +81,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
                             resultSet.getString("first_name"),
                             resultSet.getString("last_name"),
                             resultSet.getString("email"),
-                            resultSet.getDate("birthday"),
+                            resultSet.getDate("birthday").toLocalDate(),
                             resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
                             resultSet.getInt("goal_weight"),
@@ -105,7 +105,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         User user = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectByLogin)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_LOGIN)) {
 
             statement.setString(1, login);
 
@@ -119,7 +119,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
                             resultSet.getString("first_name"),
                             resultSet.getString("last_name"),
                             resultSet.getString("email"),
-                            resultSet.getDate("birthday"),
+                            resultSet.getDate("birthday").toLocalDate(),
                             resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
                             resultSet.getInt("goal_weight"),
@@ -142,14 +142,14 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
     public boolean add(User newEntity) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insert)
+             PreparedStatement statement = connection.prepareStatement(INSERT)
         ) {
             statement.setString(1, newEntity.getLogin());
             statement.setString(2, newEntity.getPassword());
             statement.setString(3, newEntity.getFirstName());
             statement.setString(4, newEntity.getLastName());
             statement.setString(5, newEntity.getEmail());
-            statement.setDate(6, new Date(newEntity.getBirthday().getTime()));
+            statement.setDate(6,  Date.valueOf(newEntity.getBirthday()));
             statement.setInt(7, newEntity.getGenderId());
             statement.setInt(8, newEntity.getWeight());
             statement.setInt(9, newEntity.getGoalWeight());
@@ -168,18 +168,19 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public boolean update(int userId, User user) {
+    public boolean update(User user) {
         int resultUpdate = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateById)
+             PreparedStatement statement = connection.prepareStatement(UPDATE)
         ) {
-            statement.setDate(1, new Date(user.getBirthday().getTime()));
+            statement.setDate(1, Date.valueOf(user.getBirthday()));
             statement.setInt(2, user.getGenderId());
             statement.setInt(3, user.getWeight());
             statement.setInt(4, user.getGoalWeight());
             statement.setInt(5, user.getHeight());
             statement.setInt(6, user.getLifestyleId());
-            statement.setInt(7, userId);
+            statement.setInt(7, user.getCalorieNorm());
+            statement.setInt(8, user.getId());
 
             logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();
@@ -196,7 +197,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
     public boolean updateStatus(User user) {
         int resultUpdate = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateStatusIdById)
+             PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS_ID)
         ) {
             statement.setInt(1, user.getStatusId());
             statement.setInt(2, user.getId());
@@ -218,7 +219,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         List<User> users = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAllLimitOffset);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_LIMIT_OFFSET);
         ) {
             statement.setInt(1, limit);
             statement.setInt(2, offset);
@@ -232,7 +233,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
                             resultSet.getString("first_name"),
                             resultSet.getString("last_name"),
                             resultSet.getString("email"),
-                            resultSet.getDate("birthday"),
+                            resultSet.getDate("birthday").toLocalDate(),
                             resultSet.getInt("gender_id"),
                             resultSet.getInt("weight"),
                             resultSet.getInt("goal_weight"),
@@ -256,7 +257,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         int result = 0;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectCount);
+             PreparedStatement statement = connection.prepareStatement(SELECT_COUNT);
              ResultSet resultSet = statement.executeQuery()
         ) {
             logger.info("Query: " + statement.toString());
@@ -274,7 +275,7 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
     public boolean delete(int id) {
         int resultDelete = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(deleteById)
+             PreparedStatement statement = connection.prepareStatement(DELETE)
         ) {
             statement.setInt(1, id);
 

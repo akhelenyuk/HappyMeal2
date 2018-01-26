@@ -32,7 +32,6 @@ public class BlockUserFilter implements Filter {
             logger.debug("User status id: " + user.getStatusId());
         }
 
-        logger.debug("********************" + UtilManager.getProperty("status.unblocked").equalsIgnoreCase(user.getStatusId().toString()));
         // if user is blocked - redirect to login.jsp
         if (user != null && UtilManager.getProperty("status.unblocked").equalsIgnoreCase(user.getStatusId().toString())) {
             filterChain.doFilter(servletRequest, servletResponse);

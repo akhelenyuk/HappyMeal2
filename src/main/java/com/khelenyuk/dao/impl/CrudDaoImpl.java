@@ -21,7 +21,7 @@ public class CrudDaoImpl<T> implements CrudDao<T> {
     }
 
     @Override
-    public boolean update(int oldId, T newEntity) {
+    public boolean update(T newEntity) {
         throw new UnsupportedOperationException();
     }
 
