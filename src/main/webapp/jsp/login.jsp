@@ -14,6 +14,7 @@
 <fmt:message key="login.incorrectlog" var="incorrectLog"/>
 <fmt:message key="login.userblocked" var="userBlocked"/>
 <fmt:message key="login.registrsuccess" var="registrSuccess"/>
+<fmt:message key="login.usernull" var="userNull"/>
 
 <html lang="UK">
 <head>
@@ -44,6 +45,9 @@
                 </c:if>
                 <c:if test="${not empty userBlockMessage}">
                     <h4 class="error">${userBlocked}</h4>
+                </c:if>
+                <c:if test="${not empty userNullMessage}">
+                    <h4 class="error">${userNull}</h4>
                 </c:if>
             </div>
             <div class="col py-4 text-center">

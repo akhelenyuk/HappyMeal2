@@ -22,11 +22,11 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/pages/error/error.jsp</location>
+        <location>/jsp/error.jsp</location>
     </error-page>
     <error-page>
         <exception-type>java.lang.RuntimeException</exception-type>
-        <location>/jsp/pages/error/error.jsp</location>
+        <location>/jsp/error.jsp</location>
     </error-page>
 
     <filter>
@@ -60,7 +60,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         <url-pattern>/jsp/pages/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>REQUEST</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
+        <!--<dispatcher>INCLUDE</dispatcher>-->
     </filter-mapping>
     <filter-mapping>
         <filter-name>CacheControlFilter</filter-name>

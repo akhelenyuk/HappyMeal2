@@ -1,83 +1,70 @@
-<%@ page contentType="text/html;charset=utf-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<html>
+<html lang="UK">
 <head>
-    <title>Add product</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css' type='text/css'>
+    <link rel='stylesheet' href='/bootstrap/css/styles.css' type='text/css' media='all'>
+    <title>Add activity</title>
 </head>
 
-<body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col col-4">
-            <div class="panel panel-default">
-                <%--TODO change to activity message--%>
-                <c:if test="${not empty errorActivityExistMessage}"><h6
-                        class="alert-danger">${errorActivityExistMessage}</h6
-                ></c:if>
-                <div class="panel-heading text-center">
-                    <h3 class="panel-title">Add activity</h3>
-                </div>
-                <div class="panel-body">
-
-                    <form method="POST" action="controller">
-
-                        <div class="row">
-                            <div class="col-lg-3 form-group">
-                                <label>Name:</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="text"
-                                       required
-                                       name="name"
-                                       class="form-control input-sm <c:if test="${not empty errorActivityExistMessage}">border-danger</c:if>"
-                                       value="${newActivity.name}"
-                                       placeholder="Activity">
-                            </div>
-                        </div>
-                        <%--calories--%>
-                        <div class="row">
-                            <div class="col-lg-3 form-group">
-                                <label>Calories:</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="number"
-                                       required
-                                       min="1"
-                                       max="999"
-                                       step="1"
-                                       name="calories"
-                                       value="${newActivity.calories}"
-                                       class="form-control input-sm">
-                            </div>
-                        </div>
-
-                        <%--note (in 100 gramms...)--%>
-                        <div class="row">
-                            <label>* calories are indicated for 60 minutes of activity</label>
-                        </div>
-
-                        <%--buttons (Add Cancel)--%>
-                        <div class="row">
-                            <div class="col form-group">
-                                <button type="submit" name="command" value="ADD_NEW_ACTIVITY"
-                                        class="btn btn-success btn-block">Add activity
-                                </button>
-                            </div>
-                            <div class="col">
-                                    <button type="submit" formnovalidate name="command" value="Cancel"
-                                            class="btn btn-default btn-block">Cancel
-                                    </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<body class="page page_white-bg">
+<header class="header header-black">
+    <div class="logo">
+            <span class="logo__first-word">
+          Fitness
+        </span>
+        <span class="logo__second-word">
+          Buddy
+        </span>
     </div>
-</div>
+</header>
+<main>
+    <h2 class="h2-page h2-page_grey">
+        Add activity
+    </h2>
+    <form class="register-form" action="/controller" method="post">
+        <div class="wrapper">
+            <label><span>Name:</span>
+                <input type="text"
+                       required
+                       maxlength="30"
+                       name="name"
+                       value="${newActivity.name}"
+                       placeholder="Activity"
+                       class="register-form__input <c:if test="${not empty errorActivityExistMessage}">border-danger</c:if>"></label>
 
+            <label><span>Calories:</span>
+                <input type="number"
+                       required
+                       name="calories" min="1" max="999" step="1"
+                       value="${newActivity.calories}"
+                       class="register-form__input"></label>
+
+            <%--note (for 60 minutes)--%>
+            <div>
+                <label>* calories are indicated for 60 minutes of activity</label>
+            </div>
+
+        </div>
+
+        <div class="text-center">
+            <c:if test="${not empty errorActivityExistMessage}">
+                <h4 class="error">${errorActivityExistMessage}</h4>
+            </c:if>
+        </div>
+
+        <div class="wrapper">
+            <button type="submit" name="command" value="ADD_NEW_ACTIVITY"
+                    class="login-form__input login-form__input_submit">Add activity
+            </button>
+
+            <button type="submit" formnovalidate name="command" value="Cancel"
+                    class="login-form__input login-form__input_submit btn-cancel">Cancel
+            </button>
+        </div>
+    </form>
+</main>
 </body>
 </html>
