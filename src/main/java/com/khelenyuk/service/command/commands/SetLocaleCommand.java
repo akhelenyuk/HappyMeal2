@@ -1,29 +1,28 @@
 package com.khelenyuk.service.command.commands;
 
+import com.khelenyuk.service.IPageService;
 import com.khelenyuk.service.command.ActionCommand;
+import com.khelenyuk.service.factory.ServiceFactory;
 import com.khelenyuk.utils.ConfigurationManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SetLocaleCommand implements ActionCommand {
-    /**
-     *
-     */
+    private static final Logger logger = LogManager.getLogger(SetLocaleCommand.class);
+
+
     @Override
     public String execute(HttpServletRequest request) {
-        // тут нужна ссылка на ту же страницу, откуда пришел запрос
-        String page = ConfigurationManager.getProperty("path.page.login");
-
+        String page = (ConfigurationManager.getProperty("path.page.login"));
         HttpSession session = request.getSession();
+
         switch (request.getParameter("locale")) {
             case "EN":
                 session.setAttribute("locale", "en_US");
                 session.setAttribute("selectedLocale", "EN");
-                break;
-            case "RU":
-                session.setAttribute("locale", "ru_RU");
-                session.setAttribute("selectedLocale", "RU");
                 break;
             case "UA":
                 default:
@@ -31,6 +30,7 @@ public class SetLocaleCommand implements ActionCommand {
                 session.setAttribute("selectedLocale", "UA");
                 break;
         }
+        logger.info("Locale set to:" + session.getAttribute("locale"));
         return page;
     }
 }

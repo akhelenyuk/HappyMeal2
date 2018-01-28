@@ -21,7 +21,7 @@ body {
 
 .bg {
     height: 100%;
-    background: url("/bootstrap/images/gray-background-3.jpg") no-repeat fixed center;
+    background: url("/bootstrap/images/mainGrayBg.jpg") no-repeat fixed center;
     background-size: cover;
 }
 

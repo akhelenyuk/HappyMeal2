@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class MyServlet extends HttpServlet {
@@ -50,9 +51,6 @@ public class MyServlet extends HttpServlet {
                 response.sendRedirect(page);
             } else {
                 logger.info("Request will be forwarded to " + page);
-                logger.debug("Request URL:" + request.getRequestURI());
-                logger.debug("Request URL:" + request.getContextPath());
-                logger.debug("Request URL:" + request.getAttribute("javax.servlet.forward.request_uri"));
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
                 dispatcher.forward(request, response);
             }

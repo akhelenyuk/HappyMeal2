@@ -142,6 +142,8 @@ public class PageServiceImpl implements IPageService {
 
         session.setAttribute("genders", userService.getGenders());
         session.setAttribute("lifestyles", userService.getLifestyles());
+        session.setAttribute("maxBirth", LocalDate.now());
+        session.setAttribute("minBirth", LocalDate.parse("1900-01-01"));
     }
 
     @Override

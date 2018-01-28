@@ -19,9 +19,7 @@ public class User implements Serializable {
     private Integer goalWeight;
     private Integer height;
     private Integer lifestyleId;
-
-    //    TODO need method to calculate this value
-    private Integer calorieNorm = 2345;
+    private Integer calorieNorm;
     private Integer roleId;
     private Integer statusId;
 
@@ -154,7 +152,6 @@ public class User implements Serializable {
     public boolean isAdmin() {
         return UtilManager.getProperty("role.admin").equalsIgnoreCase(String.valueOf(roleId));
     }
-
 
     public Integer getId() {
         return id;

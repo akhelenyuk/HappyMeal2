@@ -3,72 +3,90 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <fmt:setLocale value="${locale}" scope="session"/>
-<fmt:setBundle basename="loginpagecontent"/>
+<fmt:setBundle basename="lang"/>
 
-<html>
+<fmt:message key="login.title" var="loginTitle"/>
+<fmt:message key="login.login" var="loginPlaceholder"/>
+<fmt:message key="login.password" var="passwordPlaceholder"/>
+<fmt:message key="login.loginbutton" var="loginBtn"/>
+<fmt:message key="login.registrationbutton" var="registerBtn"/>
+<fmt:message key="login.notamember" var="notAMember"/>
+<fmt:message key="login.incorrectlog" var="incorrectLog"/>
+<fmt:message key="login.userblocked" var="userBlocked"/>
+<fmt:message key="login.registrsuccess" var="registrSuccess"/>
+
+<html lang="UK">
 <head>
-    <title><fmt:message key="label.title"/></title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bootstrap/css/login.css">
+    <title>${loginTitle}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css' type='text/css'>
+    <link rel='stylesheet' href='/bootstrap/css/login.css' type='text/css' media='all'>
 </head>
 <body>
-<%--<div id="fullscreen_bg" class="fullscreen_bg"/>--%>
-<div class="row">
-    <nav class="navbar container-fluid navbar-header">
-        <div class="navbar-brand fitness-buddy"><span class="fitness">Fitness</span>Buddy
-        </div>
-
-        <form class="form-inline" method="post" action="/controller">
-            <button type="submit" class="btn btn-link btn-sm" name="command" value="en">en</button>
-            <button type="submit" class="btn btn-link btn-sm" name="command" value="ua">ua</button>
-        </form>
-    </nav>
-</div>
-
-
-<div class="container">
-    <form class="text-center" method="post" action="/controller">
-        <h4 class="alert-danger">${registrationSuccessMessage}</h4>
-        <h4 class="border-danger">${errorLoginPassMessage}</h4>
-        <h4 class="border-danger">${userBlockMessage}</h4>
-        <h2>Track meals. Stay committed.</h2>
-        <br/>
-        <div class="form-row align-items-center justify-content-center">
-            <div class="col col-lg-3">
-                <input
-                        type="text"
-                        name="login"
-                        class="form-control <c:if test="${not empty errorLoginPassMessage}">alert-danger</c:if>"
-                        value="${login}"
-
-                        placeholder="login">
+<header>
+    <form method="post" action="/controller">
+        <input type="hidden" name="command" value="SET_LOCALE">
+        <div class="row">
+            <div class="col logo">
+            <span class="logo__first-word">
+          Fitness
+        </span>
+                <span class="logo__second-word">
+          Buddy
+        </span>
             </div>
-            <div class="col col-lg-3">
-                <input
-                        type="password"
-                        class="form-control <c:if test="${not empty errorLoginPassMessage}">border-danger</c:if>"
-                        name="password"
-                        value="${password}"
-                        placeholder="password">
+            <div class="col text-center">
+                <c:if test="${not empty registrationSuccessMessage}">
+                    <h4 class="success">${registrSuccess}</h4>
+                </c:if>
+                <c:if test="${not empty errorLoginPassMessage}">
+                    <h4 class="error">${incorrectLog}</h4>
+                </c:if>
+                <c:if test="${not empty userBlockMessage}">
+                    <h4 class="error">${userBlocked}</h4>
+                </c:if>
+            </div>
+            <div class="col py-4 text-center">
+                <button type="submit" class="btn btn-link" name="locale" value="EN">en</button>
+                <button type="submit" class="btn btn-link" name="locale" value="UA">укр</button>
             </div>
         </div>
-        <br>
-        <div class="form-row align-items-center justify-content-center">
-            <div class="col col-lg-3">
-                <button type="submit"  name="command" value="LOGIN">Login</button>
-            </div>
-        </div>
-
-        <div class="text-center">
-            <label for="registration-btn">Not a member?</label>
-            <button id="registration-btn" type="submit" class="btn btn-link justify-content-center" name="command"
-                    value="to_registration_page">Register
-            </button>
-        </div>
-
     </form>
 
-</div>
+</header>
+<main>
 
+
+    <h2 class="h2-index h2-index_grey">
+        Track meals. Stay commited.
+    </h2>
+    <form class="login-form" method="post" action="/controller">
+        <div class="wrapper">
+            <input
+                    type="text"
+                    name="login"
+                    placeholder="${loginPlaceholder}"
+                    class="login-form__input <c:if test="${not empty errorLoginPassMessage}">border-danger</c:if>"
+                    value="${login}">
+            <input
+                    type="password"
+                    name="password"
+                    placeholder="${passwordPlaceholder}"
+                    class="login-form__input <c:if test="${not empty errorLoginPassMessage}">border-danger</c:if>"
+                    value="${password}">
+        </div>
+
+        <button type="submit" value="Login" class="login-form__input login-form__btn_submit" name="command"
+                value="to_registration_page">${loginBtn}
+        </button>
+
+        <div class="wrapper">
+            <span class="login-form__questions">${notAMember}&nbsp;</span>
+            <button type="submit" class="btn btn-link" name="command"
+                    value="to_registration_page">${registerBtn}
+            </button>
+        </div>
+    </form>
+</main>
 </body>
 </html>

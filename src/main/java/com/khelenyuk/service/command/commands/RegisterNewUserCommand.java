@@ -17,7 +17,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class RegisterNewUserCommand implements ActionCommand {
-    private static final Logger logger = LogManager.getLogger(SelectDateCommand.class);
+    private static final Logger logger = LogManager.getLogger(RegisterNewUserCommand.class);
 
     private static final String PARAM_NAME_FIRST_NAME = "first_name";
     private static final String PARAM_NAME_LAST_NAME = "last_name";
@@ -45,6 +45,7 @@ public class RegisterNewUserCommand implements ActionCommand {
 
         User newUser = getUserFromRequest(request);
         request.setAttribute("registrationUser", newUser);
+        logger.debug("!!! New user:" + newUser);
 
 
         String password_confirm = request.getParameter(PARAM_NAME_PASSWORD_CONFIRM);
@@ -53,11 +54,15 @@ public class RegisterNewUserCommand implements ActionCommand {
             request.setAttribute("errorPassConfirmMessage", MessageManager.getProperty("message.passconfirmerror"));
             return page;
         }
+        logger.debug("!!! Pass confirm OK:");
+
 
         if (loginRegistrationService.checkLoginExist(newUser.getLogin())) {
             request.setAttribute("errorLoginExistMessage", MessageManager.getProperty("message.loginexisterror"));
             return page;
         }
+        logger.debug("!!! Login check OK:");
+
 
         if (userService.addUser(newUser)) {
             request.setAttribute("registrationSuccessMessage", MessageManager.getProperty("message.registrationconfirm"));
@@ -71,10 +76,10 @@ public class RegisterNewUserCommand implements ActionCommand {
     }
 
     private User getUserFromRequest(HttpServletRequest request) {
-        User user = new User(request.getParameter(PARAM_NAME_FIRST_NAME),
-                request.getParameter(PARAM_NAME_LAST_NAME),
-                request.getParameter(PARAM_NAME_LOGIN),
+        User user = new User(request.getParameter(PARAM_NAME_LOGIN),
                 request.getParameter(PARAM_NAME_PASSWORD),
+                request.getParameter(PARAM_NAME_FIRST_NAME),
+                request.getParameter(PARAM_NAME_LAST_NAME),
                 request.getParameter(PARAM_NAME_EMAIL),
                 LocalDate.parse(request.getParameter(PARAM_NAME_BIRTHDAY)),
                 Integer.valueOf(request.getParameter(PARAM_NAME_GENDER)),
