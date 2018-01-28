@@ -18,6 +18,6 @@ public interface IPageService {
 
     void updateAdminPageData(HttpServletRequest request);
 
-    void updateUser(HttpServletRequest request, User user);
+    void updateUser(HttpSession session, Integer userId);
 }
 

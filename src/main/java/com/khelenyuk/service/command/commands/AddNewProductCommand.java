@@ -57,7 +57,7 @@ public class AddNewProductCommand implements ActionCommand {
     private Product getProductFromRequest(HttpServletRequest request) {
         Product product = new Product(
                 request.getParameter(PARAM_NAME_NAME),
-                Float.valueOf(request.getParameter(PARAM_NAME_CALORIES)),
+                Integer.valueOf(request.getParameter(PARAM_NAME_CALORIES)),
                 Float.valueOf(request.getParameter(PARAM_NAME_PROTEIN)),
                 Float.valueOf(request.getParameter(PARAM_NAME_FAT)),
                 Float.valueOf(request.getParameter(PARAM_NAME_CARBS))

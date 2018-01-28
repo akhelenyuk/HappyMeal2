@@ -14,7 +14,7 @@ public class ToAddProductPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.addProduct");
-        pageService.updateUser(request, (User) request.getSession().getAttribute("user"));
+        pageService.updateUser(request.getSession(), ((User) request.getSession().getAttribute("user")).getId());
 
         return page;
     }

@@ -35,7 +35,7 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
                 products.add(new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
-                        resultSet.getFloat("calories"),
+                        resultSet.getInt("calories"),
                         resultSet.getFloat("protein"),
                         resultSet.getFloat("fat"),
                         resultSet.getFloat("carbs")
@@ -63,7 +63,7 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
                     product = new Product(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
-                            resultSet.getFloat("calories"),
+                            resultSet.getInt("calories"),
                             resultSet.getFloat("protein"),
                             resultSet.getFloat("fat"),
                             resultSet.getFloat("carbs"));
@@ -92,7 +92,7 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
                     product = new Product(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
-                            resultSet.getFloat("calories"),
+                            resultSet.getInt("calories"),
                             resultSet.getFloat("protein"),
                             resultSet.getFloat("fat"),
                             resultSet.getFloat("carbs"));

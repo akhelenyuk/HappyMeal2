@@ -27,20 +27,23 @@ public class BlockUserFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         User user = (User) request.getSession().getAttribute("user");
-        logger.debug("User: " + user);
-        if (user != null) {
-            logger.debug("User status id: " + user.getStatusId());
-        }
 
-        // if user is blocked - redirect to login.jsp
-        if (user != null && UtilManager.getProperty("status.unblocked").equalsIgnoreCase(user.getStatusId().toString())) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            logger.info("User tried to reach " + request.getRequestURI() + " having status 'blocked'! Redirected to login page!");
-            request.setAttribute("userBlockMessage", MessageManager.getProperty("message.userblocked"));
-            RequestDispatcher dispatcher = request.getRequestDispatcher(ConfigurationManager.getProperty("path.page.login"));
+
+        /**
+         *  if user is null or blocked - forward to login.jsp
+         */
+        RequestDispatcher dispatcher = request.getRequestDispatcher(ConfigurationManager.getProperty("path.page.login"));
+        if (user == null) {
+            logger.info("User tried to reach " + request.getRequestURI() + " being not logged in! Forwarding to login page...");
+            request.setAttribute("userNullMessage", MessageManager.getProperty("message.usernullerror"));
             dispatcher.forward(request, response);
-//            response.sendRedirect(ConfigurationManager.getProperty("path.page.login"));
+        } else if (UtilManager.getProperty("status.blocked").equalsIgnoreCase(user.getStatusId().toString())) {
+            logger.info("User tried to reach " + request.getRequestURI() + " having status 'blocked'! Forwarding to login page...");
+            request.setAttribute("userBlockMessage", MessageManager.getProperty("message.userblocked"));
+            dispatcher.forward(request, response);
+        } else {
+            logger.debug("++++ test ++++");
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

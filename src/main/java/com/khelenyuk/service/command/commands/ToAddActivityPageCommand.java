@@ -14,7 +14,7 @@ public class ToAddActivityPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.addActivity");
-        pageService.updateUser(request, (User) request.getSession().getAttribute("user"));
+        pageService.updateUser(request.getSession(), ((User) request.getSession().getAttribute("user")).getId());
 
         return page;
     }

@@ -28,7 +28,6 @@ public class DeleteEntryFromFoodDiaryCommand implements ActionCommand {
         String page = ConfigurationManager.getProperty("path.page.main");
 
         int id = Integer.valueOf(request.getParameter(REQUEST_PARAM_MEAL_ID));
-        logger.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$  3 id:" + id);
 
 
         if (menuService.deleteFromFoodDiary(id)) {

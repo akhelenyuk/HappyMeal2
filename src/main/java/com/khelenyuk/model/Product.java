@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Product implements Serializable {
     private int id;
     private String name;
-    private Float calories;
+    private Integer calories;
     private Float protein;
     private Float fat;
     private Float carbs;
@@ -15,7 +15,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String name, Float calories, Float protein, Float fat, Float carbs) {
+    public Product(String name, Integer calories, Float protein, Float fat, Float carbs) {
         this.name = name;
         this.calories = calories;
         this.protein = protein;
@@ -23,7 +23,7 @@ public class Product implements Serializable {
         this.carbs = carbs;
     }
 
-    public Product(int id, String name, Float calories, Float protein, Float fat, Float carbs) {
+    public Product(int id, String name, Integer calories, Float protein, Float fat, Float carbs) {
         this.id = id;
         this.name = name;
         this.calories = calories;
@@ -41,7 +41,7 @@ public class Product implements Serializable {
         return id;
     }
 
-    public Float getCalories() {
+    public Integer getCalories() {
         return calories;
     }
 
@@ -65,7 +65,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public void setCalories(Float calories) {
+    public void setCalories(Integer calories) {
         this.calories = calories;
     }
 

@@ -30,12 +30,11 @@ public class UpdateUserInfoCommand implements ActionCommand {
     private IUserService userService = ServiceFactory.getUserService();
     private IPageService pageService = ServiceFactory.getPageService();
 
-    private HttpSession session;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getProperty("path.page.main");
-        session = request.getSession();
+        HttpSession session = request.getSession();
 
 
         User newUser = updateUser(request, (User) session.getAttribute("user"));
@@ -44,7 +43,7 @@ public class UpdateUserInfoCommand implements ActionCommand {
 
         if (userService.updateUser(newUser)) {
             request.setAttribute("updateUserSuccessMessage", MessageManager.getProperty("message.updateuserconfirm"));
-            pageService.updateUser(request, newUser);
+            pageService.updateMainPageData(request.getSession(), newUser.getId());
         } else {
             request.setAttribute("updateUserErrorMessage", MessageManager.getProperty("message.updateusererror"));
         }
