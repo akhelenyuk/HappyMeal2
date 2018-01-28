@@ -1,0 +1,197 @@
+/*кроссбраузерное и вообще правильное подключение шрифтов
+(вообще-то нет - кроссбраузерное, это когда 3 формата:)*/
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue.otf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/helvetica-neue-bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/helvetica-neue-bold.otf);
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Medium.ttf);
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Medium.otf);
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Light.ttf);
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Light.otf);
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Thin.ttf);
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url(/bootstrap/font/HelveticaNeue-Thin.otf);
+    font-weight: 100;
+    font-style: normal;
+}
+/*обнуляем для всех элементов отступы, и все то, что все-равно придется обнулять*/
+/*если использовать бутстрап в чистом виде, то часть этих обнулений работать не будет из-за недостатка специфичности селекторов*/
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    list-style-type: none;
+    box-sizing: border-box;
+    font-family: HelveticaNeue;
+    transition: .3s background-color, .3s color, .3s opacity;
+}
+body{
+    background: url(/bootstrap/images/loginBg.png) black center right/cover no-repeat;
+    min-height: 100vh;
+}
+
+/*используем бэм методологию и флексы
+если не знаешь, что это попробуй прогуглить, потом спросишь что не понятно*/
+/*______________________header___________________*/
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 88px;
+}
+/*_________________logo______________*/
+.logo {
+    padding: 20px 36px;
+    font-weight: bold;
+    text-align: left;
+}
+.logo__first-word {
+    font-weight: 700;
+    font-family: HelveticaNeue;
+    font-size: 40px;
+}
+.logo__second-word {
+    font-weight: 100;
+    font-family: HelveticaNeue;
+    font-size: 40px;
+}
+.logo__first-word_green,
+.logo__second-word_green{
+    color: #19a9a9;
+}
+/*_________________languages_______________*/
+.languages{
+    display: flex;
+    align-items: center;
+    height: 88px;
+    margin-right: 15%;
+}
+.languages__item{
+    margin: 20px 10px 0;
+    color: #19a9a9;
+    font-size: 20px;
+}
+.languages__item_current{
+    color: rgba(255, 255, 255, .65);
+}
+/*____________________h2-index______________*/
+.h2-index{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 45px;
+    opacity: 0.8;
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+}
+.h2-index_grey{
+    color: rgba(255, 255, 255, .65);
+}
+/*________________login-form__________________*/
+.login-form{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-form__input {
+    width: 260px;
+    height: 50px;
+    margin: 5px;
+    padding: 15px 18px 14px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.17);
+    border: solid 1px #ffffff;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .65);
+}
+.login-form__input::placeholder {
+    width: 80px;
+    height: 21px;
+    opacity: 0.8;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, .45);
+}
+.login-form__input_submit {
+    width: 250px;
+    margin: 30px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background-color: #19a9a9;
+    border: none;
+}
+.login-form .wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.login-form__questions{
+    color: rgba(255, 255, 255, .65);
+    text-align: center;
+    margin-bottom: 14px;
+}
+.login-form__questions_green{
+    color: #19a9a9;
+}
