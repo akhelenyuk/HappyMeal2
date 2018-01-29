@@ -12,14 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.*;
 
-/*TODO check if I need this class to be singleton or just class with static methods
- */
-
 public class PageServiceImpl implements IPageService {
     private static final Logger logger = LogManager.getLogger(PageServiceImpl.class);
 
     private static final String PARAM_NAME_LOGIN = "pageNumber";
-
 
     private boolean redirect = false;
 
@@ -30,12 +26,23 @@ public class PageServiceImpl implements IPageService {
     private IActivityService activityService = ServiceFactory.getActivityService();
     private IActivityDiaryService activityDiaryService = ServiceFactory.getActivityDiaryService();
 
-    private static PageServiceImpl instance = new PageServiceImpl();
+    private static PageServiceImpl instance;
 
     private PageServiceImpl() {
     }
 
+    /**
+     * Singleton: double-checked locking
+     * @return
+     */
     public static PageServiceImpl getInstance() {
+        if(instance == null){
+            synchronized (PageServiceImpl.class){
+                if(instance == null){
+                    instance = new PageServiceImpl();
+                }
+            }
+        }
         return instance;
     }
 

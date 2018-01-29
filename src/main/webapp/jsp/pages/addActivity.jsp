@@ -26,13 +26,13 @@
     </h2>
     <form class="register-form" action="/controller" method="post">
         <div class="wrapper">
-            <label><span>Name:</span>
+            <label><span>Activity:</span>
                 <input type="text"
                        required
                        maxlength="30"
                        name="name"
                        value="${newActivity.name}"
-                       placeholder="Activity"
+                       placeholder="Name"
                        class="register-form__input <c:if test="${not empty errorActivityExistMessage}">border-danger</c:if>"></label>
 
             <label><span>Calories:</span>

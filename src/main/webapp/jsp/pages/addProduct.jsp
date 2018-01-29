@@ -26,7 +26,7 @@
     </h2>
     <form class="register-form" action="/controller" method="post">
         <div class="wrapper">
-            <label><span>Name:</span>
+            <label><span>Product:</span>
                 <input type="text"
                        required
                        maxlength="30"

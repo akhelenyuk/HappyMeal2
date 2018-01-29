@@ -1,6 +1,9 @@
 package com.khelenyuk.service.impl;
 
 
+import com.khelenyuk.dao.MealDao;
+import com.khelenyuk.dao.MealTypeDao;
+import com.khelenyuk.dao.factory.DaoFactory;
 import com.khelenyuk.dao.impl.MealDiaryDaoImpl;
 import com.khelenyuk.model.Meal;
 import com.khelenyuk.model.MealToDisplay;
@@ -15,14 +18,13 @@ import java.util.List;
 public class MenuServiceImpl implements IMenuService {
     private static final Logger logger = LogManager.getLogger(MenuServiceImpl.class);
 
-    //todo rewrite to Interface
-    private static MealDiaryDaoImpl mealDiaryDAO = new MealDiaryDaoImpl();
-    private static MenuServiceImpl instance = new MenuServiceImpl();
+    private static MealDao mealDiaryDAO = DaoFactory.getMealMethods();
+    private static IMenuService instance = new MenuServiceImpl();
 
     private MenuServiceImpl() {
     }
 
-    public static MenuServiceImpl getInstance() {
+    public static IMenuService getInstance() {
         return instance;
     }
 

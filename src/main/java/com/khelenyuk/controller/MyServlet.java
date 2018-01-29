@@ -33,9 +33,15 @@ public class MyServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-
+    /**
+     * Obtains command from HttpServletRequest, runs the respective command and forwards/redirects to
+     * requested page
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // todo check if this is needed
         request.setCharacterEncoding("UTF-8");
 
         String page = null;
@@ -58,7 +64,7 @@ public class MyServlet extends HttpServlet {
         } else {
             page = ConfigurationManager.getProperty("path.page.error");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
-            response.sendRedirect(request.getContextPath() + page);
+            response.sendRedirect(page);
         }
     }
 }
