@@ -35,7 +35,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 users.add(new User(
                         resultSet.getInt("id"),
@@ -72,7 +71,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     user = new User(
                             resultSet.getInt("id"),
@@ -110,7 +108,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
             statement.setString(1, login);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     user = new User(
                             resultSet.getInt("id"),
@@ -157,7 +154,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
             statement.setInt(11, newEntity.getLifestyleId());
             statement.setInt(12, newEntity.getCalorieNorm());
 
-            logger.info("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
             logger.info((resultInsert < 1) ? "User was not added." : resultInsert + " user was successfully added.");
 
@@ -182,7 +178,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
             statement.setInt(7, user.getCalorieNorm());
             statement.setInt(8, user.getId());
 
-            logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();
             if (resultUpdate < 1) {
                 logger.info("User was not updated.");
@@ -202,8 +197,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
             statement.setInt(1, user.getStatusId());
             statement.setInt(2, user.getId());
 
-
-            logger.info("Query: " + statement.toString());
             resultUpdate = statement.executeUpdate();
             if (resultUpdate < 1) {
                 logger.info("User statusId was not updated.");
@@ -260,14 +253,12 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SELECT_COUNT);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             if (resultSet.next()) {
                 result = resultSet.getInt("count");
             }
         } catch (SQLException e) {
             logger.error("Error in obtaining 'number of users'" + e.getCause());
         }
-        logger.info("Number of users is :" + result);
         return result;
     }
 
@@ -279,7 +270,6 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
         ) {
             statement.setInt(1, id);
 
-            logger.info("Query: " + statement.toString());
             resultDelete = statement.executeUpdate();
             if (resultDelete < 1) {
                 logger.info("User was not deleted.");

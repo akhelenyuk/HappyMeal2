@@ -10,7 +10,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 
     <servlet>
         <servlet-name>MyServlet</servlet-name>
-        <servlet-class>com.khelenyuk.servlet.MyServlet</servlet-class>
+        <servlet-class>com.khelenyuk.controller.MyServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
@@ -31,19 +31,19 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 
     <filter>
         <filter-name>BlockUserFilter</filter-name>
-        <filter-class>com.khelenyuk.service.filter.BlockUserFilter</filter-class>
+        <filter-class>com.khelenyuk.controller.filter.BlockUserFilter</filter-class>
     </filter>
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>com.khelenyuk.service.filter.AuthFilter</filter-class>
+        <filter-class>com.khelenyuk.controller.filter.AuthFilter</filter-class>
     </filter>
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>com.khelenyuk.service.filter.LoginFilter</filter-class>
+        <filter-class>com.khelenyuk.controller.filter.LoginFilter</filter-class>
     </filter>
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.khelenyuk.service.filter.EncodingFilter</filter-class>
+        <filter-class>com.khelenyuk.controller.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -51,7 +51,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     </filter>
     <filter>
         <filter-name>CacheControlFilter</filter-name>
-        <filter-class>com.khelenyuk.service.filter.CacheControlFilter</filter-class>
+        <filter-class>com.khelenyuk.controller.filter.CacheControlFilter</filter-class>
     </filter>
 
 

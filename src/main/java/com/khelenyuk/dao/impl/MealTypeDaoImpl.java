@@ -17,17 +17,16 @@ import java.util.List;
 public class MealTypeDaoImpl extends CrudDaoImpl<MealType> implements MealTypeDao {
     private static final Logger logger = LogManager.getLogger(MealTypeDaoImpl.class);
 
-    private String selectAll = QueryManager.getProperty("mealTypesSelectAll");
+    private static final String SELECT_ALL = QueryManager.getProperty("mealTypesSelectAll");
 
     @Override
     public List<MealType> getAll() {
         List<MealType> mealTypes = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAll);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 mealTypes.add(new MealType(
                         resultSet.getInt("id"),

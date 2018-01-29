@@ -23,6 +23,7 @@ public class ProductServiceImpl implements IProductService{
         return instance;
     }
 
+
     @Override
     public boolean addProduct(Product product) {
         return productDAO.add(product);
@@ -35,7 +36,6 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public boolean checkProductExist(String name) {
-        logger.info("Check if product with such name already exists");
         return productDAO.get(name) != null;
     }
 }

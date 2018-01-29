@@ -6,6 +6,7 @@
     </Properties>
 
     <Appenders>
+        <!-- writes to console -->
         <Console name="Console-Appender" target="SYSTEM_OUT">
             <PatternLayout>
                 <pattern>
@@ -13,6 +14,8 @@
                 </pattern>>
             </PatternLayout>
         </Console>
+
+        <!--writes to file D:\apache-tomcat-9.0.0.M10\bin\logs-->
         <File name="File-Appender" fileName="${log-path}/xmlfilelog.log" immediateFlush="true">
             <PatternLayout>
                 <pattern>
@@ -20,6 +23,8 @@
                 </pattern>
             </PatternLayout>
         </File>
+
+        <!--creates new file if file lof file is more than 5 MB-->
         <!--<RollingFile name="RollingFile-Appender"-->
                      <!--fileName="${log-path}/rollingfile.log"-->
                      <!--filePattern="${archive}/rollingfile.log.%d{yyyy-MM-dd-hh-mm}.gz">-->

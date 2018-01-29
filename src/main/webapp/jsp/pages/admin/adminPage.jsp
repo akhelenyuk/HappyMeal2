@@ -35,12 +35,12 @@
         <nav class="admin navbar justify-content-center">Admin Page</nav>
 
         <thead>
-        <th scope="col"><input type="checkbox" id="checkall"/></th>
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
         <th scope="col">Login</th>
-        <th scope="col">Role</th>
-        <th scope="col">Status</th>
+        <th scope="col">Password</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Birthday</th>
         <th scope="col" class="text-center"> Action</th>
         </thead>
 
@@ -49,12 +49,12 @@
             <form method="post" action="/controller">
                 <input type="hidden" name="userId" value="${user.id}">
                 <tr>
-                    <th scope="row"><input type="checkbox" class="checkthis"/></th>
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>${user.login}</td>
-                    <td>${user.roleId}</td>
-                    <td>${user.statusId}</td>
+                    <td>${user.password}</td>
+                    <td>${user.email}</td>
+                    <td>${user.birthday}</td>
                     <td class="align-right">
                         <c:choose>
                             <c:when test="${user.statusId == 1}">
@@ -72,7 +72,6 @@
                                 </button>
                             </c:otherwise>
                         </c:choose>
-
                     </td>
                 </tr>
             </form>

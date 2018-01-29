@@ -34,8 +34,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(chosenDate));
 
-            logger.info("Executing statement: " + statement.toString());
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     menu.add(new MealToDisplay(
@@ -68,9 +66,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             statement.setInt(4, newMeal.getMealTypeId());
             statement.setDate(5, Date.valueOf(newMeal.getDate()));
 
-            logger.info("Executing request: " + statement.toString());
             resultInsert = statement.executeUpdate();
-            logger.info("Result set of adding = " + resultInsert);
         } catch (SQLException e) {
             logger.error("Error in adding new meal to DB", e.getCause());
         }
@@ -88,7 +84,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             statement.setDate(2, Date.valueOf(date));
             statement.setInt(3, mealTypeId);
 
-            logger.info("Executing statement: " + statement.toString());
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     mealToDisplayTotals = new MealToDisplay(
@@ -99,17 +94,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
                             resultSet.getFloat("carbs")
                     );
                 }
-//                while (resultSet.next()) {
-//                    totalsByMealType.add(new MealToDisplay(
-//                            null,
-//                            null,
-//                            resultSet.getInt("weight"),
-//                            resultSet.getFloat("calories"),
-//                            resultSet.getFloat("protein"),
-//                            resultSet.getFloat("fat"),
-//                            resultSet.getFloat("carbs")
-//                    ));
-//                }
             }
         } catch (SQLException e) {
             logger.error("Error in getting 'total' value by 'meal type' from database", e.getCause());
@@ -127,7 +111,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(date));
 
-            logger.info("Executing statement: " + statement.toString());
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     mealToDisplayTotals = new MealToDisplay(
@@ -138,17 +121,6 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
                             resultSet.getFloat("carbs")
                     );
                 }
-//                while (resultSet.next()) {
-//                    totalsByMealType.add(new MealToDisplay(
-//                            null,
-//                            null,
-//                            resultSet.getInt("weight"),
-//                            resultSet.getFloat("calories"),
-//                            resultSet.getFloat("protein"),
-//                            resultSet.getFloat("fat"),
-//                            resultSet.getFloat("carbs")
-//                    ));
-//                }
             }
         } catch (SQLException e) {
             logger.error("Error in getting 'Day totals' values from database", e.getCause());
@@ -164,9 +136,7 @@ public class MealDiaryDaoImpl extends CrudDaoImpl<Meal> implements MealDao {
         ) {
             statement.setInt(1, id);
 
-            logger.info("Executing request: " + statement.toString());
             resultDelete = statement.executeUpdate();
-            logger.info("Result set of adding = " + resultDelete);
         } catch (SQLException e) {
             logger.error("Error in deleting 'MealDiary entry' from DB", e.getCause());
         }

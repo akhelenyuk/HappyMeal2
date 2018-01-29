@@ -97,8 +97,8 @@ public class PageServiceImpl implements IPageService {
          * gets list of current products from db and writes them into session
          */
 
-        Map<String, MealToDisplay> totalsByMealTypeMap = makeMap2(userId, chosenDate, mealTypes);
-        Map<String, List<MealToDisplay>> mealsSplittedByType = makeMap(mealTypes, userMealToDisplay);
+        Map<String, MealToDisplay> totalsByMealTypeMap = makeMapMealTypesTotalsForMealType(userId, chosenDate, mealTypes);
+        Map<String, List<MealToDisplay>> mealsSplittedByType = makeMapMealTypesAndListsOfMeals(mealTypes, userMealToDisplay);
 
         session.setAttribute("mealTypes", mealTypes);
         session.setAttribute("products", productService.getAllProducts());
@@ -157,7 +157,6 @@ public class PageServiceImpl implements IPageService {
         int limit = 5;
         int pages = 1;
 
-        logger.debug("requested page number: " + request.getParameter(PARAM_NAME_LOGIN));
         if (request.getParameter(PARAM_NAME_LOGIN) != null) {
             int requestedPage = Integer.valueOf(request.getParameter(PARAM_NAME_LOGIN));
             offset = (requestedPage - 1) * limit;
@@ -176,11 +175,9 @@ public class PageServiceImpl implements IPageService {
                 pages++;
             }
         }
-        logger.debug("Total number of pages: " + pages);
         request.setAttribute("pages", pages);
 
         int currentPage = offset / limit + 1;
-        logger.debug("Current page number: " + currentPage);
         request.setAttribute("currentPage", currentPage);
     }
 
@@ -194,14 +191,14 @@ public class PageServiceImpl implements IPageService {
 
 
     /**
-     * Makes map with key = MealType, value = list of meals within MealType
+     * Makes map with key = MealType, value = list of MealToDisplay within MealType
      * to be displayed on jsp page.
      *
      * @param mealTypes
      * @param meals     - list of all meals of certain user on certain date
-     * @return
+     * @return Map<String, List<MealToDisplay>>
      */
-    private Map<String, List<MealToDisplay>> makeMap(List<MealType> mealTypes, List<MealToDisplay> meals) {
+    private Map<String, List<MealToDisplay>> makeMapMealTypesAndListsOfMeals(List<MealType> mealTypes, List<MealToDisplay> meals) {
         Map<String, List<MealToDisplay>> map = new LinkedHashMap<>();
 
         for (MealType type : mealTypes
@@ -216,7 +213,15 @@ public class PageServiceImpl implements IPageService {
         return map;
     }
 
-    private Map<String, MealToDisplay> makeMap2(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
+    /**
+     * Makes map with key = MealType, value = MealToDisplay with totals on each field
+     * to be displayed on jsp page.
+     * @param userId
+     * @param chosenDate
+     * @param mealTypes
+     * @return Map<String, MealToDisplay>
+     */
+    private Map<String, MealToDisplay> makeMapMealTypesTotalsForMealType(int userId, LocalDate chosenDate, List<MealType> mealTypes) {
         Map<String, MealToDisplay> map = new HashMap<>();
         for (MealType type : mealTypes) {
             map.put(type.getName(), menuService.getTotalsByMealType(userId, chosenDate, type.getId()));

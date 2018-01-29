@@ -1,6 +1,5 @@
 package com.khelenyuk.service.impl;
 
-
 import com.khelenyuk.service.IActivityDiaryService;
 import com.khelenyuk.dao.ActivityDiaryDao;
 import com.khelenyuk.dao.factory.DaoFactory;

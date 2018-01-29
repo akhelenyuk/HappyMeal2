@@ -1,5 +1,7 @@
 package com.khelenyuk.model;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,6 +11,13 @@ import java.util.Objects;
  * mealType name and product name instead of their id;
  * calories, protein, fat and carbs of the product according to its weight (not for 100 grams)
  */
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class MealToDisplay implements Serializable {
     private Integer id;
     private String mealType;
@@ -19,9 +28,6 @@ public class MealToDisplay implements Serializable {
     private Float fat;
     private Float carbs;
 
-    public MealToDisplay() {
-    }
-
     // constructor for displaying totals
     public MealToDisplay(Float weight, Integer calories, Float protein, Float fat, Float carbs) {
         this.weight = weight;
@@ -31,81 +37,4 @@ public class MealToDisplay implements Serializable {
         this.carbs = carbs;
     }
 
-    public MealToDisplay(Integer id, String mealNumber, String product, Float weight, Integer calories, Float protein, Float fat, Float carbs) {
-        this.id = id;
-        this.mealType = mealNumber;
-        this.product = product;
-        this.weight = weight;
-        this.calories = calories;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbs = carbs;
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-    public String getProduct() {
-        return product;
-    }
-
-    public Float getWeight() {
-        return weight;
-    }
-
-    public Integer getCalories() {
-        return calories;
-    }
-
-    public Float getProtein() {
-        return protein;
-    }
-
-    public Float getFat() {
-        return fat;
-    }
-
-    public Float getCarbs() {
-        return carbs;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MealToDisplay that = (MealToDisplay) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(mealType, that.mealType) &&
-                Objects.equals(product, that.product) &&
-                Objects.equals(weight, that.weight) &&
-                Objects.equals(calories, that.calories) &&
-                Objects.equals(protein, that.protein) &&
-                Objects.equals(fat, that.fat) &&
-                Objects.equals(carbs, that.carbs);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, mealType, product, weight, calories, protein, fat, carbs);
-    }
-
-    @Override
-    public String toString() {
-        return "MealToDisplay{" +
-                "id=" + id +
-                ", mealType='" + mealType + '\'' +
-                ", product='" + product + '\'' +
-                ", weight=" + weight +
-                ", calories=" + calories +
-                ", protein=" + protein +
-                ", fat=" + fat +
-                ", carbs=" + carbs +
-                '}';
-    }
 }

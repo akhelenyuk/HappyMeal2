@@ -17,19 +17,18 @@ import java.util.List;
 public class ActivityDaoImpl extends CrudDaoImpl<Activity> implements ActivityDao {
     private static final Logger logger = LogManager.getLogger(ActivityDaoImpl.class);
 
-    private String selectAll = QueryManager.getProperty("activitySelectAll");
-    private String selectByName = QueryManager.getProperty("activitySelectByName");
-    private String insert = QueryManager.getProperty("activityInsert");
+    private static final String SELECT_ALL = QueryManager.getProperty("activitySelectAll");
+    private static final String SELECT_BY_NAME = QueryManager.getProperty("activitySelectByName");
+    private static final String INSERT = QueryManager.getProperty("activityInsert");
 
     @Override
     public List<Activity> getAll() {
         List<Activity> activities = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAll);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 activities.add(new Activity(
                         resultSet.getInt("id"),
@@ -47,7 +46,7 @@ public class ActivityDaoImpl extends CrudDaoImpl<Activity> implements ActivityDa
         Activity activity = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectByName)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_NAME)) {
 
             statement.setString(1, name);
 
@@ -73,7 +72,7 @@ public class ActivityDaoImpl extends CrudDaoImpl<Activity> implements ActivityDa
     public boolean add(Activity activity) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insert)
+             PreparedStatement statement = connection.prepareStatement(INSERT)
         ) {
             statement.setString(1, activity.getName());
             statement.setInt(2, activity.getCalories());

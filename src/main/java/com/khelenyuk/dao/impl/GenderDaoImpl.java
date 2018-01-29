@@ -27,7 +27,6 @@ public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 genders.add(new Gender(
                         resultSet.getInt("id"),
@@ -49,8 +48,6 @@ public class GenderDaoImpl extends CrudDaoImpl<Gender> implements GenderDao {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     gender = new Gender(
                             resultSet.getInt("id"),

@@ -37,7 +37,6 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
-
     public int getTotalWeight(List<MealToDisplay> menu) {
         int total = 0;
         for (MealToDisplay meal : menu
@@ -48,41 +47,36 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
-
     public String getTotalCalories(List<MealToDisplay> menu) {
         float total = 0f;
         for (MealToDisplay meal : menu
                 ) {
             total += meal.getCalories();
         }
-logger.debug("-------------------------->" + new DecimalFormat("###,###").format(total));
-        return new DecimalFormat("###,###").format(total);
+        return new DecimalFormat("###").format(total);
     }
 
     @Override
-
     public String getTotalProteins(List<MealToDisplay> menu) {
         float total = 0.0f;
         for (MealToDisplay meal : menu
                 ) {
             total += meal.getProtein();
         }
-        return new DecimalFormat(".##").format(total);
+        return new DecimalFormat(".#").format(total);
     }
 
     @Override
-
     public String getTotalFat(List<MealToDisplay> menu) {
         float total = 0.0f;
         for (MealToDisplay meal : menu
                 ) {
             total += meal.getFat();
         }
-        return new DecimalFormat(".##").format(total);
+        return new DecimalFormat(".#").format(total);
     }
 
     @Override
-
     public String getTotalCarbs(List<MealToDisplay> menu) {
         float total = 0.0f;
         for (MealToDisplay meal : menu

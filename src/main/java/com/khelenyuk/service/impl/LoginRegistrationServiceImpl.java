@@ -24,14 +24,11 @@ public class LoginRegistrationServiceImpl implements ILoginRegistrationService {
      */
     @Override
     public boolean checkLogin(String login, String pass) {
-        logger.info("Get user with login=" + login);
         User user = userDAO.get(login);
-        logger.debug("---------------- User:" +user);
         if (user == null) {
-            logger.info("User was not found");
+            logger.info("User is null");
             return false;
         }
-        logger.info("check user's password");
         return user.getPassword().equals(pass);
     }
 
@@ -48,7 +45,6 @@ public class LoginRegistrationServiceImpl implements ILoginRegistrationService {
 
     /**
      * check if login exists in database
-     *
      * @return true if login already exists, otherwise - false
      */
     @Override

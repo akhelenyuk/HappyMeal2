@@ -9,13 +9,11 @@ import com.khelenyuk.model.Lifestyle;
 import com.khelenyuk.model.Gender;
 import com.khelenyuk.model.User;
 import com.khelenyuk.service.IUserService;
-import com.khelenyuk.utils.UtilManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.List;
 
 public class UserServiceImpl implements IUserService {
@@ -96,8 +94,12 @@ public class UserServiceImpl implements IUserService {
         return userDAO.getUsersCount();
     }
 
-
-    private int calculateCalorieNorm(User user) {
+    /**
+     * claculates Calorie norm based on given formula and parameters
+      * @param user
+     * @return calorie norm
+     */
+    public int calculateCalorieNorm(User user) {
         if (user == null) {
             return 0;
         }
@@ -109,11 +111,11 @@ public class UserServiceImpl implements IUserService {
 
         switch (gender.getName()) {
             case "male": {
-                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age + 5;
+                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age + 5 - 300;
                 break;
             }
             case "female": {
-                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age - 161;
+                calorieNorm = 10 * user.getWeight() + (int) (6.25d * user.getHeight()) - 5 * age - 161 - 200;
                 break;
             }
             default: {
@@ -121,7 +123,7 @@ public class UserServiceImpl implements IUserService {
             }
         }
 
-        switch (lifestyle.getName()){
+        switch (lifestyle.getName()) {
             case "active": {
                 calorieNorm = (int) (calorieNorm * 1.4625d);
                 break;

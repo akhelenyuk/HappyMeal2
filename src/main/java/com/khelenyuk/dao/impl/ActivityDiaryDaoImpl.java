@@ -17,10 +17,11 @@ import java.util.List;
 public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements ActivityDiaryDao {
     private static final Logger logger = LogManager.getLogger(ActivityDiaryDaoImpl.class);
 
-    private final String INSERT = QueryManager.getProperty("activityDiaryInsert");
-    private final String SELECT_ALL_BY_ID = QueryManager.getProperty("activityDiarySelectAllById");
-    private final String SELECT_TOTALS = QueryManager.getProperty("activityDiarySelectTotals");
-    private final String DELETE = QueryManager.getProperty("activityDiaryDelete");
+    private static final String INSERT = QueryManager.getProperty("activityDiaryInsert");
+    private static final String SELECT_ALL_BY_ID = QueryManager.getProperty("activityDiarySelectAllById");
+    private static final String SELECT_TOTALS = QueryManager.getProperty("activityDiarySelectTotals");
+    private static final String DELETE = QueryManager.getProperty("activityDiaryDelete");
+
 
     @Override
     public boolean add(ActivityDiary activityDiaryEntry) {
@@ -33,15 +34,12 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
             statement.setInt(3, activityDiaryEntry.getTimeSpent());
             statement.setDate(4, Date.valueOf(activityDiaryEntry.getDate()));
 
-            logger.info("Executing request: " + statement.toString());
             resultInsert = statement.executeUpdate();
-            logger.info("Result set of adding = " + resultInsert);
         } catch (SQLException e) {
             logger.error("Error in adding new 'ActivityDiary entry to DB", e.getCause());
         }
         return resultInsert > 0;
     }
-
 
     @Override
     public List<ActivityDiaryToDisplay> getAll(Integer userId, LocalDate date) {
@@ -52,8 +50,6 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(date));
 
-            logger.info("Executing statement: " + statement.toString());
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     listOfActivities.add(new ActivityDiaryToDisplay(
@@ -63,12 +59,6 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
                             resultSet.getInt("calories")
                     ));
                 }
-            }
-            logger.debug("@@@@@@@@@@@@@@@@@@" + listOfActivities);
-
-            for (ActivityDiaryToDisplay a: listOfActivities
-                 ) {
-                logger.debug("@@@@@@@@@@@@@@@@@@" + a);
             }
         } catch (SQLException e) {
             logger.error("Error in getting 'list of activities' from database", e.getCause());
@@ -84,8 +74,6 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
              PreparedStatement statement = connection.prepareStatement(SELECT_TOTALS)) {
             statement.setInt(1, userId);
             statement.setDate(2, Date.valueOf(date));
-
-            logger.info("Executing statement: " + statement.toString());
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -110,10 +98,7 @@ public class ActivityDiaryDaoImpl extends CrudDaoImpl<ActivityDiary> implements 
              PreparedStatement statement = connection.prepareStatement(DELETE)
         ) {
             statement.setInt(1, id);
-
-            logger.info("Executing request: " + statement.toString());
             resultDelete = statement.executeUpdate();
-            logger.info("Result set of adding = " + resultDelete);
         } catch (SQLException e) {
             logger.error("Error in deleting 'ActivityDiary entry' from DB", e.getCause());
         }

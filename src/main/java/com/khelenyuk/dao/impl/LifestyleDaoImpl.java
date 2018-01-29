@@ -29,7 +29,6 @@ public class LifestyleDaoImpl extends CrudDaoImpl<Lifestyle> implements Lifestyl
         ) {
             statement.setInt(1, id);
             try(ResultSet resultSet = statement.executeQuery()) {
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     lifestyle = new Lifestyle(
                             resultSet.getInt("id"),
@@ -52,7 +51,6 @@ public class LifestyleDaoImpl extends CrudDaoImpl<Lifestyle> implements Lifestyl
              PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 lifestyles.add(new Lifestyle(
                         resultSet.getInt("id"),

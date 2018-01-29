@@ -17,7 +17,6 @@ public class MealTypeServiceImpl implements IMealTypeService {
     private static MealTypeDao mealTypeDAO = DaoFactory.getMealTypeMethods();
 
 
-
     private MealTypeServiceImpl() {
     }
 

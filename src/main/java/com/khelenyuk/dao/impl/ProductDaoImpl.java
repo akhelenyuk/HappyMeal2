@@ -15,11 +15,11 @@ import java.util.List;
 public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
     private static final Logger logger = LogManager.getLogger(ProductDaoImpl.class);
 
-    private String selectById = QueryManager.getProperty("productSelectById");
-    private String selectByName = QueryManager.getProperty("productSelectByName");
-    private String selectAll = QueryManager.getProperty("productSelectAll");
-    private String deleteById = QueryManager.getProperty("productDeleteById");
-    private String insert = QueryManager.getProperty("productInsert");
+    private static final String SELECT_BY_ID = QueryManager.getProperty("productSelectById");
+    private static final String SELECT_BY_NAME = QueryManager.getProperty("productSelectByName");
+    private static final String SELECT_ALL = QueryManager.getProperty("productSelectAll");
+    private static final String DELETE_BY_ID = QueryManager.getProperty("productDeleteById");
+    private static final String INSERT = QueryManager.getProperty("productInsert");
 
 
     @Override
@@ -27,10 +27,9 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
         List<Product> products = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectAll);
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL);
              ResultSet resultSet = statement.executeQuery()
         ) {
-            logger.info("Query: " + statement.toString());
             while (resultSet.next()) {
                 products.add(new Product(
                         resultSet.getInt("id"),
@@ -53,12 +52,11 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
         Product product = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectById)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID)) {
 
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     product = new Product(
                             resultSet.getInt("id"),
@@ -82,12 +80,11 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
         Product product = null;
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectByName)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_BY_NAME)) {
 
             statement.setString(1, name);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                logger.info("Query: " + statement.toString());
                 if (resultSet.next()) {
                     product = new Product(
                             resultSet.getInt("id"),
@@ -110,7 +107,7 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
     public boolean add(Product product) {
         int resultInsert = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insert)
+             PreparedStatement statement = connection.prepareStatement(INSERT)
         ) {
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getCalories());
@@ -118,7 +115,6 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
             statement.setFloat(4, product.getFat());
             statement.setFloat(5, product.getCarbs());
 
-            logger.info("Query: " + statement.toString());
             resultInsert = statement.executeUpdate();
             if (resultInsert < 1) {
                 logger.info("Product was not added.");
@@ -133,11 +129,10 @@ public class ProductDaoImpl extends CrudDaoImpl<Product> implements ProductDao {
     public boolean delete(int productId) {
         int resultDelete = 0;
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(deleteById)
+             PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID)
         ) {
             statement.setInt(1, productId);
 
-            logger.info("Query: " + statement.toString());
             resultDelete = statement.executeUpdate();
             if (resultDelete < 1) {
                 logger.info("Product was not deleted.");

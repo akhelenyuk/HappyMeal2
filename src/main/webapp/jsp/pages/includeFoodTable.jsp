@@ -81,7 +81,7 @@
             <th>${totalDayProteins}</th>
             <th>${totalDayFat}</th>
             <th>${totalDayCarbs}</th>
-            <%--TODO this is for table correct borders only. Buttons are invisible--%>
+            <%--this is for table correct borders only. Buttons are invisible--%>
             <td>
                 <button class="btn btn-link btn-block invisible food-row-tr-btn btn-sm" type="button">Delete
                 </button>
